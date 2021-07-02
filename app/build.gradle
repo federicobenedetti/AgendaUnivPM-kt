@@ -47,4 +47,9 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Iconics for icons
+    implementation "com.mikepenz:iconics-core:5.2.8"
+    implementation "com.mikepenz:iconics-views:5.2.8"
+    implementation 'com.mikepenz:google-material-typeface:4.0.0.1-kotlin@aar'
 }

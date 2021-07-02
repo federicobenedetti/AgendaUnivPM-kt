@@ -10,6 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.agendaunivpm.ui.main.SectionsPagerAdapter
 import com.example.agendaunivpm.databinding.ActivityMainBinding
+import com.mikepenz.iconics.IconicsDrawable
+import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
+import com.mikepenz.iconics.utils.sizeDp
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,16 +24,52 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Mi ritorna i fragment delle pagine che poi andrò a visualizzare
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
-        tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = binding.fab
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        // viewPager: mi serve per poter mostrare le pagine swipando
+        val viewPager: ViewPager = binding.viewPager
+
+        viewPager.adapter = sectionsPagerAdapter
+
+        // Tab layout
+        val tabs: TabLayout = binding.tabLayout
+        tabs.setupWithViewPager(viewPager)
+
+        tabs.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+
+        })
+
+        // Setup our tabitems layout with icons
+        for(index in 0..tabs.tabCount) {
+            var tab = tabs.getTabAt(index)
+            when (index) {
+                0 -> {
+                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_home_filled)
+                }
+                1 -> {
+                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_list)
+                }
+                2 -> {
+                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_search)
+                }
+                3 -> {
+                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_person)
+                }
+            }
+
         }
     }
 }
