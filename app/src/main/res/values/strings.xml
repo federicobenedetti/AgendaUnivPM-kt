@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Agenda UnivPM</string>
-    <string name="tab_text_1">Home</string>
-    <string name="tab_text_2">Corsi</string>
-    <string name="tab_text_3">Ricerca</string>
-    <string name="tab_text_4">Profilo</string>
+    <string name="available_courses">Corsi disponibili</string>
+    <string name="course_year">Anno </string>
+    <string name="course_subscribe">Iscriviti</string>
+    <string name="course_prof">Prof</string>
 </resources>
