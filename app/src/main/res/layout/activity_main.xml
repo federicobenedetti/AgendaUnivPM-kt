@@ -8,22 +8,21 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_weight="1" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/tabs_height"
-            android:background="?attr/colorPrimary"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabIndicatorGravity="top"
-            app:tabIndicatorColor="@color/primaryLightColor"
-            app:tabIndicatorHeight="@dimen/selected_tab_indicator_height"
-            app:tabIconTint="@color/primaryTextColor"/>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabs_height"
+        android:background="?attr/colorPrimary"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorGravity="top"
+        app:tabIndicatorColor="@color/primaryLightColor"
+        app:tabIndicatorHeight="@dimen/selected_tab_indicator_height"
+        app:tabIconTint="@color/primaryTextColor"/>
 </LinearLayout>

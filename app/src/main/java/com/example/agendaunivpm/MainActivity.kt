@@ -2,53 +2,49 @@ package com.example.agendaunivpm
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import com.example.agendaunivpm.ui.main.SectionsPagerAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.agendaunivpm.databinding.ActivityMainBinding
+import com.example.agendaunivpm.ui.main.ViewPagerFragmentAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var tabLayout: TabLayout
+    protected lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        tabLayout = findViewById(R.id.tabs)
 
-        // Mi ritorna i fragment delle pagine che poi andrò a visualizzare
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        viewPager = findViewById(R.id.view_pager)
+        viewPager.adapter = ViewPagerFragmentAdapter(supportFragmentManager, lifecycle)
 
-        // viewPager: mi serve per poter mostrare le pagine swipando
-        val viewPager: ViewPager = binding.viewPager
+        // gotoPage.setOnClickListener {
+        //    val card = cardSelector.selectedItemPosition
+        //    val smoothScroll = smoothScrollCheckBox.isChecked
+        //    viewPager.setCurrentItem(card, smoothScroll)
+        // }
 
-        viewPager.adapter = sectionsPagerAdapter
-
-        // Tab layout
-        val tabs: TabLayout = binding.tabLayout
-        tabs.setupWithViewPager(viewPager)
-
-        // Setup our tabitems layout with icons
-        for(index in 0..tabs.tabCount) {
-            var tab = tabs.getTabAt(index)
-            when (index) {
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
                 0 -> {
-                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_home_filled)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_home_filled)
                 }
                 1 -> {
-                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_list)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_list)
                 }
                 2 -> {
-                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_search)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_search)
                 }
                 3 -> {
-                    tab?.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_person)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_person)
                 }
             }
-
-        }
+        }.attach()
     }
 }
