@@ -25,5 +25,5 @@
             app:tabIndicatorGravity="top"
             app:tabIndicatorColor="@color/primaryLightColor"
             app:tabIndicatorHeight="@dimen/selected_tab_indicator_height"
-            app:tabIconTint="@color/secondaryTextColor"/>
+            app:tabIconTint="@color/primaryTextColor"/>
 </LinearLayout>

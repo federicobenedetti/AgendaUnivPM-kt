@@ -1,9 +1,9 @@
-package com.example.agendaunivpm.ui.main
+package com.example.agendaunivpm.ui.main.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class UserViewModel: ViewModel() {
+class ListViewModel : ViewModel() {
 
     private val _index = MutableLiveData<Int>()
 

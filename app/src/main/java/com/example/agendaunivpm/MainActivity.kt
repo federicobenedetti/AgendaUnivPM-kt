@@ -31,22 +31,6 @@ class MainActivity : AppCompatActivity() {
         val tabs: TabLayout = binding.tabLayout
         tabs.setupWithViewPager(viewPager)
 
-        tabs.addOnTabSelectedListener(object :
-            TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-
-        })
-
         // Setup our tabitems layout with icons
         for(index in 0..tabs.tabCount) {
             var tab = tabs.getTabAt(index)

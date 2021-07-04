@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:id="@+id/linearLayoutVertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/layout_padding"
-    tools:context=".ui.main.PlaceholderFragment">
+    tools:context=".ui.main.fragments.HomeFragment">
 
     <TextView
         android:layout_width="match_parent"
