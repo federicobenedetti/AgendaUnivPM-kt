@@ -6,6 +6,8 @@
 
     <dimen name="layout_padding">10dp</dimen>
 
+    <dimen name="tabs_height">55dp</dimen>
+
     <!-- Paddings -->
     <dimen name="padding_big">16dp</dimen>
     <dimen name="padding_medium">10dp</dimen>
