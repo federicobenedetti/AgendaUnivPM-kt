@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:id="@+id/linearLayoutVertical"
@@ -18,46 +17,10 @@
         android:layout_marginBottom="@dimen/margin_medium">
     </TextView>
 
-    <androidx.cardview.widget.CardView
+    <include
+        layout="@layout/info_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="@dimen/card_elevation"
-        app:cardCornerRadius="@dimen/card_border_radius"
-        app:cardBackgroundColor="@color/primaryTextColor"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_medium"
-            android:text="Programmazione mobile"
-            android:padding="@dimen/padding_small"
-            android:textStyle="bold"
-            ></TextView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_small">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_medium"
-                android:text="@string/course_year"
-                android:layout_marginRight="@dimen/margin_small"
-                ></TextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_medium"
-                android:text="2018 / 2019"
-                ></TextView>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+        android:layout_height="wrap_content">
+    </include>
 
 </LinearLayout>
