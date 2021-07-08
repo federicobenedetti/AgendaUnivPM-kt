@@ -1,4 +1,4 @@
-package com.example.agendaunivpm.ui.main.viewmodels
+package com.federicobenedetti.agendaunivpm.ui.main.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

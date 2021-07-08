@@ -1,4 +1,4 @@
-package com.example.agendaunivpm.ui.main.viewmodels
+package com.federicobenedetti.agendaunivpm.ui.main.viewmodels
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
@@ -24,26 +24,26 @@ class User {
     private var id: String? = ""
     private var photoUrl: Uri? = null
 
-    public fun getDisplayName(): String? {
+    fun getDisplayName(): String? {
         return displayName
     }
 
-    public fun getEmail(): String? {
+    fun getEmail(): String? {
         return email
     }
 
-    public fun getId(): String? {
+    fun getId(): String? {
         return id
     }
 
-    public fun getPhotoUrl(): Uri? {
+    fun getPhotoUrl(): Uri? {
         return photoUrl
     }
 
-    public fun parseUserFromGoogleSignIn(googleAccount: GoogleSignInAccount) {
-        displayName = googleAccount.displayName
-        email = googleAccount.email
-        id = googleAccount.id
-        photoUrl = googleAccount.photoUrl
+    fun parseUserFromGoogleSignIn(googleAccount: GoogleSignInAccount?) {
+        displayName = googleAccount?.displayName
+        email = googleAccount?.email
+        id = googleAccount?.id
+        photoUrl = googleAccount?.photoUrl
     }
 }

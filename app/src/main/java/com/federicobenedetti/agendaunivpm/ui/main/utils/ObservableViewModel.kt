@@ -1,4 +1,4 @@
-package com.example.agendaunivpm.ui.main.utils
+package com.federicobenedetti.agendaunivpm.ui.main.utils
 
 /*
  * Copyright (C) 2018 The Android Open Source Project

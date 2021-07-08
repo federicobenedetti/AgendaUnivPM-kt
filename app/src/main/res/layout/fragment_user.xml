@@ -6,7 +6,7 @@
 
         <variable
             name="userViewModel"
-            type="com.example.agendaunivpm.ui.main.viewmodels.UserViewModel" />
+            type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel" />
     </data>
 
     <LinearLayout

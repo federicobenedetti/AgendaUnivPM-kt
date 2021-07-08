@@ -1,9 +1,9 @@
-package com.example.agendaunivpm
+package com.federicobenedetti.agendaunivpm
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.agendaunivpm.ui.main.ViewPagerFragmentAdapter
+import com.federicobenedetti.agendaunivpm.ui.main.ViewPagerFragmentAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mikepenz.iconics.IconicsDrawable

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -9,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.agendaunivpm"
+        applicationId "com.federicobenedetti.agendaunivpm"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -77,6 +78,10 @@ dependencies {
     implementation "com.mikepenz:iconics-views:5.2.8"
     implementation 'com.mikepenz:google-material-typeface:4.0.0.1-kotlin@aar'
 
+    // Firebase 
+    implementation platform('com.google.firebase:firebase-bom:28.2.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    
     // FirebaseUI
     // FirebaseUI for Firebase Realtime Database
     implementation 'com.firebaseui:firebase-ui-database:7.2.0'

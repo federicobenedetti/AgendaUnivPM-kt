@@ -1,8 +1,8 @@
-package com.example.agendaunivpm.ui.main.activities
+package com.federicobenedetti.agendaunivpm.ui.main.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.R
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig
 import com.firebase.ui.auth.AuthUI.IdpConfig.EmailBuilder

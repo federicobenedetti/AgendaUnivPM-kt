@@ -1,4 +1,4 @@
-package com.example.agendaunivpm.ui.main.fragments
+package com.federicobenedetti.agendaunivpm.ui.main.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.agendaunivpm.R
-import com.example.agendaunivpm.databinding.FragmentUserBinding
-import com.example.agendaunivpm.ui.main.viewmodels.UserViewModel
+import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.databinding.FragmentUserBinding
+import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.User
+import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -68,7 +69,8 @@ class UserFragment : Fragment() {
 
 
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode === 1) {
+            println("Resultcode" + result.resultCode)
+            if (result.resultCode === 0) {
                 // The Task returned from this call is always completed, no need to attach
                 // a listener.
                 val task: Task<GoogleSignInAccount> =
@@ -81,6 +83,11 @@ class UserFragment : Fragment() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
+
+            _userViewModel.loggedInUser?.observe(viewLifecycleOwner) { user: User ->
+                user.parseUserFromGoogleSignIn(account)
+                println("user" + user.toString())
+            }
             // Signed in successfully, show authenticated UI.
             //updateUI(account)
         } catch (e: ApiException) {

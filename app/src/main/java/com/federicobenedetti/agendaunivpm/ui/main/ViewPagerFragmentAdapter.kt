@@ -1,13 +1,13 @@
-package com.example.agendaunivpm.ui.main
+package com.federicobenedetti.agendaunivpm.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.agendaunivpm.ui.main.fragments.HomeFragment
-import com.example.agendaunivpm.ui.main.fragments.ListFragment
-import com.example.agendaunivpm.ui.main.fragments.SearchFragment
-import com.example.agendaunivpm.ui.main.fragments.UserFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.HomeFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.ListFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.SearchFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.UserFragment
 
 class ViewPagerFragmentAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {
