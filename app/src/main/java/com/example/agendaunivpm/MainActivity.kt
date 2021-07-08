@@ -1,14 +1,14 @@
 package com.example.agendaunivpm
 
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.agendaunivpm.databinding.ActivityMainBinding
 import com.example.agendaunivpm.ui.main.ViewPagerFragmentAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,12 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         viewPager = findViewById(R.id.view_pager)
         viewPager.adapter = ViewPagerFragmentAdapter(supportFragmentManager, lifecycle)
-
-        // gotoPage.setOnClickListener {
-        //    val card = cardSelector.selectedItemPosition
-        //    val smoothScroll = smoothScrollCheckBox.isChecked
-        //    viewPager.setCurrentItem(card, smoothScroll)
-        // }
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
@@ -47,4 +41,5 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
     }
+
 }

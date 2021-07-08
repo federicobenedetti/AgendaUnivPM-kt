@@ -9,8 +9,8 @@ import com.example.agendaunivpm.ui.main.fragments.ListFragment
 import com.example.agendaunivpm.ui.main.fragments.SearchFragment
 import com.example.agendaunivpm.ui.main.fragments.UserFragment
 
-class ViewPagerFragmentAdapter(fm: FragmentManager, lifecycle: Lifecycle)
-    : FragmentStateAdapter(fm, lifecycle) {
+class ViewPagerFragmentAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fm, lifecycle) {
 
     override fun getItemCount(): Int {
         return 4;
@@ -18,10 +18,10 @@ class ViewPagerFragmentAdapter(fm: FragmentManager, lifecycle: Lifecycle)
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> HomeFragment.newInstance()
+            0 -> UserFragment.newInstance()
             1 -> ListFragment.newInstance()
             2 -> SearchFragment.newInstance()
-            3 -> UserFragment.newInstance()
+            3 -> HomeFragment.newInstance()
             else -> HomeFragment.newInstance()
         }
     }
