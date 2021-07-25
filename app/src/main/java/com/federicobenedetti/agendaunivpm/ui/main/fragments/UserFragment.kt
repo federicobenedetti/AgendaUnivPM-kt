@@ -44,12 +44,13 @@ class UserFragment : CustomFragment("USER") {
         binding.lifecycleOwner = viewLifecycleOwner
         val view = binding.root
 
-
+        // Let's sign in!
         signIn()
 
         return view
     }
 
+    // Let's check that we have already a user logged in
     override fun onStart() {
         super.onStart()
 
@@ -62,6 +63,8 @@ class UserFragment : CustomFragment("USER") {
     }
 
 
+    // We need to get the Google Sign In client for the request
+    // we are going to do soon after
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -83,6 +86,8 @@ class UserFragment : CustomFragment("USER") {
         _binding = null
     }
 
+    // When we get back from the Google Login Form
+    // we handle the response and update the UI
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -101,6 +106,7 @@ class UserFragment : CustomFragment("USER") {
         }
     }
 
+    // We're logging in with Firebase, Google auth
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         activity?.let {
@@ -120,11 +126,24 @@ class UserFragment : CustomFragment("USER") {
         }
     }
 
+    // Notify the VM that data has changed and need to be refreshed
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             Log.w(_logTAG, "User: " + user.email + ", " + user.displayName + ", " + user.photoUrl)
             _userViewModel.setCurrentLoggedInUser(user)
         }
+    }
+
+    public fun logOut() {
+
+    }
+
+    public fun launchFaqActivity() {
+
+    }
+
+    public fun launchFeedbackActivity() {
+
     }
 
     companion object {
