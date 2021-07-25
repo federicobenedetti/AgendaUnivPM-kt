@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_home_filled)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_person)
                 }
                 1 -> {
                     tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_list)
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                     tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_search)
                 }
                 3 -> {
-                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_person)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_home_filled)
                 }
             }
         }.attach()

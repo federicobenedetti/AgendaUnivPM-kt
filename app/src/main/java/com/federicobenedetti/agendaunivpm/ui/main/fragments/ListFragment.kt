@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 
-class ListFragment : Fragment() {
+class ListFragment : CustomFragment("LIST") {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
