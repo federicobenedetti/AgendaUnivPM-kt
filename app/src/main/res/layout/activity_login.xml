@@ -8,10 +8,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minLines="10"></TextView>
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_big"
+        android:text="Agenda UnivPM"></TextView>
 
-    <Button
-        android:layout_width="match_parent"
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Invia feedback"></Button>
+        android:layout_gravity="center_vertical"
+        android:id="@+id/buttonSignIn"></com.google.android.gms.common.SignInButton>
 </LinearLayout>

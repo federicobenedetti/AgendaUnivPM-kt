@@ -151,16 +151,19 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/buttonLaunchFaqActivity"
                 android:text="FAQ"></Button>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/buttonLaunchFeedbackActivity"
                 android:text="Feedback"></Button>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/buttonLaunchSignOut"
                 android:text="Logout"></Button>
         </LinearLayout>
     </LinearLayout>
