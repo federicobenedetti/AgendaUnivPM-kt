@@ -16,7 +16,7 @@ class UserViewModel : ViewModel() {
         _loggedInUser.value = User()
     }
 
-    public fun setCurrentLoggedInUser(user: FirebaseUser?) {
+    fun setCurrentLoggedInUser(user: FirebaseUser?) {
         _loggedInUser.value?.parseUserFromGoogleSignIn(user);
     }
 }

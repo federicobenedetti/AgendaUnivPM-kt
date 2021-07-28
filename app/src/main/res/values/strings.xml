@@ -7,4 +7,10 @@
     <string name="courses_list">Lista corsi</string>
     <string name="search_label">Ricerca</string>
     <string name="search_hint">Ricerca i corsi...</string>
+    <string name="feedback_title">Feedback</string>
+    <string name="edit_text_hint">Scrivi il tuo feedback qui...</string>
+    <string name="feedback_description">Se hai trovato delle difficoltà, dei bug, delle funzionalità mancanti o vuoi solo dirmi se ti piace o meno l\'app, lascia un feedback!</string>
+    <string name="btn_send_feedback">Invia Feedback</string>
+    <string name="faq_title">FAQ</string>
+    <string name="profile_title">Profilo</string>
 </resources>
