@@ -54,17 +54,12 @@
                 android:text="@string/feedback_description"></TextView>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="bottom">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_send_feedback"></Button>
-        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_send_feedback"
+            android:id="@+id/btnSendFeedback"></Button>
 
     </LinearLayout>
 </layout>

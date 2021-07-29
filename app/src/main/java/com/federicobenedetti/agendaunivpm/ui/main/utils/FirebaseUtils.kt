@@ -9,7 +9,7 @@ object FirebaseUtils {
         mFirebaseAuth = FirebaseAuth.getInstance()
     }
 
-    public fun getFirebaseAuthInstance(): FirebaseAuth? {
+    fun getFirebaseAuthInstance(): FirebaseAuth? {
         return mFirebaseAuth
     }
 }

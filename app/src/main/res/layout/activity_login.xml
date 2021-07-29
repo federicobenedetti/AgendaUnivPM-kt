@@ -2,19 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="@dimen/layout_padding">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.mikepenz.iconics.view.IconicsImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/margin_big"
+            app:iiv_icon="gmd-menu_book"></com.mikepenz.iconics.view.IconicsImageView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_big"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_big"
+            android:text="@string/app_name"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/buttonSignIn"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"></com.google.android.gms.common.SignInButton>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/text_big"
-        android:text="Agenda UnivPM"></TextView>
-
-    <com.google.android.gms.common.SignInButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/buttonSignIn"></com.google.android.gms.common.SignInButton>
+        android:gravity="center|bottom"
+        android:textSize="@dimen/text_small"
+        android:text="@string/login_copyright"></TextView>
 </LinearLayout>

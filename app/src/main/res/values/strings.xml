@@ -13,4 +13,6 @@
     <string name="btn_send_feedback">Invia Feedback</string>
     <string name="faq_title">FAQ</string>
     <string name="profile_title">Profilo</string>
+    <string name="feedback_sent">Feedback inviato!</string>
+    <string name="login_copyright">All rights reserved - © Copyright Federico Benedetti</string>
 </resources>
