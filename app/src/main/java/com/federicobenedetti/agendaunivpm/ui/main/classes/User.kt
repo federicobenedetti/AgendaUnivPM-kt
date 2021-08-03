@@ -2,6 +2,7 @@ package com.federicobenedetti.agendaunivpm.ui.main.classes
 
 import android.net.Uri
 import android.util.Log
+import com.federicobenedetti.agendaunivpm.R
 import com.google.firebase.auth.FirebaseUser
 
 class User {
@@ -10,7 +11,8 @@ class User {
     private var displayName: String? = ""
     private var email: String? = ""
     private var id: String? = ""
-    private var photoUrl: Uri? = null
+    private var photoUrl: Uri? =
+        Uri.parse("android.resource://com.federicobenedetti.univpm/" + R.drawable.ic_launcher_background);
 
     fun getDisplayName(): String? {
         return displayName

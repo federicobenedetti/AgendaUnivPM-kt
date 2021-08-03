@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.FragmentUserBinding
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
@@ -35,6 +38,7 @@ class UserFragment : CustomFragment("USER") {
     private var mButtonFaqActivity: Button? = null
     private var mButtonFeedbackActivity: Button? = null
     private var mButtonSignOut: Button? = null
+    private var mImageViewUserProfileImage: ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +50,13 @@ class UserFragment : CustomFragment("USER") {
         binding.userViewModel = _userViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         val view = binding.root
+
+        _userViewModel.loggedInUser!!.observe(viewLifecycleOwner, Observer {
+            mImageViewUserProfileImage?.let { it1 ->
+                Glide.with(this).load(_userViewModel.loggedInUser!!.value!!.getPhotoUrl())
+                    .into(it1)
+            };
+        })
 
         mButtonFaqActivity = binding.buttonLaunchFaqActivity
         mButtonFaqActivity!!.setOnClickListener {
@@ -72,7 +83,7 @@ class UserFragment : CustomFragment("USER") {
             }
         }
 
-
+        mImageViewUserProfileImage = binding.userProfileImage
         return view
     }
 

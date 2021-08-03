@@ -32,9 +32,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/ic_launcher_background"
+                    android:layout_height="@dimen/user_fragment_pic_size"
+                    android:layout_width="@dimen/user_fragment_pic_size"
+                    android:id="@+id/userProfileImage"
                     android:layout_marginRight="@dimen/margin_medium"></ImageView>
 
 
@@ -55,7 +55,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="S1088801"
+                        android:text="@{userViewModel.loggedInUser.getId()}"
                         android:textSize="@dimen/text_medium"></TextView>
                 </LinearLayout>
             </TableRow>
@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"
-                android:text="fede.benedetti9@gmail.com"></TextView>
+                android:text="@{userViewModel.loggedInUser.getEmail()}"></TextView>
 
         </LinearLayout>
 
