@@ -26,9 +26,9 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
         setContentView(R.layout.activity_main)
         Log.w(_logTAG, "Starting MainActivity")
 
-        var currentUser = FirebaseUtils.getFirebaseAuthInstance()
+        var currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
 
-        Log.w(_logTAG, "Current signedInUser: " + currentUser)
+        Log.w(_logTAG, "Current signedInUser: $currentUser")
 
         if (currentUser != null) {
             initViewPager()
@@ -39,12 +39,12 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.w(_logTAG, "ActivityResult reached, requestCode: " + requestCode)
+        Log.w(_logTAG, "ActivityResult reached, requestCode: $requestCode")
 
         if (requestCode == LAUNCH_LOGIN_ACTIVITY) {
             Log.w(_logTAG, "Request code is equal to LAUNCH_LOGIN_ACTIVITY")
             var currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser;
-            Log.w(_logTAG, "After LoginActivity, current signed in user: " + currentUser)
+            Log.w(_logTAG, "After LoginActivity, current signed in user: $currentUser")
 
             // TODO: Maybe there's a better way to do the same check
             if (currentUser == null) {

@@ -109,6 +109,7 @@ class UserFragment : CustomFragment("USER") {
     }
 
     private fun launchMainActivity() {
+        Log.w(_logTAG, "Launching MainActivity")
         val intent = Intent(context, MainActivity::class.java)
         startActivity(intent)
     }
