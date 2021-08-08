@@ -1,13 +1,61 @@
 package com.federicobenedetti.agendaunivpm.ui.main.viewmodels
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
+import java.util.*
 
 class ListViewModel : ViewModel() {
 
-    private val _index = MutableLiveData<Int>()
+    private val _availableCourses = mutableListOf<Course>()
 
-    fun setIndex(index: Int) {
-        _index.value = index
+    var availableCourses: MutableList<Course> = mutableListOf()
+        get() = _availableCourses
+
+    init {
+        _availableCourses.add(
+            Course(
+                "Course_0",
+                "Programmazione Mobile",
+                "Questo è il corso di programmazione mobile",
+                Date(2021, 9, 11, 14, 45),
+                Teacher(
+                    "Teacher_0",
+                    "Mario",
+                    "",
+                    "Rossi",
+                )
+            )
+        )
+
+        _availableCourses.add(
+            Course(
+                "Course_1",
+                "Tecnologie Web",
+                "Questo è il corso di Tecnologie Web",
+                Date(2021, 9, 12, 9, 15),
+                Teacher(
+                    "Teacher_1",
+                    "Luigi",
+                    "",
+                    "Bianchi",
+                )
+            ),
+        )
+
+        _availableCourses.add(
+            Course(
+                "Course_2",
+                "Inglese",
+                "Questo è il corso di Inglese",
+                Date(2021, 10, 11, 17, 30),
+                Teacher(
+                    "Teacher_2",
+                    "Pippo",
+                    "",
+                    "Verdi",
+                )
+            )
+        )
     }
 }

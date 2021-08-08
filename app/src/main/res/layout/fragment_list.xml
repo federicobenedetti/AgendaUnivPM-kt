@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/layout_padding"
-    tools:context=".ui.main.fragments.ListFragment">
+<layout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/courses_list"
-        android:textSize="@dimen/text_big"
-        android:layout_marginBottom="@dimen/margin_medium"></TextView>
+    <data>
 
-    <include
-        layout="@layout/info_card"
+        <variable
+            name="listViewModel"
+            type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.ListViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></include>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_padding"
+        tools:context=".ui.main.fragments.ListFragment">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/courses_list"
+            android:textSize="@dimen/text_big"
+            android:layout_marginBottom="@dimen/margin_medium"></TextView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ScrollView>
+
+        <include
+            layout="@layout/info_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></include>
+    </LinearLayout>
+</layout>

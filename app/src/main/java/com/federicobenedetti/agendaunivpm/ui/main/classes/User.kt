@@ -2,17 +2,31 @@ package com.federicobenedetti.agendaunivpm.ui.main.classes
 
 import android.net.Uri
 import android.util.Log
-import com.federicobenedetti.agendaunivpm.R
 import com.google.firebase.auth.FirebaseUser
 
-class User {
+open class User {
     private var _logTAG = "USERCLASS"
 
-    private var displayName: String? = ""
-    private var email: String? = ""
-    private var id: String? = ""
-    private var photoUrl: Uri? =
-        Uri.parse("android.resource://com.federicobenedetti.univpm/" + R.drawable.ic_launcher_background);
+    /**
+     * Id dell'utente
+     */
+    private lateinit var id: String
+
+    /**
+     * Nome (o meglio username) dell'utente
+     */
+    private lateinit var displayName: String
+
+    /**
+     * Email associata all'utente
+     */
+    private lateinit var email: String
+
+
+    /**
+     * URI della foto associata all'utente
+     */
+    private lateinit var photoUrl: Uri
 
     fun getDisplayName(): String? {
         return displayName
@@ -30,11 +44,15 @@ class User {
         return photoUrl
     }
 
+    /**
+     * Firebase ci ritorna un FirebaseUser
+     * Noi lo dobbiamo parsare per poterlo trasformare in qualcosa che la nostra View può capire
+     */
     fun parseUserFromGoogleSignIn(user: FirebaseUser?) {
-        displayName = user?.displayName
-        email = user?.email
-        id = user?.uid
-        photoUrl = user?.photoUrl
+        displayName = user?.displayName.toString()
+        email = user?.email.toString()
+        id = user?.uid.toString()
+        photoUrl = user?.photoUrl!!
 
         Log.w(_logTAG, "Parsed user: " + displayName + ", " + email + ", " + id + ", " + photoUrl)
     }

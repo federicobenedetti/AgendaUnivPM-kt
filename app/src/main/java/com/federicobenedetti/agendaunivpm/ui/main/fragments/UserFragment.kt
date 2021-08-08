@@ -25,12 +25,9 @@ import com.google.firebase.auth.FirebaseUser
 
 
 class UserFragment : CustomFragment("USER") {
-    // We are using ViewBinding here
-    // as we dont have dynamic data to handle
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
-
-    // UserFragment viewmodel
+    
     private val _userViewModel: UserViewModel by activityViewModels()
 
     private var mFirebaseAuth: FirebaseAuth? = null
