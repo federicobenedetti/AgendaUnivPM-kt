@@ -12,6 +12,10 @@ class ListViewModel : ViewModel() {
     var availableCourses: MutableList<Course> = mutableListOf()
         get() = _availableCourses
 
+    fun getCoursesAsArrayList(): ArrayList<Course> {
+        return _availableCourses as ArrayList<Course>
+    }
+
     init {
         _availableCourses.add(
             Course(
@@ -24,7 +28,8 @@ class ListViewModel : ViewModel() {
                     "Mario",
                     "",
                     "Rossi",
-                )
+                ),
+                "14: 45"
             )
         )
 
@@ -39,7 +44,8 @@ class ListViewModel : ViewModel() {
                     "Luigi",
                     "",
                     "Bianchi",
-                )
+                ),
+                "14: 00"
             ),
         )
 
@@ -54,7 +60,8 @@ class ListViewModel : ViewModel() {
                     "Pippo",
                     "",
                     "Verdi",
-                )
+                ),
+                "17: 00"
             )
         )
     }

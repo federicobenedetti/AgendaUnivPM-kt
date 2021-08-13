@@ -23,15 +23,11 @@
             android:textSize="@dimen/text_big"
             android:layout_marginBottom="@dimen/margin_medium"></TextView>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mRecyclerViewListInfoCard">
 
-        </ScrollView>
-
-        <include
-            layout="@layout/info_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></include>
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </layout>

@@ -8,40 +8,49 @@ open class Course {
     /**
      * Id del corso
      */
-    private lateinit var id: String
+    lateinit var id: String
 
     /**
      * Titolo del corso
      */
-    private lateinit var title: String
+    lateinit var title: String
 
     /**
      * Descrizione del corso
      */
-    private lateinit var description: String
+    lateinit var description: String
 
     /**
      * Anno accademico del corso
      */
-    private lateinit var session: Date
+    lateinit var session: Date
 
     /**
      * Professore che tiene il corso
      */
-    private lateinit var teacher: Teacher
+    lateinit var teacher: Teacher
+
+    /**
+     * L'ora nella quale il corso verrà tenuto
+     */
+    lateinit var bookedHour: String
+
+    constructor()
 
     constructor(
         _id: String,
         _title: String,
         _description: String,
         _session: Date,
-        _teacher: Teacher
+        _teacher: Teacher,
+        _bookedHour: String
     ) {
         id = _id
         title = _title
         description = _description
         session = _session
         teacher = _teacher
+        bookedHour = _bookedHour
     }
 
 }

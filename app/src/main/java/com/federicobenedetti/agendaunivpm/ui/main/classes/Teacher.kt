@@ -1,27 +1,27 @@
 package com.federicobenedetti.agendaunivpm.ui.main.classes
 
 open class Teacher {
-    private var _logTAG = "TEACHECLASS"
+    private var _logTAG = "TEACHERCLASS"
 
     /**
      * Id del professore
      */
-    private lateinit var id: String
+    lateinit var id: String
 
     /**
      * Nome del professore
      */
-    private lateinit var name: String
+    lateinit var name: String
 
     /**
      * Secondo nome del professore
      */
-    private lateinit var middleName: String
+    lateinit var middleName: String
 
     /**
      * Cognome del professore
      */
-    private lateinit var lastName: String
+    lateinit var lastName: String
 
     constructor(
         _id: String,
