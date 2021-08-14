@@ -15,4 +15,5 @@
     <string name="profile_title">Profilo</string>
     <string name="feedback_sent">Feedback inviato!</string>
     <string name="login_copyright">All rights reserved - © Copyright Federico Benedetti</string>
+    <string name="btn_label_go_to_course_detail">Dettaglio</string>
 </resources>

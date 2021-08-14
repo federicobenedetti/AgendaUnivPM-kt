@@ -21,6 +21,9 @@
         <activity android:name=".ui.main.activities.LoginActivity"></activity>
         <activity android:name=".ui.main.activities.FaqActivity"></activity>
         <activity android:name=".ui.main.activities.FeedbackActivity"></activity>
+        <activity android:name=".ui.main.activities.CourseDetailActivity"></activity>
+        <activity android:name=".ui.main.activities.CourseStreamingActivity"></activity>
+        <activity android:name=".ui.main.activities.CourseCalendarActivity"></activity>
     </application>
 
 </manifest>

@@ -64,5 +64,53 @@ class ListViewModel : ViewModel() {
                 "17: 00"
             )
         )
+
+        _availableCourses.add(
+            Course(
+                "Course_2",
+                "Inglese",
+                "Questo è il corso di Inglese",
+                Date(2021, 10, 11, 17, 30),
+                Teacher(
+                    "Teacher_2",
+                    "Pippo",
+                    "",
+                    "Verdi",
+                ),
+                "17: 00"
+            )
+        )
+
+        _availableCourses.add(
+            Course(
+                "Course_2",
+                "Inglese",
+                "Questo è il corso di Inglese",
+                Date(2021, 10, 11, 17, 30),
+                Teacher(
+                    "Teacher_2",
+                    "Pippo",
+                    "",
+                    "Verdi",
+                ),
+                "17: 00"
+            )
+        )
+
+        _availableCourses.add(
+            Course(
+                "Course_2",
+                "Inglese",
+                "Questo è il corso di Inglese",
+                Date(2021, 10, 11, 17, 30),
+                Teacher(
+                    "Teacher_2",
+                    "Pippo",
+                    "",
+                    "Verdi",
+                ),
+                "17: 00"
+            )
+        )
     }
 }

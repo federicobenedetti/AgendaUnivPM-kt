@@ -1,10 +1,12 @@
 package com.federicobenedetti.agendaunivpm.ui.main.utils
 
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.ui.main.activities.CourseDetailActivity
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.extensions.inflate
 
@@ -16,7 +18,7 @@ class RecyclerAdapter(private val courses: ArrayList<Course>) :
         parent: ViewGroup,
         viewType: Int
     ): InfoCardHolder {
-        val inflatedView = parent.inflate(R.layout.info_card, false)
+        val inflatedView = parent.inflate(R.layout.layout_card_info, false)
         return InfoCardHolder(inflatedView)
     }
 
@@ -52,7 +54,9 @@ class RecyclerAdapter(private val courses: ArrayList<Course>) :
         }
 
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
+            var intent = Intent(view.context, CourseDetailActivity::class.java)
+            intent.putExtra("CourseId", course?.id)
+            view.context.startActivity(intent)
         }
 
         companion object {
