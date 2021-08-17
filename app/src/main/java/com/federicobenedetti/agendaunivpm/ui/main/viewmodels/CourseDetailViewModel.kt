@@ -5,7 +5,7 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import java.util.*
 
-class ListViewModel : ViewModel() {
+class CourseDetailViewModel : ViewModel() {
 
     private val _availableCourses = mutableListOf<Course>()
 
@@ -14,6 +14,15 @@ class ListViewModel : ViewModel() {
 
     fun getCoursesAsArrayList(): ArrayList<Course> {
         return _availableCourses as ArrayList<Course>
+    }
+
+    private var _selectedCourse: Course? = null
+
+    var selectedCourse: Course? = null
+        get() = _selectedCourse
+
+    fun setSelectedCourseById(id: String) {
+        _selectedCourse = _availableCourses.find { c -> c.id == id }
     }
 
     init {

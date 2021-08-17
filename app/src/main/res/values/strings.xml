@@ -34,4 +34,6 @@
 
     <string name="faq_6_label">Come è stata, tutto sommato, l\'esperienza?</string>
     <string name="faq_6_description">Divertente! Come al solito. Mi piace immergermi nella tecnologia, si impara sempre qualcosa di nuovo.</string>
+
+    <string name="course_detail_held_by">Tenuto da <b>%1$s</b> alle ore <b>%2$s</b></string>
 </resources>

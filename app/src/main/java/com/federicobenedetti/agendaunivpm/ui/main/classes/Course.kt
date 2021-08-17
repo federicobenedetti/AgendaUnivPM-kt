@@ -16,7 +16,12 @@ open class Course {
     lateinit var title: String
 
     /**
-     * Descrizione del corso
+     * Breve descrizione del corso, visualizzabile dalle liste
+     */
+    lateinit var shortDescription: String
+
+    /**
+     * Descrizione del corso per esteso, visualizzabile dal dettaglio
      */
     lateinit var description: String
 
@@ -40,6 +45,7 @@ open class Course {
     constructor(
         _id: String,
         _title: String,
+        _shortDescription: String,
         _description: String,
         _session: Date,
         _teacher: Teacher,
@@ -47,6 +53,7 @@ open class Course {
     ) {
         id = _id
         title = _title
+        shortDescription = _shortDescription
         description = _description
         session = _session
         teacher = _teacher

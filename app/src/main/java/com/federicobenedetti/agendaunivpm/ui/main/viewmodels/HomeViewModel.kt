@@ -22,7 +22,10 @@ class HomeViewModel : ViewModel() {
                 "Course_0",
                 "Programmazione Mobile",
                 "Questo è il corso di programmazione mobile",
-                Date(2021, 9, 11, 14, 45),
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a finibus nibh. Ut id finibus velit. Suspendisse id felis turpis. Nulla id risus id mi posuere auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar finibus tellus, quis ullamcorper eros pulvinar ut.",
+                Date(
+                    2021, 9, 11, 14, 45
+                ),
                 Teacher(
                     "Teacher_0",
                     "Mario",
@@ -38,6 +41,7 @@ class HomeViewModel : ViewModel() {
                 "Course_1",
                 "Tecnologie Web",
                 "Questo è il corso di Tecnologie Web",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a finibus nibh. Ut id finibus velit. Suspendisse id felis turpis. Nulla id risus id mi posuere auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar finibus tellus, quis ullamcorper eros pulvinar ut.",
                 Date(2021, 9, 12, 9, 15),
                 Teacher(
                     "Teacher_1",
@@ -47,22 +51,6 @@ class HomeViewModel : ViewModel() {
                 ),
                 "14: 00"
             ),
-        )
-
-        _availableCourses.add(
-            Course(
-                "Course_2",
-                "Inglese",
-                "Questo è il corso di Inglese",
-                Date(2021, 10, 11, 17, 30),
-                Teacher(
-                    "Teacher_2",
-                    "Pippo",
-                    "",
-                    "Verdi",
-                ),
-                "17: 00"
-            )
         )
     }
 
