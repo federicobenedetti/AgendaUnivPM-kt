@@ -99,7 +99,10 @@ dependencies {
     // Firebase Functions
     implementation 'com.google.firebase:firebase-functions-ktx'
 
+    // CalendarView
+    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
+
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 }

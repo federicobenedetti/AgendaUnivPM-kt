@@ -1,7 +1,9 @@
 package com.federicobenedetti.agendaunivpm.ui.main.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.federicobenedetti.agendaunivpm.R
@@ -14,6 +16,9 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
     private lateinit var courseDetailViewModel: CourseDetailViewModel
 
     private lateinit var selectedCourseDetailId: String
+
+    private lateinit var mBtnGoToCalendar: Button
+    private lateinit var mBtnGoToStreaming: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,5 +35,19 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
         Log.d(_logTAG, "Selected course ID: $selectedCourseDetailId")
 
         courseDetailViewModel.setSelectedCourseById(selectedCourseDetailId)
+
+        mBtnGoToCalendar = courseDetailBinding.mBtnGoToCalendar
+        mBtnGoToCalendar.setOnClickListener {
+            var intent = Intent(this, CourseCalendarActivity::class.java)
+            intent.putExtra("CourseId", selectedCourseDetailId)
+            startActivity(intent)
+        }
+
+        mBtnGoToStreaming = courseDetailBinding.mBtnGoToStreaming
+        mBtnGoToStreaming.setOnClickListener {
+            var intent = Intent(this, CourseStreamingActivity::class.java)
+            intent.putExtra("CourseId", selectedCourseDetailId)
+            startActivity(intent)
+        }
     }
 }

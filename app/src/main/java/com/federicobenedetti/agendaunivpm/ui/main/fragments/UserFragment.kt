@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser
 class UserFragment : CustomFragment("USER") {
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
-    
+
     private val _userViewModel: UserViewModel by activityViewModels()
 
     private var mFirebaseAuth: FirebaseAuth? = null
@@ -124,6 +124,7 @@ class UserFragment : CustomFragment("USER") {
 
     private fun launchFeedbackActivity() {
         val intent = Intent(context, FeedbackActivity::class.java)
+        // intent.putExtra("matricola", _userViewModel.loggedInUser.value.)
         startActivity(intent)
     }
 

@@ -74,7 +74,6 @@ class FeedbackActivity : CustomAppCompatActivity("FEEDBACK") {
                     return@OnCompleteListener
                 }
 
-                val result = task.result
                 Toast.makeText(this, R.string.feedback_sent, Toast.LENGTH_LONG).show();
                 finish()
             })

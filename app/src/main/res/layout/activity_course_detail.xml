@@ -47,14 +47,16 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/mBtnGoToCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vai al calendario"></Button>
+                android:text="@string/course_detail_go_to_calendar"></Button>
 
             <Button
+                android:id="@+id/mBtnGoToStreaming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vai allo streaming"></Button>
+                android:text="@string/course_detail_go_to_streaming"></Button>
         </LinearLayout>
 
 
