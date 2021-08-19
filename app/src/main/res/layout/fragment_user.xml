@@ -7,6 +7,10 @@
         <variable
             name="userViewModel"
             type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel" />
+
+        <variable
+            name="whoAmI"
+            type="com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI" />
     </data>
 
     <LinearLayout
@@ -55,7 +59,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{userViewModel.loggedInUser.getId()}"
+                        android:text="@{whoAmI.studentMatricola}"
                         android:textSize="@dimen/text_medium"></TextView>
                 </LinearLayout>
             </TableRow>

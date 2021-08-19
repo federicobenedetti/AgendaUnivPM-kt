@@ -16,7 +16,7 @@ import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.FragmentUserBinding
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FeedbackActivity
-import com.federicobenedetti.agendaunivpm.ui.main.activities.MainActivity
+import com.federicobenedetti.agendaunivpm.ui.main.activities.LoginActivity
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel
@@ -76,7 +76,7 @@ class UserFragment : CustomFragment("USER") {
             Log.w(_logTAG, "FirebaseAuth state changed")
             if (mFirebaseAuth!!.currentUser == null) {
                 Log.w(_logTAG, "User logged out")
-                launchMainActivity()
+                launchLoginActivity()
             }
         }
 
@@ -116,9 +116,9 @@ class UserFragment : CustomFragment("USER") {
         startActivity(intent)
     }
 
-    private fun launchMainActivity() {
-        Log.w(_logTAG, "Launching MainActivity")
-        val intent = Intent(context, MainActivity::class.java)
+    private fun launchLoginActivity() {
+        Log.w(_logTAG, "Launching LoginActivity")
+        val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
     }
 
