@@ -1,24 +1,21 @@
 package com.federicobenedetti.agendaunivpm.ui.main.classes
 
-open class Student {
+open class Student(
+    _matricola: String,
+    _uid: String,
+    _telefono: Int,
+    _annoCorso: Int,
+    _corsi: Array<Course>
+) {
 
-    private var matricola: String
+    var matricola: String = _matricola
 
-    private var uid: String
+    var uid: String = _uid
 
-    private var telefono: Int = 0
+    var telefono: Int = _telefono
 
-    private var annoCorso: Int = 0
+    var annoCorso: Int = _annoCorso
 
-    private var corsi: ArrayList<Course>
+    var corsi = _corsi
 
-    constructor(
-        student: Student
-    ) {
-        matricola = student.matricola
-        uid = student.uid
-        telefono = student.telefono
-        annoCorso = student.annoCorso
-        corsi = student.corsi
-    }
 }

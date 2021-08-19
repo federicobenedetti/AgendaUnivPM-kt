@@ -17,8 +17,8 @@ import com.federicobenedetti.agendaunivpm.databinding.FragmentUserBinding
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FeedbackActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.MainActivity
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
-import com.federicobenedetti.agendaunivpm.ui.main.utils.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

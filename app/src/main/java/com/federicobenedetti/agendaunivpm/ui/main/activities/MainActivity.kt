@@ -7,8 +7,9 @@ import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
-import com.federicobenedetti.agendaunivpm.ui.main.utils.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.ViewPagerFragmentAdapter
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -16,6 +17,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
 import java.util.*
@@ -83,8 +85,17 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
                     return@OnCompleteListener
                 }
 
-                Toast.makeText(this, R.string.feedback_sent, Toast.LENGTH_LONG).show();
-                finish()
+                /**
+                 * Se il risultato della chiamata è null c'è qualche problema grosso dietro
+                 * Evidentemente all'utente loggato non gli è stata assegnata una matricola (Firebase)
+                 * quindi è necessario riverificarlo, facendolo ripassare dal login
+                 */
+                if (task.result == null) {
+                    Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
+                    startLoginActivity()
+                }
+
+                WhoAmI.setLoggedInStudent(task.result!!)
             })
     }
 
@@ -93,9 +104,15 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
             .getHttpsCallable("getUserFromAuthUid")
             .call()
             .continueWith { task ->
-                var gson = Gson()
-                Log.d(_logTAG, "Pippo: " + gson.fromJson(json, task.result?.data as Student))
-                task.result?.data as Student
+                val result = task.result?.data as Map<String, Any>
+
+                val gson = Gson()
+                val jsonElement: JsonElement = gson.toJsonTree(result)
+                val pojo: Student = gson.fromJson(jsonElement, Student::class.java)
+
+                Log.d(_logTAG, "Student: ${pojo.matricola}")
+
+                pojo
             }
     }
 

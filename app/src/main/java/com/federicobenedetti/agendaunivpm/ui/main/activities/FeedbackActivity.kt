@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.ActivityFeedbackBinding
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.FeedbackViewModel
 import com.google.android.gms.tasks.OnCompleteListener
@@ -43,8 +44,12 @@ class FeedbackActivity : CustomAppCompatActivity("FEEDBACK") {
     }
 
     private fun sendUserFeedback(): Task<String> {
+        /**
+         * Siamo sicuri che NON possiamo essere nella pagina di Feedback se NON abbiamo uno studente loggato
+         */
         val data = hashMapOf(
-            "feedback" to feedbackViewModel.userFeedback.value
+            "feedback" to feedbackViewModel.userFeedback.value,
+            "matricola" to WhoAmI.getStudentMatricola()
         )
 
         return functions

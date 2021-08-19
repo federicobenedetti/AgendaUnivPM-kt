@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
-import com.federicobenedetti.agendaunivpm.ui.main.utils.FirebaseUtils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -30,6 +30,9 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         mButtonSignIn!!.setOnClickListener {
             startLoginProcedure()
         }
+
+        // Let's sign out before user can login
+        FirebaseUtils.getFirebaseAuthInstance()!!.signOut()
     }
 
     // When we get back from the Google Login Form

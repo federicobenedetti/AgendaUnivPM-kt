@@ -1,4 +1,4 @@
-package com.federicobenedetti.agendaunivpm.ui.main.utils
+package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions

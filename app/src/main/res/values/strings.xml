@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Agenda UnivPM</string>
+    <string name="generic_error">Errore</string>
+    <string name="generic_success">Successo!</string>
+
     <string name="available_courses">Corsi disponibili</string>
     <string name="course_year">Anno </string>
     <string name="course_subscribe">Iscriviti</string>
