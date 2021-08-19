@@ -11,7 +11,9 @@ object WhoAmI {
     private var studentLoggedIn: Student? = null
 
     fun setLoggedInStudent(s: Student) {
-        studentLoggedIn = s
+        if (s != null) {
+            studentLoggedIn = s
+        }
     }
 
     fun getStudentMatricola(): String {

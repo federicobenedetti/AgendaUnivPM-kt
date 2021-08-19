@@ -92,10 +92,14 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
                  */
                 if (task.result == null) {
                     Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
-                    startLoginActivity()
+                    // startLoginActivity()
+                    // finish()
+
+                    return@OnCompleteListener
                 }
 
                 WhoAmI.setLoggedInStudent(task.result!!)
+                return@OnCompleteListener
             })
     }
 
@@ -113,6 +117,7 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
                 Log.d(_logTAG, "Student: ${pojo.matricola}")
 
                 pojo
+                
             }
     }
 
