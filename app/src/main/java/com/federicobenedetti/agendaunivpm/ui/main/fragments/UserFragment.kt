@@ -1,6 +1,5 @@
 package com.federicobenedetti.agendaunivpm.ui.main.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,12 +16,12 @@ import com.federicobenedetti.agendaunivpm.databinding.FragmentUserBinding
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FeedbackActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.LoginActivity
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 
 class UserFragment : CustomFragment("USER") {
@@ -58,17 +57,17 @@ class UserFragment : CustomFragment("USER") {
 
         mButtonFaqActivity = binding.buttonLaunchFaqActivity
         mButtonFaqActivity!!.setOnClickListener {
-            launchFaqActivity()
+            context?.let { it -> ActivityUtils.launchActivity(it, FaqActivity::class) }
         }
 
         mButtonFeedbackActivity = binding.buttonLaunchFeedbackActivity
         mButtonFeedbackActivity!!.setOnClickListener {
-            launchFeedbackActivity()
+            context?.let { it -> ActivityUtils.launchActivity(it, FeedbackActivity::class) }
         }
 
         mButtonSignOut = binding.buttonLaunchSignOut
         mButtonSignOut!!.setOnClickListener {
-            signOut()
+            mFirebaseAuth!!.signOut()
         }
 
         mFirebaseAuth = FirebaseUtils!!.getFirebaseAuthInstance()
@@ -77,7 +76,7 @@ class UserFragment : CustomFragment("USER") {
             Log.w(_logTAG, "FirebaseAuth state changed")
             if (mFirebaseAuth!!.currentUser == null) {
                 Log.w(_logTAG, "User logged out")
-                launchLoginActivity()
+                context?.let { it -> ActivityUtils.launchActivity(it, LoginActivity::class) }
             }
         }
 
@@ -92,42 +91,13 @@ class UserFragment : CustomFragment("USER") {
         super.onStart()
 
         val currentUser = mFirebaseAuth!!.currentUser
-        updateUI(currentUser)
+        _userViewModel.setCurrentLoggedInUser(currentUser)
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    // Notify the VM that data has changed and need to be refreshed
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            _userViewModel.setCurrentLoggedInUser(user)
-        }
-    }
-
-    private fun signOut() {
-        Log.w(_logTAG, "Signing out of Firebase")
-        mFirebaseAuth!!.signOut()
-    }
-
-    private fun launchFaqActivity() {
-        val intent = Intent(context, FaqActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun launchLoginActivity() {
-        Log.w(_logTAG, "Launching LoginActivity")
-        val intent = Intent(context, LoginActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun launchFeedbackActivity() {
-        val intent = Intent(context, FeedbackActivity::class.java)
-        // intent.putExtra("matricola", _userViewModel.loggedInUser.value.)
-        startActivity(intent)
     }
 
     companion object {

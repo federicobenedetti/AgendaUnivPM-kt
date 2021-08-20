@@ -1,8 +1,6 @@
 package com.federicobenedetti.agendaunivpm.ui.main.utils
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -12,6 +10,7 @@ import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.activities.CourseDetailActivity
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.extensions.inflate
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 
 
 class RecyclerAdapter(private val courses: ArrayList<Course>) :
@@ -69,23 +68,11 @@ class RecyclerAdapter(private val courses: ArrayList<Course>) :
         }
 
         override fun onClick(v: View?) {
-            launchCourseDetailActivity()
+            ActivityUtils.launchActivityWithParams(
+                itemViewContext,
+                CourseDetailActivity::class,
+                hashMapOf("CourseId" to course.id)
+            )
         }
-
-        fun launchCourseDetailActivity() {
-            var intent = Intent(itemViewContext, CourseDetailActivity::class.java)
-
-            Log.d(_logTAG, "Selected course ID: " + course.id)
-            intent.putExtra("CourseId", course.id)
-
-            itemViewContext.startActivity(intent)
-        }
-
-        companion object {
-            // Add a key for easy reference to the item launching the RecyclerView.
-            private const val _logTAG = "COURSE"
-        }
-
     }
-
 }

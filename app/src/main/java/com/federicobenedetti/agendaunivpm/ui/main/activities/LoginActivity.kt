@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseService
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
@@ -99,18 +100,12 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             if (it.isSuccessful && it.result != null) {
                 WhoAmI.setLoggedInStudent(it.result)
                 Toast.makeText(this, R.string.generic_success, Toast.LENGTH_LONG).show();
-                launchMainActivity()
+                ActivityUtils.launchActivity(this, MainActivity::class)
+                finish()
             } else {
                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
             }
         }
 
-    }
-
-
-    fun launchMainActivity() {
-        var intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }
