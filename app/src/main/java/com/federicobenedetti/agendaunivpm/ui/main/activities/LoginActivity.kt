@@ -36,6 +36,8 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         }
 
         var currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
+        
+        FirebaseUtils.setAuthStateListener(this)
 
         Log.w(_logTAG, "Current signedInUser: $currentUser")
 
@@ -103,6 +105,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                 ActivityUtils.launchActivity(this, MainActivity::class)
                 finish()
             } else {
+                Log.d(_logTAG, "Errore durante il set della matricola: " + it.exception)
                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
             }
         }

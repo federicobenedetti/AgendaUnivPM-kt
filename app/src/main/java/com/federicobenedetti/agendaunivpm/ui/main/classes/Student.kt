@@ -5,7 +5,7 @@ open class Student(
     _uid: String,
     _telefono: Int,
     _annoCorso: Int,
-    _corsi: Array<Course>
+    _corsi: Array<String>
 ) {
 
     var matricola: String = _matricola

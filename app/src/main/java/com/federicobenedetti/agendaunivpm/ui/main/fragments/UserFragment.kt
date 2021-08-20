@@ -1,7 +1,6 @@
 package com.federicobenedetti.agendaunivpm.ui.main.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.FragmentUserBinding
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FeedbackActivity
-import com.federicobenedetti.agendaunivpm.ui.main.activities.LoginActivity
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
@@ -71,14 +69,6 @@ class UserFragment : CustomFragment("USER") {
         }
 
         mFirebaseAuth = FirebaseUtils!!.getFirebaseAuthInstance()
-
-        mFirebaseAuth!!.addAuthStateListener {
-            Log.w(_logTAG, "FirebaseAuth state changed")
-            if (mFirebaseAuth!!.currentUser == null) {
-                Log.w(_logTAG, "User logged out")
-                context?.let { it -> ActivityUtils.launchActivity(it, LoginActivity::class) }
-            }
-        }
 
         mImageViewUserProfileImage = binding.userProfileImage
 
