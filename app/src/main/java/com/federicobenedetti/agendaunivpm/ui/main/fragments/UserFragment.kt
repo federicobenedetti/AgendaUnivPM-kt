@@ -18,6 +18,7 @@ import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FeedbackActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.LoginActivity
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -81,6 +82,8 @@ class UserFragment : CustomFragment("USER") {
         }
 
         mImageViewUserProfileImage = binding.userProfileImage
+
+        _userViewModel.setCurrentLoggedInUserMatricola(WhoAmI.getStudentMatricola())
         return view
     }
 
@@ -101,7 +104,6 @@ class UserFragment : CustomFragment("USER") {
     // Notify the VM that data has changed and need to be refreshed
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            Log.w(_logTAG, "User: " + user.email + ", " + user.displayName + ", " + user.photoUrl)
             _userViewModel.setCurrentLoggedInUser(user)
         }
     }

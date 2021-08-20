@@ -13,6 +13,15 @@ open class User {
     private lateinit var id: String
 
     /**
+     * La matricola dell'utente
+     */
+    private lateinit var matricola: String;
+
+    fun setMatricola(_matricola: String) {
+        matricola = _matricola
+    }
+
+    /**
      * Nome (o meglio username) dell'utente
      */
     private lateinit var displayName: String
