@@ -3,7 +3,7 @@ package com.federicobenedetti.agendaunivpm.ui.main.utils
 import androidx.appcompat.app.AppCompatActivity
 
 open class CustomAppCompatActivity constructor() : AppCompatActivity() {
-    protected var _logTAG: String? = null
+    protected lateinit var _logTAG: String
 
     constructor(
         logTag: String

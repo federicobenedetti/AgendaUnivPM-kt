@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseService
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.*
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -36,7 +33,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         }
 
         var currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
-        
+
         FirebaseUtils.setAuthStateListener(this)
 
         Log.w(_logTAG, "Current signedInUser: $currentUser")
@@ -105,7 +102,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                 ActivityUtils.launchActivity(this, MainActivity::class)
                 finish()
             } else {
-                Log.d(_logTAG, "Errore durante il set della matricola: " + it.exception)
+                Logger.d(_logTAG, "Errore durante il set della matricola: " + it.exception)
                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
             }
         }

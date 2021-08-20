@@ -2,8 +2,10 @@ package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.HttpsCallableResult
+import com.google.gson.Gson
 
 object FirebaseClient {
+    private const val _logTAG = "FIREBASECLIENT"
 
     /**
      * Qui le funzioni vengono descritte da metodi più parlanti
@@ -23,6 +25,16 @@ object FirebaseClient {
 
         return FirebaseUtils.getFirebaseFunctionsInstance()!!
             .getHttpsCallable("addUserFeedback")
+            .call(data)
+    }
+
+    fun getCoursesForStudent(corsi: Array<String>): Task<HttpsCallableResult> {
+        val data = hashMapOf(
+            "corsi" to Gson().toJson(corsi)
+        )
+        
+        return FirebaseUtils.getFirebaseFunctionsInstance()!!
+            .getHttpsCallable("getCoursesFromCoursesId")
             .call(data)
     }
 
