@@ -53,6 +53,10 @@ open class User {
         return photoUrl
     }
 
+    fun getMatricola(): String? {
+        return matricola
+    }
+
     /**
      * Firebase ci ritorna un FirebaseUser
      * Noi lo dobbiamo parsare per poterlo trasformare in qualcosa che la nostra View può capire

@@ -11,7 +11,7 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
 object WhoAmI {
     private const val _logTAG = "WHOAMI"
 
-    private var studentLoggedIn: Student? = null
+    private lateinit var studentLoggedIn: Student
 
     private var studentCourses: List<Course> = listOf()
 
@@ -37,6 +37,7 @@ object WhoAmI {
     }
 
     fun getStudentMatricola(): String {
+        Logger.d(_logTAG, "Student", studentLoggedIn)
         return studentLoggedIn!!.matricola
     }
 }
