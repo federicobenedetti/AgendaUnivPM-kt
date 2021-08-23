@@ -2,7 +2,6 @@ package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.HttpsCallableResult
-import com.google.gson.Gson
 
 object FirebaseClient {
     private const val _logTAG = "FIREBASECLIENT"
@@ -28,14 +27,11 @@ object FirebaseClient {
             .call(data)
     }
 
-    fun getCoursesForStudent(corsi: Array<String>): Task<HttpsCallableResult> {
-        val data = hashMapOf(
-            "corsi" to Gson().toJson(corsi)
-        )
-        
+    fun getCoursesForStudent(corsi: List<String>): Task<HttpsCallableResult> {
+
         return FirebaseUtils.getFirebaseFunctionsInstance()!!
             .getHttpsCallable("getCoursesFromCoursesId")
-            .call(data)
+            .call(corsi)
     }
 
 }

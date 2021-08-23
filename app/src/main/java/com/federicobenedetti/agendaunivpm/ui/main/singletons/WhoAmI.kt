@@ -2,7 +2,6 @@ package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
-import com.google.gson.Gson
 
 /**
  * Singleton that rapresent which student is currently logged in.
@@ -14,19 +13,24 @@ object WhoAmI {
 
     private var studentLoggedIn: Student? = null
 
-    private var studentCourses: ArrayList<Course> = arrayListOf()
+    private var studentCourses: List<Course> = listOf()
+
+    fun getStudentCourses(): List<Course> {
+        Logger.d(_logTAG, "Elementi", studentCourses)
+        return studentCourses
+    }
 
     fun setLoggedInStudent(s: Student) {
         if (s != null) {
             studentLoggedIn = s
-
-            Logger.d(_logTAG, "PIPPO" + Gson().toJsonTree(s.corsi))
             FirebaseService.getStudentCourses(s.corsi).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Logger.d(_logTAG, "Risultato", it.result)
-
+                    Logger.d(_logTAG, "Elementi trovati: ", it.result)
+                    studentCourses = it.result
+                    return@addOnCompleteListener
                 } else {
                     Logger.d(_logTAG, "Fallimento" + it.exception)
+                    return@addOnCompleteListener
                 }
             }
         }

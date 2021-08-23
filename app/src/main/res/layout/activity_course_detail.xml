@@ -24,14 +24,14 @@
             android:textSize="@dimen/text_big"
             android:textStyle="bold"></TextView>
 
-        <TextView
+        <!-- <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@{String.format(@string/course_detail_held_by, courseDetailViewModel.selectedCourse.teacher.name, courseDetailViewModel.selectedCourse.bookedHour)}"></TextView>
 
-
+-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

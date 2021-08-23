@@ -1,7 +1,5 @@
 package com.federicobenedetti.agendaunivpm.ui.main.classes
 
-import java.util.*
-
 open class Course {
     private var _logTAG = "COURSECLASS"
 
@@ -28,12 +26,12 @@ open class Course {
     /**
      * Anno accademico del corso
      */
-    lateinit var session: Date
+    lateinit var session: String
 
     /**
      * Professore che tiene il corso
      */
-    lateinit var teacher: Teacher
+    lateinit var teacherId: String
 
     /**
      * L'ora nella quale il corso verrà tenuto
@@ -47,8 +45,8 @@ open class Course {
         _title: String,
         _shortDescription: String,
         _description: String,
-        _session: Date,
-        _teacher: Teacher,
+        _session: String,
+        _teacherId: String,
         _bookedHour: String
     ) {
         id = _id
@@ -56,7 +54,7 @@ open class Course {
         shortDescription = _shortDescription
         description = _description
         session = _session
-        teacher = _teacher
+        teacherId = _teacherId
         bookedHour = _bookedHour
     }
 

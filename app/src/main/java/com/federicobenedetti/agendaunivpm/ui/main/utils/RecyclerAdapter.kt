@@ -16,6 +16,7 @@ import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 class RecyclerAdapter(private val courses: ArrayList<Course>) :
     RecyclerView.Adapter<RecyclerAdapter.InfoCardHolder>() {
 
+    private var _logTAG = "RECYCLERADAPTER"
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -63,8 +64,8 @@ class RecyclerAdapter(private val courses: ArrayList<Course>) :
 
             textViewCourseTitle.text = course.title
             textViewCourseDescription.text = course.shortDescription
-            textViewCourseTeacher.text = course.teacher.name + " " + course.teacher.lastName
-            textViewCourseSession.text = course.session.year.toString()
+            // textViewCourseTeacher.text = course.teacher.name + " " + course.teacher.lastName
+            textViewCourseSession.text = course.session
         }
 
         override fun onClick(v: View?) {

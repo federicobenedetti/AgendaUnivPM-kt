@@ -1,5 +1,7 @@
 package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.convertValue
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
 import com.google.android.gms.tasks.Task
@@ -29,11 +31,17 @@ object FirebaseService {
             }
     }
 
-    fun getStudentCourses(corsi: Array<String>): Task<ArrayList<Course>> {
+    fun getStudentCourses(corsi: List<String>): Task<List<Course>> {
         return FirebaseClient.getCoursesForStudent(corsi)
             .continueWith { task ->
-                Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(task.result.data))
-                null
+                val courses = emptyList<Course>().toMutableList()
+                var result = task.result?.data as ArrayList<HashMap<String, String>>
+                for (c in result) {
+                    courses.add(ObjectMapper().convertValue(c))
+                }
+
+                Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(courses))
+                courses
             }
     }
 }
