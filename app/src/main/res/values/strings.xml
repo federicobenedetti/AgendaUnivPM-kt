@@ -42,4 +42,6 @@
 
     <string name="course_detail_go_to_calendar">Vai al calendario</string>
     <string name="course_detail_go_to_streaming">Vai allo streaming</string>
+
+    <string name="fragment_user_course_year">%1$s° anno</string>
 </resources>

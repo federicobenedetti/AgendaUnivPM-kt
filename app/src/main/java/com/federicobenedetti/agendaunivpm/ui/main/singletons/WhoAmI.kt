@@ -38,6 +38,14 @@ object WhoAmI {
 
     fun getStudentMatricola(): String {
         Logger.d(_logTAG, "Student", studentLoggedIn)
-        return studentLoggedIn!!.matricola
+        return studentLoggedIn.matricola
+    }
+
+    fun getStudentPhoneNumber(): Int {
+        return studentLoggedIn.telefono
+    }
+
+    fun getStudentCourseYear(): Int {
+        return studentLoggedIn.annoCorso
     }
 }

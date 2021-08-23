@@ -19,9 +19,17 @@ class UserViewModel : ViewModel() {
     fun setCurrentLoggedInUser(user: FirebaseUser?) {
         _loggedInUser.value?.parseUserFromGoogleSignIn(user);
     }
-    
+
     fun setCurrentLoggedInUserMatricola(matricola: String) {
         _loggedInUser.value?.setMatricola(matricola)
+    }
+
+    fun setCurrentLoggedInUserPhoneNumber(phone: Int) {
+        _loggedInUser.value?.setPhoneNumber(phone)
+    }
+
+    fun setCurrentLoggedInUserCourseYear(year: Int) {
+        _loggedInUser.value?.setCourseYear(year)
     }
 }
 

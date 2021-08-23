@@ -73,6 +73,8 @@ class UserFragment : CustomFragment("USER") {
         mImageViewUserProfileImage = binding.userProfileImage
 
         _userViewModel.setCurrentLoggedInUserMatricola(WhoAmI.getStudentMatricola())
+        _userViewModel.setCurrentLoggedInUserPhoneNumber(WhoAmI.getStudentPhoneNumber())
+        _userViewModel.setCurrentLoggedInUserCourseYear(WhoAmI.getStudentCourseYear())
         return view
     }
 

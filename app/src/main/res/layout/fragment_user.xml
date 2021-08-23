@@ -105,29 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"
-                android:text="+39 3407024884"></TextView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <com.mikepenz.iconics.view.IconicsTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_medium"
-                android:layout_marginRight="@dimen/margin_medium"
-                android:text="{gmd-event}"></com.mikepenz.iconics.view.IconicsTextView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_medium"
-                android:text="30 / 11 / 1999"></TextView>
+                android:text="@{Integer.toString(userViewModel.loggedInUser.getPhoneNumber())}"></TextView>
 
         </LinearLayout>
 
@@ -149,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"
-                android:text="3° anno"></TextView>
+                android:text="@{String.format(@string/fragment_user_course_year, Integer.toString(userViewModel.loggedInUser.getCourseYear()))}"></TextView>
 
         </LinearLayout>
 

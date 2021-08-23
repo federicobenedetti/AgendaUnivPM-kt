@@ -11,51 +11,66 @@ open class User {
      * Id dell'utente
      */
     private lateinit var id: String
+    fun getId(): String? {
+        return id
+    }
 
     /**
      * La matricola dell'utente
      */
-    private lateinit var matricola: String;
+    private lateinit var matricola: String
 
     fun setMatricola(_matricola: String) {
         matricola = _matricola
     }
 
+    fun getMatricola(): String? {
+        return matricola
+    }
+
+    private var phoneNumber: Int = 0
+    fun setPhoneNumber(_phone: Int) {
+        phoneNumber = _phone
+    }
+
+    fun getPhoneNumber(): Int {
+        return phoneNumber
+    }
+
+    private var courseYear: Int = 0
+    fun setCourseYear(_year: Int) {
+        courseYear = _year
+    }
+
+    fun getCourseYear(): Int {
+        return courseYear
+    }
+
+
     /**
      * Nome (o meglio username) dell'utente
      */
     private lateinit var displayName: String
+    fun getDisplayName(): String? {
+        return displayName
+    }
 
     /**
      * Email associata all'utente
      */
     private lateinit var email: String
-
+    fun getEmail(): String? {
+        return email
+    }
 
     /**
      * URI della foto associata all'utente
      */
     private lateinit var photoUrl: Uri
-
-    fun getDisplayName(): String? {
-        return displayName
-    }
-
-    fun getEmail(): String? {
-        return email
-    }
-
-    fun getId(): String? {
-        return id
-    }
-
     fun getPhotoUrl(): Uri? {
         return photoUrl
     }
 
-    fun getMatricola(): String? {
-        return matricola
-    }
 
     /**
      * Firebase ci ritorna un FirebaseUser
