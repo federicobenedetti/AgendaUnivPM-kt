@@ -151,6 +151,8 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                                 )
                                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG)
                                     .show();
+
+                                linearLayoutLoading.visibility = View.GONE
                                 return@addOnCompleteListener
                             }
 
@@ -162,6 +164,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                     } else {
                         Logger.d(_logTAG, "Errore durante il retrieve dei corsi: " + it.exception)
                         Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
+                        linearLayoutLoading.visibility = View.GONE
                         return@addOnCompleteListener
                     }
                 }
@@ -170,6 +173,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             } else {
                 Logger.d(_logTAG, "Errore durante il set della matricola: " + it.exception)
                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
+                linearLayoutLoading.visibility = View.GONE
             }
         }
 
