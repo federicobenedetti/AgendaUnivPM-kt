@@ -23,16 +23,13 @@ object WhoAmI {
     fun setLoggedInStudent(s: Student) {
         if (s != null) {
             studentLoggedIn = s
-            FirebaseService.getStudentCourses(s.corsi).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Logger.d(_logTAG, "Elementi trovati: ", it.result)
-                    studentCourses = it.result
-                    return@addOnCompleteListener
-                } else {
-                    Logger.d(_logTAG, "Fallimento" + it.exception)
-                    return@addOnCompleteListener
-                }
-            }
+
+        }
+    }
+
+    fun setLoggedInStudentCourses(courses: List<Course>) {
+        if (courses != null) {
+            studentCourses = courses
         }
     }
 

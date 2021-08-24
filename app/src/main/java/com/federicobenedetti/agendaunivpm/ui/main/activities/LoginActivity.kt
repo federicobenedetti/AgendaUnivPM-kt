@@ -3,6 +3,8 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.*
@@ -23,14 +25,19 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
     private val RC_SIGN_IN = 9001
 
+    private lateinit var linearLayoutLoading: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         mButtonSignIn = findViewById(R.id.buttonSignIn)
         mButtonSignIn!!.setOnClickListener {
+            linearLayoutLoading.visibility = View.VISIBLE
             startLoginProcedure()
         }
+
+        linearLayoutLoading = findViewById(R.id.linear_layout_loading)
 
         var currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
 
@@ -39,6 +46,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         Log.w(_logTAG, "Current signedInUser: $currentUser")
 
         if (currentUser != null) {
+            linearLayoutLoading.visibility = View.VISIBLE
             setStudentMatricola()
         }
     }
@@ -95,12 +103,32 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
     }
 
     private fun setStudentMatricola() {
+        // Per il momento faremo qui tutte le nostre chiamate, una dietro l'altra
+        // Carichiamo tutti i dati, dopodiché lanciamo la main activity
+        
         FirebaseService.getStudentByUid().addOnCompleteListener {
             if (it.isSuccessful && it.result != null) {
-                WhoAmI.setLoggedInStudent(it.result)
-                Toast.makeText(this, R.string.generic_success, Toast.LENGTH_LONG).show();
-                ActivityUtils.launchActivity(this, MainActivity::class)
-                finish()
+                var result = it.result
+
+                WhoAmI.setLoggedInStudent(result)
+
+                FirebaseService.getStudentCourses(result.corsi).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        Logger.d(_logTAG, "Elementi trovati: ", it.result)
+                        WhoAmI.setLoggedInStudentCourses(it.result)
+
+                        Toast.makeText(this, R.string.generic_success, Toast.LENGTH_LONG).show();
+                        ActivityUtils.launchActivity(this, MainActivity::class)
+                        finish()
+
+                        return@addOnCompleteListener
+                    } else {
+                        Logger.d(_logTAG, "Fallimento" + it.exception)
+                        return@addOnCompleteListener
+                    }
+                }
+
+
             } else {
                 Logger.d(_logTAG, "Errore durante il set della matricola: " + it.exception)
                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();

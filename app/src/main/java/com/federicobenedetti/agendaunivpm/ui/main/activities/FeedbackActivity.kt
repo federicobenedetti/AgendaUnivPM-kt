@@ -2,7 +2,9 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +20,8 @@ class FeedbackActivity : CustomAppCompatActivity("FEEDBACK") {
     private lateinit var feedbackBinding: ActivityFeedbackBinding
     private lateinit var feedbackViewModel: FeedbackViewModel
 
+    private lateinit var linearLayoutLoading: LinearLayout
+
     private lateinit var mBtnSendFeedback: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +32,11 @@ class FeedbackActivity : CustomAppCompatActivity("FEEDBACK") {
         feedbackBinding.feedbackViewModel = feedbackViewModel
         feedbackBinding.lifecycleOwner = this
 
+        linearLayoutLoading = findViewById(R.id.linear_layout_loading)
+
         mBtnSendFeedback = findViewById(R.id.btnSendFeedback)
         mBtnSendFeedback.setOnClickListener {
+            linearLayoutLoading.visibility = View.VISIBLE
             onSendFeedbackClicked()
         }
     }
@@ -44,11 +51,11 @@ class FeedbackActivity : CustomAppCompatActivity("FEEDBACK") {
         ).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Toast.makeText(this, R.string.feedback_sent, Toast.LENGTH_LONG).show();
-                finish()
             } else {
                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
-                finish()
             }
+            linearLayoutLoading.visibility = View.GONE
+            finish()
         }
     }
 }
