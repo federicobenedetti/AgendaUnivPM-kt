@@ -47,7 +47,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
         if (currentUser != null) {
             linearLayoutLoading.visibility = View.VISIBLE
-            setStudentMatricola()
+            loadStudentData()
         }
     }
 
@@ -94,7 +94,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                     // Sign in success, update UI with the signed-in user's information
                     Log.w(_logTAG, "signInWithCredential success")
                     Log.w(_logTAG, "current signed in user " + mFirebaseAuth!!.currentUser)
-                    setStudentMatricola()
+                    loadStudentData()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(_logTAG, "signInWithCredential failure", task.exception)
@@ -102,28 +102,66 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             }
     }
 
-    private fun setStudentMatricola() {
-        // Per il momento faremo qui tutte le nostre chiamate, una dietro l'altra
-        // Carichiamo tutti i dati, dopodiché lanciamo la main activity
-        
+    // Per il momento faremo qui tutte le nostre chiamate, una dietro l'altra
+    // Carichiamo tutti i dati, dopodiché lanciamo la main activity
+    // Non è proprio il massimo.. anzi
+    // Però è l'unico modo (veloce) che mi è venuto in mente per far chiamate concatenate
+    // aspettando il loro risultato.
+    // Non ho un db locale o un backend "tradizionale", le API Firebase sono limitate
+    // e le query concatenate sono definitivamente molto più complesse del necessario rispetto
+    // allo scopo e alla quantità di dati richiesti per quest'app
+    private fun loadStudentData() {
+        // Carichiamo lo studente
         FirebaseService.getStudentByUid().addOnCompleteListener {
             if (it.isSuccessful && it.result != null) {
                 var result = it.result
 
                 WhoAmI.setLoggedInStudent(result)
 
+                // Carichiamo tutti i corsi registrati
                 FirebaseService.getStudentCourses(result.corsi).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Logger.d(_logTAG, "Elementi trovati: ", it.result)
+
+
+                        Logger.d(_logTAG, "Corsi trovati: ", it.result)
                         WhoAmI.setLoggedInStudentCourses(it.result)
 
-                        Toast.makeText(this, R.string.generic_success, Toast.LENGTH_LONG).show();
-                        ActivityUtils.launchActivity(this, MainActivity::class)
-                        finish()
+
+                        // Carichiamo tutti i professori
+                        FirebaseService.getTeachers().addOnCompleteListener {
+                            if (it.isSuccessful) {
+
+                                DataPersistanceUtils.setTeachers(it.result)
+
+                                Logger.d(
+                                    _logTAG,
+                                    "Professori registrati: ",
+                                    DataPersistanceUtils.getTeachers()
+                                )
+
+                                Toast.makeText(this, R.string.generic_success, Toast.LENGTH_LONG)
+                                    .show();
+                                ActivityUtils.launchActivity(this, MainActivity::class)
+                                finish()
+                                return@addOnCompleteListener
+                            } else {
+                                Logger.d(
+                                    _logTAG,
+                                    "Errore durante il retrieve dei teacher: " + it.exception
+                                )
+                                Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG)
+                                    .show();
+                                return@addOnCompleteListener
+                            }
+
+
+                        }
+
 
                         return@addOnCompleteListener
                     } else {
-                        Logger.d(_logTAG, "Fallimento" + it.exception)
+                        Logger.d(_logTAG, "Errore durante il retrieve dei corsi: " + it.exception)
+                        Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
                         return@addOnCompleteListener
                     }
                 }

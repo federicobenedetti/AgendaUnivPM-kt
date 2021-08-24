@@ -1,6 +1,16 @@
 package com.federicobenedetti.agendaunivpm.ui.main.classes
 
 open class Teacher {
+
+    constructor() {}
+
+    constructor(_id: String, _name: String, _middleName: String, _lastName: String) {
+        this.id = _id
+        this.name = _name
+        this.middleName = _middleName
+        this.lastName = _lastName
+    }
+
     private var _logTAG = "TEACHERCLASS"
 
     /**
@@ -23,15 +33,4 @@ open class Teacher {
      */
     lateinit var lastName: String
 
-    constructor(
-        _id: String,
-        _name: String,
-        _middleName: String,
-        _lastName: String
-    ) {
-        id = _id
-        name = _name
-        middleName = _middleName
-        lastName = _lastName
-    }
 }

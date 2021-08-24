@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.convertValue
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.google.android.gms.tasks.Task
 import com.google.gson.Gson
 
@@ -42,6 +43,20 @@ object FirebaseService {
 
                 Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(courses))
                 courses
+            }
+    }
+
+    fun getTeachers(): Task<List<Teacher>> {
+        return FirebaseClient.getTeachers()
+            .continueWith { task ->
+                val teachers = emptyList<Teacher>().toMutableList()
+                var result = task.result?.data as ArrayList<HashMap<String, String>>
+                for (c in result) {
+                    teachers.add(ObjectMapper().convertValue(c))
+                }
+
+                Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(teachers))
+                teachers
             }
     }
 }

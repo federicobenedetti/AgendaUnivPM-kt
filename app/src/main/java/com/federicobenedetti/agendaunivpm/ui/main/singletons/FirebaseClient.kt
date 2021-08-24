@@ -34,4 +34,10 @@ object FirebaseClient {
             .call(corsi)
     }
 
+    fun getTeachers(): Task<HttpsCallableResult> {
+        return FirebaseUtils.getFirebaseFunctionsInstance()!!
+            .getHttpsCallable("getTeachers")
+            .call()
+    }
+
 }

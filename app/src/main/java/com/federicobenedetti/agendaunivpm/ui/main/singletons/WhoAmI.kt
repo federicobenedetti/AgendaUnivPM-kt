@@ -23,11 +23,11 @@ object WhoAmI {
     fun setLoggedInStudent(s: Student) {
         if (s != null) {
             studentLoggedIn = s
-
         }
     }
 
     fun setLoggedInStudentCourses(courses: List<Course>) {
+        Logger.d(_logTAG, "Corsi: ", courses)
         if (courses != null) {
             studentCourses = courses
         }
