@@ -20,6 +20,10 @@
     <string name="login_copyright">All rights reserved - © Copyright Federico Benedetti</string>
     <string name="btn_label_go_to_course_detail">Dettaglio</string>
 
+    <string name="btn_label_subscribe_to_course">Iscriviti al corso</string>
+
+    <string name="btn_label_unsubscribe_from_course">Disiscriviti dal corso</string>
+
     <string name="faq_1_label">Da chi è stata scritta questa app?</string>
     <string name="faq_1_description">Il ragazzo che ha programmato questa app si chiama Federico Benedetti. Viene da Fermignano, un piccolo paesino nella provincia di Pesaro e Urbino. Matricola S1088801</string>
 

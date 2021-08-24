@@ -139,10 +139,44 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                                     DataPersistanceUtils.getTeachers()
                                 )
 
-                                Toast.makeText(this, R.string.generic_success, Toast.LENGTH_LONG)
-                                    .show();
-                                ActivityUtils.launchActivity(this, MainActivity::class)
-                                finish()
+                                // Carichiamo tutti i corsi
+                                FirebaseService.getCourses().addOnCompleteListener {
+                                    if (it.isSuccessful) {
+
+                                        DataPersistanceUtils.setCourses(it.result)
+
+                                        Logger.d(
+                                            _logTAG,
+                                            "Corsi registrati: ",
+                                            DataPersistanceUtils.getCourses()
+                                        )
+
+                                        Toast.makeText(
+                                            this,
+                                            R.string.generic_success,
+                                            Toast.LENGTH_LONG
+                                        )
+                                            .show();
+                                        ActivityUtils.launchActivity(this, MainActivity::class)
+                                        finish()
+                                    } else {
+                                        Logger.d(
+                                            _logTAG,
+                                            "Errore durante il retrieve dei courses: " + it.exception
+                                        )
+                                        Toast.makeText(
+                                            this,
+                                            R.string.generic_error,
+                                            Toast.LENGTH_LONG
+                                        )
+                                            .show();
+
+                                        linearLayoutLoading.visibility = View.GONE
+                                        return@addOnCompleteListener
+                                    }
+                                }
+
+
                                 return@addOnCompleteListener
                             } else {
                                 Logger.d(

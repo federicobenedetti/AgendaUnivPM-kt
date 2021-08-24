@@ -1,13 +1,16 @@
 package com.federicobenedetti.agendaunivpm.ui.main.activities
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.ActivityCourseDetailBinding
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseService
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.Logger
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.CourseDetailViewModel
 
@@ -19,6 +22,8 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
 
     private lateinit var mBtnGoToCalendar: Button
     private lateinit var mBtnGoToStreaming: Button
+    private lateinit var mBtnSubscribeToCourse: Button
+    private lateinit var mBtnUnsubscribeFromCourse: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,5 +58,30 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
                 hashMapOf("CourseId" to selectedCourseDetailId)
             )
         }
+
+        mBtnSubscribeToCourse = courseDetailBinding.mBtnSubscribeToCourse
+        mBtnSubscribeToCourse.setOnClickListener {
+            FirebaseService.subToCourse(selectedCourseDetailId, WhoAmI.getStudentMatricola())
+                .addOnCompleteListener {
+
+                }
+        }
+
+        mBtnUnsubscribeFromCourse = courseDetailBinding.mBtnUnsubscribeFromCourse
+        mBtnUnsubscribeFromCourse.setOnClickListener {
+            FirebaseService.unsubToCourse(selectedCourseDetailId, WhoAmI.getStudentMatricola())
+                .addOnCompleteListener {
+                    
+                }
+        }
+
+        if (WhoAmI.checkIfStudentIsSubscribedToCourse(selectedCourseDetailId)) {
+            mBtnSubscribeToCourse.visibility = View.GONE
+            mBtnUnsubscribeFromCourse.visibility = View.VISIBLE
+        } else {
+            mBtnSubscribeToCourse.visibility = View.VISIBLE
+            mBtnUnsubscribeFromCourse.visibility = View.GONE
+        }
+
     }
 }

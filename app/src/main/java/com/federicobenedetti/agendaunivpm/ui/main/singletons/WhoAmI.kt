@@ -45,4 +45,11 @@ object WhoAmI {
     fun getStudentCourseYear(): Int {
         return studentLoggedIn.annoCorso
     }
+
+    fun checkIfStudentIsSubscribedToCourse(courseId: String): Boolean {
+        Logger.d(_logTAG, "is User subscribed to course $courseId")
+        Logger.d(_logTAG, "student:", studentLoggedIn)
+        Logger.d(_logTAG, "indexOf", studentLoggedIn.corsi.indexOf(courseId))
+        return studentLoggedIn.corsi.indexOf(courseId) != -1
+    }
 }

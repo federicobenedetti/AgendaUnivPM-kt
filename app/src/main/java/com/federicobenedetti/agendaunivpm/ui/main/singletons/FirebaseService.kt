@@ -6,6 +6,7 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.google.android.gms.tasks.Task
+import com.google.firebase.functions.HttpsCallableResult
 import com.google.gson.Gson
 
 object FirebaseService {
@@ -58,5 +59,27 @@ object FirebaseService {
                 Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(teachers))
                 teachers
             }
+    }
+
+    fun getCourses(): Task<List<Course>> {
+        return FirebaseClient.getCourses()
+            .continueWith { task ->
+                val courses = emptyList<Course>().toMutableList()
+                var result = task.result?.data as ArrayList<HashMap<String, String>>
+                for (c in result) {
+                    courses.add(ObjectMapper().convertValue(c))
+                }
+
+                Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(courses))
+                courses
+            }
+    }
+
+    fun subToCourse(idCorso: String, matricola: String): Task<HttpsCallableResult> {
+        return FirebaseClient.subscribeToCourse(idCorso, matricola)
+    }
+
+    fun unsubToCourse(idCorso: String, matricola: String): Task<HttpsCallableResult> {
+        return FirebaseClient.unsubscribeFromCourse(idCorso, matricola)
     }
 }

@@ -47,6 +47,20 @@
             android:orientation="vertical">
 
             <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mBtnSubscribeToCourse"
+                android:visibility="gone"
+                android:text="@string/btn_label_subscribe_to_course"></Button>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mBtnUnsubscribeFromCourse"
+                android:visibility="gone"
+                android:text="@string/btn_label_unsubscribe_from_course"></Button>
+
+            <Button
                 android:id="@+id/mBtnGoToCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

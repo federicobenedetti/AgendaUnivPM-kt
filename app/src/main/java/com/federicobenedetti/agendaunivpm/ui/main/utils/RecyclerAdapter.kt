@@ -9,31 +9,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.activities.CourseDetailActivity
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.federicobenedetti.agendaunivpm.ui.main.extensions.inflate
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.Logger
 
 
 class RecyclerAdapter(private val courses: ArrayList<Course>) :
-    RecyclerView.Adapter<RecyclerAdapter.InfoCardHolder>() {
+    RecyclerView.Adapter<RecyclerAdapter.CardViewHolder>() {
 
     private var _logTAG = "RECYCLERADAPTER"
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): InfoCardHolder {
+    ): CardViewHolder {
         val inflatedView = parent.inflate(R.layout.layout_card_info, false)
-        return InfoCardHolder(inflatedView)
+        return CardViewHolder(inflatedView)
     }
 
-    override fun onBindViewHolder(holder: InfoCardHolder, position: Int) {
+    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val course = courses[position]
         holder.bindCourse(course)
     }
 
     override fun getItemCount(): Int = courses.size
 
-    class InfoCardHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        private var _logTAG = "CARDVIEWHOLDER"
 
         private val textViewCourseTitle: TextView = itemView.findViewById(R.id.textViewCourseTitle)
         private val textViewCourseDescription: TextView =
@@ -54,17 +59,22 @@ class RecyclerAdapter(private val courses: ArrayList<Course>) :
          */
         private lateinit var course: Course
 
+        private lateinit var teacher: Teacher
+
         init {
+            Logger.d(_logTAG, "init vh")
+
             itemView.setOnClickListener(this)
             launchCourseDetailActivityBtn.setOnClickListener(this)
         }
 
         fun bindCourse(_course: Course) {
             course = _course
-
+            teacher = DataPersistanceUtils.getTeacherById(course.teacherId)!!
+            Logger.d(_logTAG, "teacher", teacher)
             textViewCourseTitle.text = course.title
             textViewCourseDescription.text = course.shortDescription
-            // textViewCourseTeacher.text = course.teacher.name + " " + course.teacher.lastName
+            textViewCourseTeacher.text = teacher.name + " " + teacher.lastName
             textViewCourseSession.text = course.session
         }
 

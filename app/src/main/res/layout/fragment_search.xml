@@ -5,7 +5,19 @@
 
     <LinearLayout android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.main.fragments.SearchFragment"
+        android:padding="@dimen/layout_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_big"
+            android:text="@string/search_label">
+
+        </TextView>
 
     </LinearLayout>
 </layout>

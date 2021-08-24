@@ -2,7 +2,7 @@ package com.federicobenedetti.agendaunivpm.ui.main.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
 class ListViewModel : ViewModel() {
 
@@ -16,6 +16,6 @@ class ListViewModel : ViewModel() {
     }
 
     init {
-        _availableCourses = WhoAmI.getStudentCourses() as MutableList<Course>
+        _availableCourses = DataPersistanceUtils.getCourses() as MutableList<Course>
     }
 }
