@@ -1,20 +1,32 @@
 package com.federicobenedetti.agendaunivpm.ui.main.classes
 
-open class Lesson(
-    _id: String,
-    _bookedHour: String,
-    _description: String,
-    _session: String,
-    _shortDescription: String,
-    _teacherId: String,
-    _title: String
-) {
+open class Lesson {
 
-    var id: String = _id
-    var bookedHour: String = _bookedHour
-    var description: String = _description
-    var session: String = _session
-    var shortDescription: String = _shortDescription
-    var teacherId: String = _teacherId
-    var title: String = _title
+    constructor()
+
+    constructor(
+        _id: String,
+        _bookedHour: String,
+        _description: String,
+        _session: String,
+        _shortDescription: String,
+        _teacherId: String,
+        _title: String
+    ) {
+        this.id = _id
+        this.bookedHour = _bookedHour
+        this.description = _description
+        this.session = _session
+        this.shortDescription = _shortDescription
+        this.teacherId = _teacherId
+        this.title = _title
+    }
+
+    lateinit var id: String
+    lateinit var bookedHour: String
+    lateinit var description: String
+    lateinit var session: String
+    lateinit var shortDescription: String
+    lateinit var teacherId: String
+    lateinit var title: String
 }

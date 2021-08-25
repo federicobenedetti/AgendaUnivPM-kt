@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.federicobenedetti.agendaunivpm.ui.main.fragments.HomeFragment
-import com.federicobenedetti.agendaunivpm.ui.main.fragments.ListFragment
-import com.federicobenedetti.agendaunivpm.ui.main.fragments.SearchFragment
-import com.federicobenedetti.agendaunivpm.ui.main.fragments.UserFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.CoursesListFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.LessonsFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.SubscribedCoursesFragment
+import com.federicobenedetti.agendaunivpm.ui.main.fragments.UserProfileFragment
 
 class ViewPagerFragmentAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {
@@ -18,11 +18,11 @@ class ViewPagerFragmentAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> UserFragment.newInstance()
-            1 -> ListFragment.newInstance()
-            2 -> SearchFragment.newInstance()
-            3 -> HomeFragment.newInstance()
-            else -> HomeFragment.newInstance()
+            0 -> UserProfileFragment.newInstance()
+            1 -> CoursesListFragment.newInstance()
+            2 -> SubscribedCoursesFragment.newInstance()
+            3 -> LessonsFragment.newInstance()
+            else -> SubscribedCoursesFragment.newInstance()
         }
     }
 }

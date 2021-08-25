@@ -42,7 +42,7 @@ object FirebaseService {
             .continueWith { task ->
                 val courses =
                     SerializationUtils.deserializeArrayListMapToT<Course>(task.result?.data as ArrayList<HashMap<*, *>>)
-                Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(courses))
+                Logger.d(_logTAG, "Objects received: ", Gson().toJsonTree(courses))
                 courses
             }
     }
@@ -52,7 +52,7 @@ object FirebaseService {
             .continueWith { task ->
                 val teachers =
                     SerializationUtils.deserializeArrayListMapToT<Teacher>(task.result?.data as ArrayList<HashMap<*, *>>)
-                Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(teachers))
+                Logger.d(_logTAG, "Objects received: ", Gson().toJsonTree(teachers))
                 teachers
             }
     }
@@ -62,8 +62,18 @@ object FirebaseService {
             .continueWith { task ->
                 val courses =
                     SerializationUtils.deserializeArrayListMapToT<Course>(task.result?.data as ArrayList<HashMap<*, *>>)
-                Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(courses))
+                Logger.d(_logTAG, "Objects received: ", Gson().toJsonTree(courses))
                 courses
+            }
+    }
+
+    fun getLessons(): Task<List<Lesson>> {
+        return FirebaseClient.getLessons()
+            .continueWith { task ->
+                val lessons =
+                    SerializationUtils.deserializeArrayListMapToT<Lesson>(task.result?.data as ArrayList<HashMap<*, *>>)
+                Logger.d(_logTAG, "Objects received: ", Gson().toJsonTree(lessons))
+                lessons
             }
     }
 
@@ -73,16 +83,5 @@ object FirebaseService {
 
     fun unsubToCourse(idCorso: String, matricola: String): Task<HttpsCallableResult> {
         return FirebaseClient.unsubscribeFromCourse(idCorso, matricola)
-    }
-
-    fun getLessons(): Task<List<Lesson>> {
-        return FirebaseClient.getLessons()
-            .continueWith { task ->
-                Logger.d(_logTAG, "lessons", task.result?.data)
-                val lessons =
-                    SerializationUtils.deserializeArrayListMapToT<Lesson>(task.result?.data as ArrayList<HashMap<*, *>>)
-                // Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(lessons))
-                lessons
-            }
     }
 }

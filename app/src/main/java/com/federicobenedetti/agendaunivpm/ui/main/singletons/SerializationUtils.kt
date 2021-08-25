@@ -1,7 +1,6 @@
 package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.convertValue
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 
@@ -29,10 +28,9 @@ object SerializationUtils {
 
     inline fun <reified T> deserializeArrayListMapToT(array: ArrayList<HashMap<*, *>>): MutableList<T> {
         val elements = emptyList<T>().toMutableList()
-        for (c in array) {
-            elements.add(ObjectMapper().convertValue(c))
+        for (element in array) {
+            elements.add(ObjectMapper().convertValue(element, T::class.java))
         }
-        Logger.d("pippo", "p", elements)
         return elements
     }
 }

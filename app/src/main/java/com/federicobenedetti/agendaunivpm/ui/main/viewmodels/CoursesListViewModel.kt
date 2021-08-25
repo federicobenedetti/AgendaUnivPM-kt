@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
-class ListViewModel : ViewModel() {
+class CoursesListViewModel : ViewModel() {
 
     private var _availableCourses = mutableListOf<Course>()
 

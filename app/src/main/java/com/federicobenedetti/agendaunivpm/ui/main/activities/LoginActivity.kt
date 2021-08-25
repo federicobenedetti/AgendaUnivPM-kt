@@ -147,19 +147,6 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         if (task.isSuccessful) {
 
             when (task.result) {
-                // 5: Carichiamo tutte le lezioni
-                is Lesson -> {
-                    Logger.d(_logTAG, "La lista è di Lezioni")
-
-                    val lessons = task.result as List<Lesson>
-
-                    Logger.d(_logTAG, "Risultato chiamata getLessons", lessons)
-
-                    DataPersistanceUtils.setLessons(lessons)
-
-                    FirebaseService.getCourses()
-                        .addOnCompleteListener { task -> handleOnCompleteListener(task) }
-                }
 
                 is Student -> {
                     // 1: Carichiamo lo studente
@@ -175,7 +162,22 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
                 is List<*> -> {
                     Logger.d(_logTAG, "E' stata ricevuta una lista")
-                    if ((task.result as List<*>).all { e -> e is Course }) {
+
+                    if ((task.result as List<*>).all { e -> e is Lesson }) {
+
+                        Logger.d(_logTAG, "La lista è di Lezioni")
+
+                        // 4: Carichiamo tutte le lezioni
+                        val lessons = task.result as List<Lesson>
+
+                        Logger.d(_logTAG, "Risultato chiamata getLessons", lessons)
+
+                        DataPersistanceUtils.setLessons(lessons)
+
+                        FirebaseService.getCourses()
+                            .addOnCompleteListener { task -> handleOnCompleteListener(task) }
+
+                    } else if ((task.result as List<*>).all { e -> e is Course }) {
                         Logger.d(_logTAG, "La lista è di Corsi")
 
                         // 2: Carichiamo i corsi dello studente
@@ -192,8 +194,8 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                             FirebaseService.getTeachers()
                                 .addOnCompleteListener { task -> handleOnCompleteListener(task) }
                         } else {
-                            // 4: Carichiamo tutti i corsi
 
+                            // 5: Carichiamo tutti i corsi
                             Logger.d(_logTAG, "Stiamo caricanto tutti i corsi")
 
                             val allCourses = task.result as List<Course>
@@ -227,6 +229,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                         Logger.d(_logTAG, "Risultato chiamata getTeachers", teachers)
 
                         DataPersistanceUtils.setTeachers(teachers)
+
                         FirebaseService.getLessons()
                             .addOnCompleteListener { task -> handleOnCompleteListener(task) }
                     }

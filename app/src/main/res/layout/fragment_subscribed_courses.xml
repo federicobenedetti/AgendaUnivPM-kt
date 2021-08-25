@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="listViewModel"
-            type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.ListViewModel" />
+            name="homeViewModel"
+            type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.HomeViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,26 +14,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="@dimen/layout_padding"
-        tools:context=".ui.main.fragments.ListFragment">
+        tools:context=".ui.main.fragments.SubscribedCoursesFragment">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/courses_list"
+            android:text="@string/available_courses"
             android:textSize="@dimen/text_big"
             android:layout_marginBottom="@dimen/margin_small"></TextView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/list_fragment_description_label"
+            android:text="@string/home_fragment_description_label"
             android:textSize="@dimen/text_small"
             android:layout_marginBottom="@dimen/margin_big"></TextView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mRecyclerViewListInfoCard">
+            android:id="@+id/mRecyclerViewHomeInfoCard">
 
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>

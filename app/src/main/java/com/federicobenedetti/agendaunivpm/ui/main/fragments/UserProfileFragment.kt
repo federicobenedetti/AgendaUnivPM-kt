@@ -11,22 +11,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.federicobenedetti.agendaunivpm.R
-import com.federicobenedetti.agendaunivpm.databinding.FragmentUserBinding
+import com.federicobenedetti.agendaunivpm.databinding.FragmentUserProfileBinding
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FeedbackActivity
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
-import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel
+import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
-class UserFragment : CustomFragment("USER") {
-    private var _binding: FragmentUserBinding? = null
+class UserProfileFragment : CustomFragment("USER") {
+    private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
 
-    private val _userViewModel: UserViewModel by activityViewModels()
+    private val _userProfileViewModel: UserProfileViewModel by activityViewModels()
 
     private var mFirebaseAuth: FirebaseAuth? = null
 
@@ -41,14 +41,15 @@ class UserFragment : CustomFragment("USER") {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
-        binding.userViewModel = _userViewModel
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_user_profile, container, false)
+        binding.userViewModel = _userProfileViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         val view = binding.root
 
-        _userViewModel.loggedInUser!!.observe(viewLifecycleOwner, Observer {
+        _userProfileViewModel.loggedInUser!!.observe(viewLifecycleOwner, Observer {
             mImageViewUserProfileImage?.let { it1 ->
-                Glide.with(this).load(_userViewModel.loggedInUser!!.value!!.getPhotoUrl())
+                Glide.with(this).load(_userProfileViewModel.loggedInUser!!.value!!.getPhotoUrl())
                     .into(it1)
             };
         })
@@ -72,9 +73,9 @@ class UserFragment : CustomFragment("USER") {
 
         mImageViewUserProfileImage = binding.userProfileImage
 
-        _userViewModel.setCurrentLoggedInUserMatricola(WhoAmI.getStudentMatricola())
-        _userViewModel.setCurrentLoggedInUserPhoneNumber(WhoAmI.getStudentPhoneNumber())
-        _userViewModel.setCurrentLoggedInUserCourseYear(WhoAmI.getStudentCourseYear())
+        _userProfileViewModel.setCurrentLoggedInUserMatricola(WhoAmI.getStudentMatricola())
+        _userProfileViewModel.setCurrentLoggedInUserPhoneNumber(WhoAmI.getStudentPhoneNumber())
+        _userProfileViewModel.setCurrentLoggedInUserCourseYear(WhoAmI.getStudentCourseYear())
         return view
     }
 
@@ -83,7 +84,7 @@ class UserFragment : CustomFragment("USER") {
         super.onStart()
 
         val currentUser = mFirebaseAuth!!.currentUser
-        _userViewModel.setCurrentLoggedInUser(currentUser)
+        _userProfileViewModel.setCurrentLoggedInUser(currentUser)
     }
 
 
@@ -94,6 +95,6 @@ class UserFragment : CustomFragment("USER") {
 
     companion object {
         @JvmStatic
-        fun newInstance() = UserFragment()
+        fun newInstance() = UserProfileFragment()
     }
 }

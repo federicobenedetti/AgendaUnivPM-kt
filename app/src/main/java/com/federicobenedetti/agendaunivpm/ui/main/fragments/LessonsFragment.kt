@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.federicobenedetti.agendaunivpm.R
-import com.federicobenedetti.agendaunivpm.databinding.FragmentSearchBinding
+import com.federicobenedetti.agendaunivpm.databinding.FragmentLessonsBinding
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 
-class SearchFragment : CustomFragment("SEARCH") {
+class LessonsFragment : CustomFragment("SEARCH") {
 
-    private var _binding: FragmentSearchBinding? = null
+    private var _binding: FragmentLessonsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,7 +19,7 @@ class SearchFragment : CustomFragment("SEARCH") {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lessons, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         val view = binding.root
 
@@ -28,6 +28,6 @@ class SearchFragment : CustomFragment("SEARCH") {
 
     companion object {
         @JvmStatic
-        fun newInstance() = SearchFragment()
+        fun newInstance() = LessonsFragment()
     }
 }

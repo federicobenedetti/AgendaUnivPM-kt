@@ -54,6 +54,12 @@ object FirebaseClient {
             .call()
     }
 
+    fun getLessons(): Task<HttpsCallableResult> {
+        return FirebaseUtils.getFirebaseFunctionsInstance()!!
+            .getHttpsCallable("getLessons")
+            .call()
+    }
+
     fun subscribeToCourse(id: String, matricola: String): Task<HttpsCallableResult> {
         val data = hashMapOf(
             "idCorso" to id,
@@ -75,11 +81,4 @@ object FirebaseClient {
             .getHttpsCallable("removeCourseFromStudent")
             .call(data)
     }
-
-    fun getLessons(): Task<HttpsCallableResult> {
-        return FirebaseUtils.getFirebaseFunctionsInstance()!!
-            .getHttpsCallable("getLessons")
-            .call()
-    }
-
 }

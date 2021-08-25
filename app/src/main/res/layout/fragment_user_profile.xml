@@ -6,7 +6,7 @@
 
         <variable
             name="userViewModel"
-            type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserViewModel" />
+            type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserProfileViewModel" />
 
         <variable
             name="whoAmI"
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:padding="@dimen/layout_padding"
         android:orientation="vertical"
-        tools:context=".ui.main.fragments.UserFragment">
+        tools:context=".ui.main.fragments.UserProfileFragment">
 
         <TextView
             android:layout_width="match_parent"

@@ -40,10 +40,10 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
                     tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_list)
                 }
                 2 -> {
-                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_search)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_bookmarks)
                 }
                 3 -> {
-                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_home_filled)
+                    tab.icon = IconicsDrawable(this, GoogleMaterial.Icon.gmd_auto_stories)
                 }
             }
         }.attach()
