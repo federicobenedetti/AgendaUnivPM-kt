@@ -48,4 +48,10 @@
     <string name="course_detail_go_to_streaming">Vai allo streaming</string>
 
     <string name="fragment_user_course_year">%1$s° anno</string>
+
+    <string name="user_fragment_description_label">Questa sezione mostra lo stato della tua carriera universitaria. Potrai quindi visualizzare la tua matricola, inviare un feedback per migliorare l\'app o visualizzare le FAQ per ulteriori chiarimenti.</string>
+    <string name="list_fragment_description_label">Questa sezione mostra la lista di tutti i corsi disponibili a cui puoi iscriverti.</string>
+    <string name="home_fragment_description_label">Questa sezione mostra i corsi a cui sei attualmente iscritto. Entrando nel dettaglio del corso potrai scegliere di disiscriverti dal corso, visualizzare la lezione di oggi in streaming o visualizzare il calendario delle prossime lezioni programmate.</string>
+
+    <string name="btn_label_go_to_lesson_detail">Vai al dettaglio</string>
 </resources>

@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.*
@@ -27,8 +28,6 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
     private var mButtonSignIn: SignInButton? = null
 
-    private val RC_SIGN_IN = 9001
-
     private lateinit var linearLayoutLoading: LinearLayout
 
     private var loadingStudentCourses: Boolean = true
@@ -46,7 +45,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         linearLayoutLoading = findViewById(R.id.linear_layout_loading)
 
         // Ci serve per capire se c'è un utente loggato o meno
-        var currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
+        val currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
 
         // Se siamo nella LoginActivity, voglio che la nostra Utils di Firebase faccia l'init
         // del suo AuthListener
@@ -76,11 +75,11 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             .build()
 
         // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         mFirebaseAuth = FirebaseUtils.getFirebaseAuthInstance()
 
-        startActivityForResult(mGoogleSignInClient?.signInIntent, RC_SIGN_IN)
+        startActivityForResult(mGoogleSignInClient?.signInIntent, 9001)
     }
 
     /**
@@ -93,7 +92,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == 9001) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -113,7 +112,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mFirebaseAuth?.signInWithCredential(credential)
-            ?.addOnCompleteListener() { task ->
+            ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.w(_logTAG, "signInWithCredential success")
@@ -148,6 +147,19 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         if (task.isSuccessful) {
 
             when (task.result) {
+                // 5: Carichiamo tutte le lezioni
+                is Lesson -> {
+                    Logger.d(_logTAG, "La lista è di Lezioni")
+
+                    val lessons = task.result as List<Lesson>
+
+                    Logger.d(_logTAG, "Risultato chiamata getLessons", lessons)
+
+                    DataPersistanceUtils.setLessons(lessons)
+
+                    FirebaseService.getCourses()
+                        .addOnCompleteListener { task -> handleOnCompleteListener(task) }
+                }
 
                 is Student -> {
                     // 1: Carichiamo lo studente
@@ -196,7 +208,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                                 R.string.generic_success,
                                 Toast.LENGTH_LONG
                             )
-                                .show();
+                                .show()
 
                             loadingStudentCourses = true
 
@@ -215,7 +227,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                         Logger.d(_logTAG, "Risultato chiamata getTeachers", teachers)
 
                         DataPersistanceUtils.setTeachers(teachers)
-                        FirebaseService.getCourses()
+                        FirebaseService.getLessons()
                             .addOnCompleteListener { task -> handleOnCompleteListener(task) }
                     }
                 }
@@ -223,7 +235,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
         } else {
             Logger.d(_logTAG, "Errore durante la chiamata", task.exception)
-            Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
             linearLayoutLoading.visibility = View.GONE
         }
 

@@ -54,7 +54,7 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
         mBtnGoToStreaming.setOnClickListener {
             ActivityUtils.launchActivityWithParams(
                 this,
-                CourseStreamingActivity::class,
+                LessonStreamingActivity::class,
                 hashMapOf("CourseId" to selectedCourseDetailId)
             )
         }
@@ -71,7 +71,7 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
         mBtnUnsubscribeFromCourse.setOnClickListener {
             FirebaseService.unsubToCourse(selectedCourseDetailId, WhoAmI.getStudentMatricola())
                 .addOnCompleteListener {
-                    
+
                 }
         }
 

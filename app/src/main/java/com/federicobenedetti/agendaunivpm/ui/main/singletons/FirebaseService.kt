@@ -1,6 +1,7 @@
 package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.google.android.gms.tasks.Task
@@ -72,5 +73,16 @@ object FirebaseService {
 
     fun unsubToCourse(idCorso: String, matricola: String): Task<HttpsCallableResult> {
         return FirebaseClient.unsubscribeFromCourse(idCorso, matricola)
+    }
+
+    fun getLessons(): Task<List<Lesson>> {
+        return FirebaseClient.getLessons()
+            .continueWith { task ->
+                Logger.d(_logTAG, "lessons", task.result?.data)
+                val lessons =
+                    SerializationUtils.deserializeArrayListMapToT<Lesson>(task.result?.data as ArrayList<HashMap<*, *>>)
+                // Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(lessons))
+                lessons
+            }
     }
 }

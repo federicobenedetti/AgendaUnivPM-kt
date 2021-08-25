@@ -25,7 +25,14 @@
             android:layout_height="wrap_content"
             android:text="@string/profile_title"
             android:textSize="@dimen/text_big"
-            android:layout_marginBottom="@dimen/margin_medium"></TextView>
+            android:layout_marginBottom="@dimen/margin_small"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_fragment_description_label"
+            android:textSize="@dimen/text_small"
+            android:layout_marginBottom="@dimen/margin_big"></TextView>
 
         <TableLayout
             android:layout_width="match_parent"

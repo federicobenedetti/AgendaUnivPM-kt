@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.FragmentListBinding
+import com.federicobenedetti.agendaunivpm.ui.main.utils.CourseRecyclerAdapter
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
-import com.federicobenedetti.agendaunivpm.ui.main.utils.RecyclerAdapter
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.ListViewModel
 
 class ListFragment : CustomFragment("LIST") {
@@ -21,7 +21,7 @@ class ListFragment : CustomFragment("LIST") {
     private val _listViewModel: ListViewModel by activityViewModels()
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var mRecyclerAdapter: RecyclerAdapter
+    private lateinit var mCourseRecyclerAdapter: CourseRecyclerAdapter
     private lateinit var mRecyclerViewInfoCard: RecyclerView
 
     override fun onCreateView(
@@ -42,8 +42,8 @@ class ListFragment : CustomFragment("LIST") {
 
         var courses = _listViewModel.getCoursesAsArrayList()
 
-        mRecyclerAdapter = RecyclerAdapter(courses)
-        mRecyclerViewInfoCard.adapter = mRecyclerAdapter
+        mCourseRecyclerAdapter = CourseRecyclerAdapter(courses)
+        mRecyclerViewInfoCard.adapter = mCourseRecyclerAdapter
 
 
         return view

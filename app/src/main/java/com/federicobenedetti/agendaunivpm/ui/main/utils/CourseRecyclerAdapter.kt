@@ -15,27 +15,28 @@ import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
 
-class RecyclerAdapter(private val courses: ArrayList<Course>) :
-    RecyclerView.Adapter<RecyclerAdapter.CardViewHolder>() {
+class CourseRecyclerAdapter(private val courses: ArrayList<Course>) :
+    RecyclerView.Adapter<CourseRecyclerAdapter.CourseCardViewHolder>() {
 
-    private var _logTAG = "RECYCLERADAPTER"
+    private var _logTAG = "COURSERECYCLERADAPTER"
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CardViewHolder {
-        val inflatedView = parent.inflate(R.layout.layout_card_info, false)
-        return CardViewHolder(inflatedView)
+    ): CourseCardViewHolder {
+        val inflatedView = parent.inflate(R.layout.layout_card_course, false)
+        return CourseCardViewHolder(inflatedView)
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CourseCardViewHolder, position: Int) {
         val course = courses[position]
         holder.bindCourse(course)
     }
 
     override fun getItemCount(): Int = courses.size
 
-    class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    class CourseCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
 
         private var _logTAG = "CARDVIEWHOLDER"
 

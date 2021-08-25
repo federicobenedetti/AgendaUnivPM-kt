@@ -76,4 +76,10 @@ object FirebaseClient {
             .call(data)
     }
 
+    fun getLessons(): Task<HttpsCallableResult> {
+        return FirebaseUtils.getFirebaseFunctionsInstance()!!
+            .getHttpsCallable("getLessons")
+            .call()
+    }
+
 }

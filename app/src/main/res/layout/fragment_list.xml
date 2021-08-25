@@ -21,7 +21,14 @@
             android:layout_height="wrap_content"
             android:text="@string/courses_list"
             android:textSize="@dimen/text_big"
-            android:layout_marginBottom="@dimen/margin_medium"></TextView>
+            android:layout_marginBottom="@dimen/margin_small"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_fragment_description_label"
+            android:textSize="@dimen/text_small"
+            android:layout_marginBottom="@dimen/margin_big"></TextView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"

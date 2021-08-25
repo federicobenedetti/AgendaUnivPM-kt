@@ -32,6 +32,7 @@ object SerializationUtils {
         for (c in array) {
             elements.add(ObjectMapper().convertValue(c))
         }
+        Logger.d("pippo", "p", elements)
         return elements
     }
 }
