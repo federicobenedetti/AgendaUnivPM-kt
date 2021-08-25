@@ -3,6 +3,14 @@ package com.federicobenedetti.agendaunivpm.ui.main.singletons
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.HttpsCallableResult
 
+/**
+ * Client (custom) per la nostra istanza Firebase
+ * L'obiettivo è quello di standardizzare il modo in cui vengono chiamate le API
+ *
+ * Inoltre, il suo scopo, è quello di ritornare un Task del risultato della chiamata a Firebase
+ * Questo client quindi non saprà mai nulla del cosa farci del risultato, ma è compito del Service di
+ * spacchettare il risultato e darlo a chi l'ha chiesto
+ */
 object FirebaseClient {
     private const val _logTAG = "FIREBASECLIENT"
 

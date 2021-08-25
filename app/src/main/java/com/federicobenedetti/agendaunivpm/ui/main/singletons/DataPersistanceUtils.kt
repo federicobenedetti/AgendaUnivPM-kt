@@ -3,6 +3,12 @@ package com.federicobenedetti.agendaunivpm.ui.main.singletons
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 
+/**
+ * Non avendo un DB implementato, necessito comunque di un posto in cui tenere i miei dati a runtime
+ * Questa classe statica mi permette di salvarne in una sola istanza e utilizzarli ovunque mi servono
+ *
+ * TODO: In futuro sicuramente sarebbe da switchare a un DB locale tipo LiteDB per la persistenza dei dati
+ */
 object DataPersistanceUtils {
     private const val _logTAG = "DATAPERSISTANCEUTILS"
 

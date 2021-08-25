@@ -1,7 +1,5 @@
 package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.convertValue
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
@@ -9,6 +7,11 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.HttpsCallableResult
 import com.google.gson.Gson
 
+/**
+ * Servizio che wrappa il client (custom) Firebase
+ * Serve per poter unificare la risposta alle chiamate e deserializzare
+ * gli oggetti che mi ritornano da Firebase
+ */
 object FirebaseService {
     private const val _logTAG = "FIREBASESERVICE"
 
@@ -20,7 +23,7 @@ object FirebaseService {
         return FirebaseClient.askForStudentByUid()
             .continueWith { task ->
                 var student =
-                    SerializationUtils.deserializeMapToT<Student>(task.result?.data as Map<String, Any>)
+                    SerializationUtils.deserializeMapToT<Student>(task.result?.data as HashMap<String, Any>)
                 student
             }
     }
@@ -36,12 +39,8 @@ object FirebaseService {
     fun getStudentCourses(corsi: List<String>): Task<List<Course>> {
         return FirebaseClient.getCoursesForStudent(corsi)
             .continueWith { task ->
-                val courses = emptyList<Course>().toMutableList()
-                var result = task.result?.data as ArrayList<HashMap<String, String>>
-                for (c in result) {
-                    courses.add(ObjectMapper().convertValue(c))
-                }
-
+                val courses =
+                    SerializationUtils.deserializeArrayListMapToT<Course>(task.result?.data as ArrayList<HashMap<*, *>>)
                 Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(courses))
                 courses
             }
@@ -50,12 +49,8 @@ object FirebaseService {
     fun getTeachers(): Task<List<Teacher>> {
         return FirebaseClient.getTeachers()
             .continueWith { task ->
-                val teachers = emptyList<Teacher>().toMutableList()
-                var result = task.result?.data as ArrayList<HashMap<String, String>>
-                for (c in result) {
-                    teachers.add(ObjectMapper().convertValue(c))
-                }
-
+                val teachers =
+                    SerializationUtils.deserializeArrayListMapToT<Teacher>(task.result?.data as ArrayList<HashMap<*, *>>)
                 Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(teachers))
                 teachers
             }
@@ -64,12 +59,8 @@ object FirebaseService {
     fun getCourses(): Task<List<Course>> {
         return FirebaseClient.getCourses()
             .continueWith { task ->
-                val courses = emptyList<Course>().toMutableList()
-                var result = task.result?.data as ArrayList<HashMap<String, String>>
-                for (c in result) {
-                    courses.add(ObjectMapper().convertValue(c))
-                }
-
+                val courses =
+                    SerializationUtils.deserializeArrayListMapToT<Course>(task.result?.data as ArrayList<HashMap<*, *>>)
                 Logger.d(_logTAG, "Objects received: " + Gson().toJsonTree(courses))
                 courses
             }

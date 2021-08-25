@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
+import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.*
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -14,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -27,6 +31,8 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
     private lateinit var linearLayoutLoading: LinearLayout
 
+    private var loadingStudentCourses: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -39,20 +45,50 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
         linearLayoutLoading = findViewById(R.id.linear_layout_loading)
 
+        // Ci serve per capire se c'è un utente loggato o meno
         var currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
 
+        // Se siamo nella LoginActivity, voglio che la nostra Utils di Firebase faccia l'init
+        // del suo AuthListener
+        // In modo che se cambiasse mai qualche cosa (tipo l'utente fa il logout)
+        // a quel punto ripartirebbe la LoginActivity
+        // (stiamo passando il contesto al metodo, non è la best-practice ma per ora può funzionare)
         FirebaseUtils.setAuthStateListener(this)
 
         Log.w(_logTAG, "Current signedInUser: $currentUser")
 
         if (currentUser != null) {
+            // La loading deve apparire nel momento in cui
+            // decidiamo di caricare i dati dello studente (già loggato)
             linearLayoutLoading.visibility = View.VISIBLE
             loadStudentData()
         }
     }
 
-    // When we get back from the Google Login Form
-    // we handle the response and update the UI
+    /**
+     * Avviamo la procedura di Login passandogli il Token di richiesta
+     * generato dalla shell Firebase
+     */
+    private fun startLoginProcedure() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        mFirebaseAuth = FirebaseUtils.getFirebaseAuthInstance()
+
+        startActivityForResult(mGoogleSignInClient?.signInIntent, RC_SIGN_IN)
+    }
+
+    /**
+     * A questo punto siamo ritornati dalla Form di Login (classica Form Google
+     * in cui ti chiede di scegliere il tuo account)
+     *
+     * Procedo a fare l'autenticazione con Firebase
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -71,21 +107,9 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         }
     }
 
-    private fun startLoginProcedure() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        mFirebaseAuth = FirebaseUtils.getFirebaseAuthInstance()
-
-        startActivityForResult(mGoogleSignInClient?.signInIntent, RC_SIGN_IN)
-    }
-
-    // We're logging in with Firebase, Google auth
+    /**
+     * Usiamo l'autenticazione Firebase, metodo: Google
+     */
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mFirebaseAuth?.signInWithCredential(credential)
@@ -102,114 +126,107 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             }
     }
 
-    // Per il momento faremo qui tutte le nostre chiamate, una dietro l'altra
-    // Carichiamo tutti i dati, dopodiché lanciamo la main activity
-    // Non è proprio il massimo.. anzi
-    // Però è l'unico modo (veloce) che mi è venuto in mente per far chiamate concatenate
-    // aspettando il loro risultato.
-    // Non ho un db locale o un backend "tradizionale", le API Firebase sono limitate
-    // e le query concatenate sono definitivamente molto più complesse del necessario rispetto
-    // allo scopo e alla quantità di dati richiesti per quest'app
+
+    /**
+     * Partiamo dal caricare lo studente che sta facendo la login
+     */
     private fun loadStudentData() {
-        // Carichiamo lo studente
-        FirebaseService.getStudentByUid().addOnCompleteListener {
-            if (it.isSuccessful && it.result != null) {
-                var result = it.result
+        FirebaseService.getStudentByUid()
+            .addOnCompleteListener { task -> handleOnCompleteListener(task) }
+    }
 
-                WhoAmI.setLoggedInStudent(result)
+    /**
+     * Questo è un metodo quasi ricorsivo
+     * Abbiamo una condizione di 'break' che è quella che si innesca
+     * quando stiamo caricando tutti i corsi, a quel punto lanciamo la
+     * MainActivity e chiudiamo la LoginActivity
+     *
+     * Per i restanti casi facciamo type-checking del risultato
+     * del onCompleteListener, e in base a quello concateniamo altre chiamate
+     */
+    private fun handleOnCompleteListener(task: Task<*>) {
+        if (task.isSuccessful) {
 
-                // Carichiamo tutti i corsi registrati
-                FirebaseService.getStudentCourses(result.corsi).addOnCompleteListener {
-                    if (it.isSuccessful) {
+            when (task.result) {
 
+                is Student -> {
+                    // 1: Carichiamo lo studente
+                    val student = task.result as Student
 
-                        Logger.d(_logTAG, "Corsi trovati: ", it.result)
-                        WhoAmI.setLoggedInStudentCourses(it.result)
+                    Logger.d(_logTAG, "Risultato chiamata getStudentByUid", student)
 
+                    WhoAmI.setLoggedInStudent(student)
 
-                        // Carichiamo tutti i professori
-                        FirebaseService.getTeachers().addOnCompleteListener {
-                            if (it.isSuccessful) {
+                    FirebaseService.getStudentCourses(student.corsi)
+                        .addOnCompleteListener { task -> handleOnCompleteListener(task) }
+                }
 
-                                DataPersistanceUtils.setTeachers(it.result)
+                is List<*> -> {
+                    Logger.d(_logTAG, "E' stata ricevuta una lista")
+                    if ((task.result as List<*>).all { e -> e is Course }) {
+                        Logger.d(_logTAG, "La lista è di Corsi")
 
-                                Logger.d(
-                                    _logTAG,
-                                    "Professori registrati: ",
-                                    DataPersistanceUtils.getTeachers()
-                                )
+                        // 2: Carichiamo i corsi dello studente
+                        if (loadingStudentCourses) {
+                            Logger.d(_logTAG, "Stiamo caricando i corsi dello studente")
 
-                                // Carichiamo tutti i corsi
-                                FirebaseService.getCourses().addOnCompleteListener {
-                                    if (it.isSuccessful) {
+                            val courses = task.result as List<Course>
 
-                                        DataPersistanceUtils.setCourses(it.result)
+                            Logger.d(_logTAG, "Risultato chiamata getStudentCourses", courses)
 
-                                        Logger.d(
-                                            _logTAG,
-                                            "Corsi registrati: ",
-                                            DataPersistanceUtils.getCourses()
-                                        )
+                            WhoAmI.setLoggedInStudentCourses(courses)
 
-                                        Toast.makeText(
-                                            this,
-                                            R.string.generic_success,
-                                            Toast.LENGTH_LONG
-                                        )
-                                            .show();
-                                        ActivityUtils.launchActivity(this, MainActivity::class)
-                                        finish()
-                                    } else {
-                                        Logger.d(
-                                            _logTAG,
-                                            "Errore durante il retrieve dei courses: " + it.exception
-                                        )
-                                        Toast.makeText(
-                                            this,
-                                            R.string.generic_error,
-                                            Toast.LENGTH_LONG
-                                        )
-                                            .show();
+                            loadingStudentCourses = false
+                            FirebaseService.getTeachers()
+                                .addOnCompleteListener { task -> handleOnCompleteListener(task) }
+                        } else {
+                            // 4: Carichiamo tutti i corsi
 
-                                        linearLayoutLoading.visibility = View.GONE
-                                        return@addOnCompleteListener
-                                    }
-                                }
+                            Logger.d(_logTAG, "Stiamo caricanto tutti i corsi")
+
+                            val allCourses = task.result as List<Course>
+
+                            Logger.d(_logTAG, "Risultato chiamata getCourses", allCourses)
+
+                            DataPersistanceUtils.setCourses(allCourses)
 
 
-                                return@addOnCompleteListener
-                            } else {
-                                Logger.d(
-                                    _logTAG,
-                                    "Errore durante il retrieve dei teacher: " + it.exception
-                                )
-                                Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG)
-                                    .show();
+                            Toast.makeText(
+                                this,
+                                R.string.generic_success,
+                                Toast.LENGTH_LONG
+                            )
+                                .show();
 
-                                linearLayoutLoading.visibility = View.GONE
-                                return@addOnCompleteListener
-                            }
+                            loadingStudentCourses = true
 
-
+                            Logger.d(_logTAG, "Finito! Lancio la MainActivity")
+                            ActivityUtils.launchActivity(this, MainActivity::class)
+                            finish()
                         }
 
 
-                        return@addOnCompleteListener
-                    } else {
-                        Logger.d(_logTAG, "Errore durante il retrieve dei corsi: " + it.exception)
-                        Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
-                        linearLayoutLoading.visibility = View.GONE
-                        return@addOnCompleteListener
+                    } else if ((task.result as List<*>).all { e -> e is Teacher }) {
+                        Logger.d(_logTAG, "La lista è di Professori")
+
+                        // 3: Carichiamo tutti i professori
+                        val teachers = task.result as List<Teacher>
+
+                        Logger.d(_logTAG, "Risultato chiamata getTeachers", teachers)
+
+                        DataPersistanceUtils.setTeachers(teachers)
+                        FirebaseService.getCourses()
+                            .addOnCompleteListener { task -> handleOnCompleteListener(task) }
                     }
                 }
-
-
-            } else {
-                Logger.d(_logTAG, "Errore durante il set della matricola: " + it.exception)
-                Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
-                linearLayoutLoading.visibility = View.GONE
             }
+
+        } else {
+            Logger.d(_logTAG, "Errore durante la chiamata", task.exception)
+            Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show();
+            linearLayoutLoading.visibility = View.GONE
         }
 
     }
 }
+

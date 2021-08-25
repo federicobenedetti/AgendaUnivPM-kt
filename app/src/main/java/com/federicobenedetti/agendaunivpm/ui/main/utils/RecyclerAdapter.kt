@@ -13,7 +13,6 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.federicobenedetti.agendaunivpm.ui.main.extensions.inflate
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.Logger
 
 
 class RecyclerAdapter(private val courses: ArrayList<Course>) :
@@ -62,16 +61,15 @@ class RecyclerAdapter(private val courses: ArrayList<Course>) :
         private lateinit var teacher: Teacher
 
         init {
-            Logger.d(_logTAG, "init vh")
-
             itemView.setOnClickListener(this)
             launchCourseDetailActivityBtn.setOnClickListener(this)
         }
 
         fun bindCourse(_course: Course) {
             course = _course
+
             teacher = DataPersistanceUtils.getTeacherById(course.teacherId)!!
-            Logger.d(_logTAG, "teacher", teacher)
+
             textViewCourseTitle.text = course.title
             textViewCourseDescription.text = course.shortDescription
             textViewCourseTeacher.text = teacher.name + " " + teacher.lastName

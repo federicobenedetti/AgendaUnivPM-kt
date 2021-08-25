@@ -11,6 +11,11 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.library.googlematerial.GoogleMaterial
 
 
+/**
+ * Questa NON è l'Activity che viene lanciata all'avvio dell'app.
+ * Questo perché, nell'architettura che ho ideato, la MainActivity si riferisce
+ * alla Activity che viene mostrata una volta effettuato il login.
+ */
 class MainActivity : CustomAppCompatActivity("MAIN") {
 
     private lateinit var tabLayout: TabLayout
@@ -25,6 +30,7 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
         viewPager = findViewById(R.id.view_pager)
         viewPager.adapter = ViewPagerFragmentAdapter(supportFragmentManager, lifecycle)
 
+        // Dico al TabLayout di assegnare ad ogni Fragment un'icona differente
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> {
