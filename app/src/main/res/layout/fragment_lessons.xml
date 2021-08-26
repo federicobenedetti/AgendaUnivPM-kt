@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data />
+    <data>
+
+        <variable
+            name="lessonsViewModel"
+            type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.LessonsViewModel" />
+    </data>
 
     <LinearLayout android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,9 +20,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_big"
-            android:text="@string/search_label">
+            android:text="@string/lessons_label"
+            android:layout_marginBottom="@dimen/margin_small">
 
         </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lessons_fragment_description_label"
+            android:textSize="@dimen/text_small"
+            android:layout_marginBottom="@dimen/margin_big"></TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mRecyclerViewLessonsCard">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 </layout>

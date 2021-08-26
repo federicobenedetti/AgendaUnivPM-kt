@@ -11,7 +11,8 @@ open class Lesson {
         _session: String,
         _shortDescription: String,
         _teacherId: String,
-        _title: String
+        _title: String,
+        _courseId: String
     ) {
         this.id = _id
         this.bookedHour = _bookedHour
@@ -20,6 +21,7 @@ open class Lesson {
         this.shortDescription = _shortDescription
         this.teacherId = _teacherId
         this.title = _title
+        this.courseId = _courseId
     }
 
     lateinit var id: String
@@ -29,4 +31,5 @@ open class Lesson {
     lateinit var shortDescription: String
     lateinit var teacherId: String
     lateinit var title: String
+    lateinit var courseId: String
 }

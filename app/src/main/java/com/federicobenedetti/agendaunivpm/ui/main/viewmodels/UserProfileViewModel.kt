@@ -31,5 +31,9 @@ class UserProfileViewModel : ViewModel() {
     fun setCurrentLoggedInUserCourseYear(year: Int) {
         _loggedInUser.value?.setCourseYear(year)
     }
+
+    fun setCurrentLoggedInUserSituazioneTasse(situazione: Boolean) {
+        _loggedInUser.value?.setSituazioneTasse(situazione)
+    }
 }
 

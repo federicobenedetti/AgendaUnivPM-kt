@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,9 +9,57 @@
             type="com.federicobenedetti.agendaunivpm.ui.main.viewmodels.LessonDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.main.activities.LessonDetailActivity"
+        android:padding="@dimen/layout_padding">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{lessonDetailViewModel.selectedLesson.title}"
+            android:textSize="@dimen/text_big"
+            android:textStyle="bold"></TextView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@{lessonDetailViewModel.selectedLesson.description}"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@{String.format(@string/lesson_detail_held_by, lessonDetailViewModel.teacher.name, lessonDetailViewModel.teacher.lastName, lessonDetailViewModel.selectedLesson.bookedHour)}"></TextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/mBtnGoToCourseDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lesson_detail_go_to_course_detail"></Button>
+
+            <Button
+                android:id="@+id/mBtnGoToStreaming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lesson_detail_go_to_streaming"></Button>
+        </LinearLayout>
+
+
+    </LinearLayout>
 </layout>

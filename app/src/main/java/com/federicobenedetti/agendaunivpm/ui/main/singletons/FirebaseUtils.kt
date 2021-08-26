@@ -34,6 +34,9 @@ object FirebaseUtils {
     fun setAuthStateListener(context: Context) {
         if (authListenerSet == false) {
             mFirebaseAuth!!.addAuthStateListener {
+
+                // TODO: Controllare che cosa sta per fare l'utente
+                // Se sta per fare il sign in, allora non ricreare la loginactivity (magari c'è un momento in cui il current user è null anche se sta facendo il sign in)
                 if (mFirebaseAuth!!.currentUser == null) {
                     ActivityUtils.launchActivity(context, LoginActivity::class)
                 }

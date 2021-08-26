@@ -46,6 +46,10 @@ object WhoAmI {
         return studentLoggedIn.annoCorso
     }
 
+    fun getStudentSituazioneTasse(): Boolean {
+        return studentLoggedIn.situazioneTasse
+    }
+
     fun checkIfStudentIsSubscribedToCourse(courseId: String): Boolean {
         Logger.d(_logTAG, "is User subscribed to course $courseId")
         Logger.d(_logTAG, "student:", studentLoggedIn)

@@ -8,7 +8,7 @@
     <string name="course_subscribe">Iscriviti</string>
     <string name="course_prof">Prof</string>
     <string name="courses_list">Lista corsi</string>
-    <string name="search_label">Ricerca</string>
+    <string name="lessons_label">Lezioni disponibili oggi</string>
     <string name="search_hint">Ricerca i corsi...</string>
     <string name="feedback_title">Feedback</string>
     <string name="edit_text_hint">Scrivi il tuo feedback qui...</string>
@@ -31,7 +31,7 @@
     <string name="faq_2_description">Chissà, magari un giorno. Per ora è stata unicamente scritta per riuscire a prendere 30 all\'esame di Programmazione Mobile ;)</string>
 
     <string name="faq_3_label">L\'app comunica con qualche tipo di Backend?</string>
-    <string name="faq_3_description">Sì. Non tutte le parti son state collegate a Firebase, ma alcune (ad es: Feedback e Login) hanno una comunicazione attiva col Backend</string>
+    <string name="faq_3_description">Sì. L\'app sincronizza all\'avvio i dati con Firebase.</string>
 
     <string name="faq_4_label">E\' stato difficile mettere mano a Kotlin / Flutter?</string>
     <string name="faq_4_description">Ho già un background in Android e nelle app, però ultimamente ho utilizzato molto più tecnologie alla base di Web App come Angular / Typescript, o linguaggi Backend tipo C#</string>
@@ -42,16 +42,22 @@
     <string name="faq_6_label">Come è stata, tutto sommato, l\'esperienza?</string>
     <string name="faq_6_description">Divertente! Come al solito. Mi piace immergermi nella tecnologia, si impara sempre qualcosa di nuovo.</string>
 
-    <string name="course_detail_held_by">Tenuto da <b>%1$s</b> alle ore <b>%2$s</b></string>
+    <string name="lesson_detail_held_by">Tenuta da %1$s %2$s alle ore %3$s</string>
 
     <string name="course_detail_go_to_calendar">Vai al calendario</string>
-    <string name="course_detail_go_to_streaming">Vai allo streaming</string>
+    <string name="lesson_detail_go_to_streaming">Vai allo streaming</string>
+    <string name="lesson_detail_go_to_course_detail">Vai al corso</string>
 
     <string name="fragment_user_course_year">%1$s° anno</string>
+    <string name="fragment_user_situazione_tasse">Situazione tasse %1$s</string>
+
+    <string name="situazione_regolare">Regolare</string>
+    <string name="situazione_da_pagare">Da pagare!</string>
 
     <string name="user_fragment_description_label">Questa sezione mostra lo stato della tua carriera universitaria. Potrai quindi visualizzare la tua matricola, inviare un feedback per migliorare l\'app o visualizzare le FAQ per ulteriori chiarimenti.</string>
     <string name="list_fragment_description_label">Questa sezione mostra la lista di tutti i corsi disponibili a cui puoi iscriverti.</string>
-    <string name="home_fragment_description_label">Questa sezione mostra i corsi a cui sei attualmente iscritto. Entrando nel dettaglio del corso potrai scegliere di disiscriverti dal corso, visualizzare la lezione di oggi in streaming o visualizzare il calendario delle prossime lezioni programmate.</string>
+    <string name="home_fragment_description_label">Questa sezione mostra i corsi a cui sei attualmente iscritto. Entrando nel dettaglio del corso potrai scegliere di disiscriverti dal corso o visualizzare il calendario delle prossime lezioni programmate.</string>
+    <string name="lessons_fragment_description_label">Questa sezione mostra l\'elenco delle lezioni dei vari corsi a cui sei iscritto. Entrando nel dettaglio potrai accedere allo streaming della lezione.</string>
 
-    <string name="btn_label_go_to_lesson_detail">Vai al dettaglio</string>
+    <string name="btn_label_go_to_lesson_detail">Lezione</string>
 </resources>

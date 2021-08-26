@@ -3,6 +3,7 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.federicobenedetti.agendaunivpm.R
@@ -21,7 +22,6 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
     private lateinit var selectedCourseDetailId: String
 
     private lateinit var mBtnGoToCalendar: Button
-    private lateinit var mBtnGoToStreaming: Button
     private lateinit var mBtnSubscribeToCourse: Button
     private lateinit var mBtnUnsubscribeFromCourse: Button
 
@@ -50,19 +50,16 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
             )
         }
 
-        mBtnGoToStreaming = courseDetailBinding.mBtnGoToStreaming
-        mBtnGoToStreaming.setOnClickListener {
-            ActivityUtils.launchActivityWithParams(
-                this,
-                LessonStreamingActivity::class,
-                hashMapOf("CourseId" to selectedCourseDetailId)
-            )
-        }
-
         mBtnSubscribeToCourse = courseDetailBinding.mBtnSubscribeToCourse
         mBtnSubscribeToCourse.setOnClickListener {
             FirebaseService.subToCourse(selectedCourseDetailId, WhoAmI.getStudentMatricola())
                 .addOnCompleteListener {
+                    Toast.makeText(
+                        this,
+                        R.string.generic_success,
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
 
                 }
         }
@@ -71,6 +68,12 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
         mBtnUnsubscribeFromCourse.setOnClickListener {
             FirebaseService.unsubToCourse(selectedCourseDetailId, WhoAmI.getStudentMatricola())
                 .addOnCompleteListener {
+                    Toast.makeText(
+                        this,
+                        R.string.generic_success,
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
 
                 }
         }

@@ -15,7 +15,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
 
-class CourseRecyclerAdapter(private val courses: ArrayList<Course>) :
+class CourseRecyclerAdapter(
+    private val courses: ArrayList<Course>
+) :
     RecyclerView.Adapter<CourseRecyclerAdapter.CourseCardViewHolder>() {
 
     private var _logTAG = "COURSERECYCLERADAPTER"
@@ -35,7 +37,8 @@ class CourseRecyclerAdapter(private val courses: ArrayList<Course>) :
 
     override fun getItemCount(): Int = courses.size
 
-    class CourseCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    class CourseCardViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
 
         private var _logTAG = "CARDVIEWHOLDER"
@@ -81,7 +84,9 @@ class CourseRecyclerAdapter(private val courses: ArrayList<Course>) :
             ActivityUtils.launchActivityWithParams(
                 itemViewContext,
                 CourseDetailActivity::class,
-                hashMapOf("CourseId" to course.id)
+                hashMapOf(
+                    "CourseId" to course.id
+                )
             )
         }
     }

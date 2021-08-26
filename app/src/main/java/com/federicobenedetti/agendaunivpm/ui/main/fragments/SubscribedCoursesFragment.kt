@@ -12,16 +12,16 @@ import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.FragmentSubscribedCoursesBinding
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CourseRecyclerAdapter
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
-import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.HomeViewModel
+import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.SubscribedCoursesViewModel
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class SubscribedCoursesFragment : CustomFragment("HOME") {
+class SubscribedCoursesFragment : CustomFragment("SUBSCRIBEDCOURSES") {
     private var _binding: FragmentSubscribedCoursesBinding? = null
     private val binding get() = _binding!!
 
-    private val _homeViewModel: HomeViewModel by activityViewModels()
+    private val _subscribedCoursesViewModel: SubscribedCoursesViewModel by activityViewModels()
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var mCourseRecyclerAdapter: CourseRecyclerAdapter
@@ -38,17 +38,17 @@ class SubscribedCoursesFragment : CustomFragment("HOME") {
             container,
             false
         )
-        binding.homeViewModel = _homeViewModel
+        binding.subscribedCoursesViewModel = _subscribedCoursesViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         val view = binding.root
 
         linearLayoutManager = LinearLayoutManager(context)
 
-        mRecyclerViewInfoCard = view.findViewById(R.id.mRecyclerViewHomeInfoCard)
+        mRecyclerViewInfoCard = view.findViewById(R.id.mRecyclerViewSubscribedCoursesCard)
 
         mRecyclerViewInfoCard.layoutManager = linearLayoutManager
 
-        var courses = _homeViewModel.getCoursesAsArrayList()
+        var courses = _subscribedCoursesViewModel.getCoursesAsArrayList()
 
         mCourseRecyclerAdapter = CourseRecyclerAdapter(courses)
         mRecyclerViewInfoCard.adapter = mCourseRecyclerAdapter

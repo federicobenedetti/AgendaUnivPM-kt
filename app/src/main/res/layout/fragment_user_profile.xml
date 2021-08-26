@@ -36,7 +36,8 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_big">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -135,6 +136,28 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"
                 android:text="@{String.format(@string/fragment_user_course_year, Integer.toString(userViewModel.loggedInUser.getCourseYear()))}"></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_medium"
+                android:layout_marginRight="@dimen/margin_medium"
+                android:text="{gmd-euro}"></com.mikepenz.iconics.view.IconicsTextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_medium"
+                android:text="@{String.format(@string/fragment_user_situazione_tasse, userViewModel.loggedInUser.getSituazioneTasse())}"></TextView>
 
         </LinearLayout>
 

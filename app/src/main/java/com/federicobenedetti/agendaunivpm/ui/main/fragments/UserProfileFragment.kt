@@ -50,6 +50,7 @@ class UserProfileFragment : CustomFragment("USER") {
         _userProfileViewModel.loggedInUser!!.observe(viewLifecycleOwner, Observer {
             mImageViewUserProfileImage?.let { it1 ->
                 Glide.with(this).load(_userProfileViewModel.loggedInUser!!.value!!.getPhotoUrl())
+                    .circleCrop()
                     .into(it1)
             };
         })
@@ -76,6 +77,7 @@ class UserProfileFragment : CustomFragment("USER") {
         _userProfileViewModel.setCurrentLoggedInUserMatricola(WhoAmI.getStudentMatricola())
         _userProfileViewModel.setCurrentLoggedInUserPhoneNumber(WhoAmI.getStudentPhoneNumber())
         _userProfileViewModel.setCurrentLoggedInUserCourseYear(WhoAmI.getStudentCourseYear())
+        _userProfileViewModel.setCurrentLoggedInUserSituazioneTasse(WhoAmI.getStudentSituazioneTasse())
         return view
     }
 

@@ -8,13 +8,15 @@ open class Student {
         _uid: String,
         _telefono: Int,
         _annoCorso: Int,
-        _corsi: List<String>
+        _corsi: List<String>,
+        _situazioneTasse: Boolean
     ) {
         this.matricola = _matricola
         this.uid = _uid
         this.telefono = _telefono
         this.annoCorso = _annoCorso
         this.corsi = _corsi
+        this.situazioneTasse = _situazioneTasse
     }
 
     lateinit var matricola: String
@@ -26,5 +28,7 @@ open class Student {
     var annoCorso: Int = 0
 
     lateinit var corsi: List<String>
+
+    var situazioneTasse: Boolean = false
 
 }

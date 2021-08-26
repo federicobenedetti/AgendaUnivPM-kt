@@ -71,6 +71,19 @@ open class User {
         return photoUrl
     }
 
+    private lateinit var situazioneTasse: String
+
+    fun setSituazioneTasse(situazione: Boolean) {
+        if (situazione) {
+            this.situazioneTasse = "regolare"
+        } else {
+            this.situazioneTasse = "da pagare!"
+        }
+    }
+
+    fun getSituazioneTasse(): String {
+        return this.situazioneTasse
+    }
 
     /**
      * Firebase ci ritorna un FirebaseUser

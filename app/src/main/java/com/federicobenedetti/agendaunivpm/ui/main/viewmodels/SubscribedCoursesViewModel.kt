@@ -5,7 +5,7 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import java.util.*
 
-class HomeViewModel : ViewModel() {
+class SubscribedCoursesViewModel : ViewModel() {
 
     private var _availableCourses = mutableListOf<Course>()
 
