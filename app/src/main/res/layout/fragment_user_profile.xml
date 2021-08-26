@@ -113,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"
-                android:text="@{Integer.toString(userViewModel.loggedInUser.getPhoneNumber())}"></TextView>
+                android:text="@{@string/it_prefix_phone + ' ' + Integer.toString(userViewModel.loggedInUser.getPhoneNumber())}"></TextView>
 
         </LinearLayout>
 
@@ -171,19 +171,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonLaunchFaqActivity"
-                android:text="FAQ"></Button>
+                android:text="@string/btn_go_to_faq"></Button>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonLaunchFeedbackActivity"
-                android:text="Feedback"></Button>
+                android:text="@string/btn_go_to_feedback"></Button>
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonLaunchSignOut"
-                android:text="Logout"></Button>
+                android:text="@string/btn_go_to_logout"></Button>
         </LinearLayout>
     </LinearLayout>
 </layout>

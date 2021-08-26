@@ -60,4 +60,10 @@
     <string name="lessons_fragment_description_label">Questa sezione mostra l\'elenco delle lezioni dei vari corsi a cui sei iscritto. Entrando nel dettaglio potrai accedere allo streaming della lezione.</string>
 
     <string name="btn_label_go_to_lesson_detail">Lezione</string>
+
+    <string name="it_prefix_phone">+39</string>
+
+    <string name="btn_go_to_feedback">Feedback</string>
+    <string name="btn_go_to_faq">FAQ</string>
+    <string name="btn_go_to_logout">Logout</string>
 </resources>
