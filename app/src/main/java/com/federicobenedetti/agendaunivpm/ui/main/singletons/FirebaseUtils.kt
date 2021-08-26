@@ -6,6 +6,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
+import java.io.File
 
 /**
  * Singleton utilizzato per mantenere un'istanza unica
@@ -18,6 +22,13 @@ object FirebaseUtils {
     // Unica istanza delle Firebase Functions
     private var mFirebaseFunctions: FirebaseFunctions? = null
 
+    // Unica istanza di Firebase Storage
+    private var mFirebaseStorage: FirebaseStorage? = null
+
+    private var mStorageRef: StorageReference? = null
+
+    private var mStreamingPath: String = "gs://agenda-univpm.appspot.com/01.mp4"
+
     // Mi serve per capire se l'auth listener è stato impostato (dalla Login Activity)
     // Altrimenti si rischia un loop
     private var authListenerSet: Boolean = false
@@ -25,6 +36,8 @@ object FirebaseUtils {
     init {
         mFirebaseAuth = FirebaseAuth.getInstance()
         mFirebaseFunctions = Firebase.functions
+        mFirebaseStorage = Firebase.storage
+        mStorageRef = mFirebaseStorage!!.getReferenceFromUrl(mStreamingPath)
     }
 
     /**
@@ -58,5 +71,16 @@ object FirebaseUtils {
      */
     fun getFirebaseFunctionsInstance(): FirebaseFunctions? {
         return mFirebaseFunctions
+    }
+
+    fun downloadStreamingVideo() {
+        val localFile = File.createTempFile("streaming01", "mp4")
+        mStorageRef?.getFile(localFile)?.addOnCompleteListener {
+            if (it.isSuccessful) {
+                Logger.d("pippo", "successo")
+            } else {
+                Logger.d("pippo", "fallimento")
+            }
+        }
     }
 }
