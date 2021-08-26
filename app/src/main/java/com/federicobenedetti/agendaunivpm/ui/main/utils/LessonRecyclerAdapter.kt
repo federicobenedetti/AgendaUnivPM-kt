@@ -1,6 +1,7 @@
 package com.federicobenedetti.agendaunivpm.ui.main.utils
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -10,7 +11,6 @@ import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.activities.LessonDetailActivity
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
-import com.federicobenedetti.agendaunivpm.ui.main.extensions.inflate
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
@@ -24,7 +24,8 @@ class LessonRecyclerAdapter(private val courses: ArrayList<Lesson>) :
         parent: ViewGroup,
         viewType: Int
     ): LessonCardViewHolder {
-        val inflatedView = parent.inflate(R.layout.layout_card_lesson, false)
+        val inflatedView =
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_card_lesson, parent, false)
         return LessonCardViewHolder(inflatedView)
     }
 

@@ -25,6 +25,12 @@
             android:textSize="@dimen/text_big"
             android:textStyle="bold"></TextView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@{String.format(@string/lesson_detail_held_by, lessonDetailViewModel.teacher.name, lessonDetailViewModel.teacher.lastName, lessonDetailViewModel.selectedLesson.bookedHour)}"></TextView>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -32,13 +38,6 @@
             android:textSize="@dimen/text_medium"
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@{lessonDetailViewModel.selectedLesson.description}"></TextView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@{String.format(@string/lesson_detail_held_by, lessonDetailViewModel.teacher.name, lessonDetailViewModel.teacher.lastName, lessonDetailViewModel.selectedLesson.bookedHour)}"></TextView>
 
 
         <LinearLayout

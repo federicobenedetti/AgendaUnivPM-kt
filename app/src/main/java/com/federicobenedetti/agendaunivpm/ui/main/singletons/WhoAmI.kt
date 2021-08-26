@@ -26,6 +26,10 @@ object WhoAmI {
         }
     }
 
+    fun getStudentCoursesStringList(): List<String> {
+        return studentLoggedIn.corsi
+    }
+
     fun setLoggedInStudentCourses(courses: List<Course>) {
         Logger.d(_logTAG, "Corsi: ", courses)
         if (courses != null) {

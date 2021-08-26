@@ -17,6 +17,6 @@ class LessonsViewModel : ViewModel() {
     }
 
     init {
-        _availableLessons = DataPersistanceUtils.getLessons() as MutableList<Lesson>
+        _availableLessons = DataPersistanceUtils.getStudentLessons() as MutableList<Lesson>
     }
 }
