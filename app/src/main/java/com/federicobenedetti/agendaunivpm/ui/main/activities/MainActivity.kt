@@ -3,6 +3,7 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.utils.ViewPagerFragmentAdapter
 import com.google.android.material.tabs.TabLayout
@@ -47,5 +48,12 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
                 }
             }
         }.attach()
+
+        // Se siamo nella MainActivity, voglio che la nostra Utils di Firebase faccia l'init
+        // del suo AuthListener
+        // In modo che se cambiasse mai qualche cosa (tipo l'utente fa il logout)
+        // a quel punto ripartirebbe la LoginActivity
+        // (stiamo passando il contesto al metodo, non è la best-practice ma per ora può funzionare)
+        FirebaseUtils.setAuthStateListener(this)
     }
 }

@@ -47,13 +47,6 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         // Ci serve per capire se c'è un utente loggato o meno
         val currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
 
-        // Se siamo nella LoginActivity, voglio che la nostra Utils di Firebase faccia l'init
-        // del suo AuthListener
-        // In modo che se cambiasse mai qualche cosa (tipo l'utente fa il logout)
-        // a quel punto ripartirebbe la LoginActivity
-        // (stiamo passando il contesto al metodo, non è la best-practice ma per ora può funzionare)
-        FirebaseUtils.setAuthStateListener(this)
-
         Log.w(_logTAG, "Current signedInUser: $currentUser")
 
         if (currentUser != null) {
@@ -102,6 +95,8 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(_logTAG, "Google sign in failed", e)
+                linearLayoutLoading.visibility = View.GONE
+                Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -121,6 +116,8 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(_logTAG, "signInWithCredential failure", task.exception)
+                    linearLayoutLoading.visibility = View.GONE
+                    Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
                 }
             }
     }
