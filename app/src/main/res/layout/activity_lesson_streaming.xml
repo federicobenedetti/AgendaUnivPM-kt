@@ -13,24 +13,28 @@
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-        tools:context=".ui.main.activities.LessonStreamingActivity">
+        tools:context=".ui.main.activities.LessonStreamingActivity"
+        android:padding="@dimen/layout_padding">
 
-        <LinearLayout
-            android:id="@+id/linear_layout_loading"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="wrap_content"
+            android:text="@string/lesson_streaming_title"
+            android:textSize="@dimen/text_big"
+            android:layout_marginBottom="@dimen/margin_medium"></TextView>
 
-            <include
-                layout="@layout/layout_loading"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/login_loading"
-                android:layout_gravity="center"
-                style="@style/SpinKitView.Small"></include>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:text="@string/lesson_streaming_description"
+            android:layout_marginBottom="@dimen/margin_medium"></TextView>
 
-        </LinearLayout>
+        <VideoView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mVideoView">
 
+        </VideoView>
     </LinearLayout>
 </layout>

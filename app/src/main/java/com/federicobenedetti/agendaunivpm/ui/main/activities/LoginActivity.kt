@@ -7,10 +7,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
+import com.federicobenedetti.agendaunivpm.ui.main.classes.*
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.*
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -201,19 +198,8 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
                             DataPersistanceUtils.setCourses(allCourses)
 
-
-                            Toast.makeText(
-                                this,
-                                R.string.generic_success,
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
-
-                            loadingStudentCourses = true
-
-                            Logger.d(_logTAG, "Finito! Lancio la MainActivity")
-                            ActivityUtils.launchActivity(this, MainActivity::class)
-                            finish()
+                            FirebaseService.getCalendarlessons()
+                                .addOnCompleteListener { task -> handleOnCompleteListener(task) }
                         }
 
 
@@ -229,6 +215,27 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
                         FirebaseService.getLessons()
                             .addOnCompleteListener { task -> handleOnCompleteListener(task) }
+                    } else if ((task.result as List<*>).all { e -> e is CalendarLesson }) {
+
+                        // 6: Carichiamo tutte le lezioni del calendario
+                        var calendarLessons = task.result as List<CalendarLesson>
+
+                        Logger.d(_logTAG, "Risultato chiamata getCalendarLessons", calendarLessons)
+
+                        DataPersistanceUtils.setCalendarLessons(calendarLessons)
+
+                        Toast.makeText(
+                            this,
+                            R.string.generic_success,
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+
+                        loadingStudentCourses = true
+
+                        Logger.d(_logTAG, "Finito! Lancio la MainActivity")
+                        ActivityUtils.launchActivity(this, MainActivity::class)
+                        finish()
                     }
                 }
             }

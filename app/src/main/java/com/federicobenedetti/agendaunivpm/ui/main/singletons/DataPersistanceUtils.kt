@@ -1,5 +1,6 @@
 package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
+import com.federicobenedetti.agendaunivpm.ui.main.classes.CalendarLesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
@@ -18,6 +19,8 @@ object DataPersistanceUtils {
     private var courses: List<Course> = listOf()
 
     private var lessons: List<Lesson> = listOf()
+
+    private var calendarLessons: List<CalendarLesson> = listOf()
 
     fun setTeachers(t: List<Teacher>) {
         if (t != null) {
@@ -65,5 +68,19 @@ object DataPersistanceUtils {
 
     fun getLessonById(id: String): Lesson? {
         return lessons.find { t -> t.id === id }
+    }
+
+    fun getCalendarLessons(): List<CalendarLesson> {
+        return calendarLessons
+    }
+
+    fun getCalendarLessonById(id: String): CalendarLesson? {
+        return calendarLessons.find { t -> t.lessonId === id }
+    }
+
+    fun setCalendarLessons(l: List<CalendarLesson>) {
+        if (l != null) {
+            calendarLessons = l
+        }
     }
 }

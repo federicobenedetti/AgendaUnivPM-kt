@@ -1,9 +1,6 @@
 package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
-import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
+import com.federicobenedetti.agendaunivpm.ui.main.classes.*
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.HttpsCallableResult
 import com.google.gson.Gson
@@ -74,6 +71,21 @@ object FirebaseService {
                     SerializationUtils.deserializeArrayListMapToT<Lesson>(task.result?.data as ArrayList<HashMap<*, *>>)
                 Logger.d(_logTAG, "Objects received: ", Gson().toJsonTree(lessons))
                 lessons
+            }
+    }
+
+    fun getCalendarlessons(): Task<List<CalendarLesson>> {
+        return FirebaseClient.getCalendarLessons()
+            .continueWith { task ->
+                var result = task.result.data as HashMap<String, String>
+                var calendarLessons = ArrayList<CalendarLesson>()
+
+                for (r in result.entries) {
+                    calendarLessons.add(CalendarLesson(r.key, r.value))
+                }
+                
+                Logger.d(_logTAG, "Objects received: ", calendarLessons)
+                calendarLessons
             }
     }
 
