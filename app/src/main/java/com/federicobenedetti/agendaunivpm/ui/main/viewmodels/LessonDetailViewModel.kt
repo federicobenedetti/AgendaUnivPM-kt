@@ -5,6 +5,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
+/**
+ * Viewmodel relativo al dettaglio della lezione scelta dall'utente
+ */
 class LessonDetailViewModel : ViewModel() {
     private var _selectedLesson: Lesson? = null
 

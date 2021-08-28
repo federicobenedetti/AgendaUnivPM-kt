@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.federicobenedetti.agendaunivpm.ui.main.classes.User
 import com.google.firebase.auth.FirebaseUser
 
+/**
+ * Viewmodel relativo al profilo utente
+ */
 class UserProfileViewModel : ViewModel() {
     private val _loggedInUser = MutableLiveData<User>()
 

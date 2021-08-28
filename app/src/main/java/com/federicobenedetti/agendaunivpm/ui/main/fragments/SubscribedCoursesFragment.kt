@@ -14,8 +14,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.utils.CourseRecyclerAdapter
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.SubscribedCoursesViewModel
 
+
 /**
- * A placeholder fragment containing a simple view.
+ * Fragment che mostra a video i corsi a cui l'utente si è iscritto
  */
 class SubscribedCoursesFragment : CustomFragment("SUBSCRIBEDCOURSES") {
     private var _binding: FragmentSubscribedCoursesBinding? = null

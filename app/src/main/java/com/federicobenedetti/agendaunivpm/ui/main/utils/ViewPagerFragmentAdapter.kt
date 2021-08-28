@@ -9,6 +9,11 @@ import com.federicobenedetti.agendaunivpm.ui.main.fragments.LessonsFragment
 import com.federicobenedetti.agendaunivpm.ui.main.fragments.SubscribedCoursesFragment
 import com.federicobenedetti.agendaunivpm.ui.main.fragments.UserProfileFragment
 
+/**
+ * ViewPagerFragmentAdapter
+ * Utilizzato per poter bindare i fragment al viewpager
+ * In questo modo, per ogni posizione della navbar, sappiamo quale fragment richiamare
+ */
 class ViewPagerFragmentAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {
 

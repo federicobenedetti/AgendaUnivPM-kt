@@ -21,7 +21,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.UserProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-
+/**
+ * Fragment che mostra a video i dati dell'utente loggato
+ */
 class UserProfileFragment : CustomFragment("USER") {
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
@@ -86,7 +88,9 @@ class UserProfileFragment : CustomFragment("USER") {
         super.onStart()
 
         val currentUser = mFirebaseAuth!!.currentUser
-        _userProfileViewModel.setCurrentLoggedInUser(currentUser)
+        if (currentUser != null) {
+            _userProfileViewModel.setCurrentLoggedInUser(currentUser)
+        }
     }
 
 

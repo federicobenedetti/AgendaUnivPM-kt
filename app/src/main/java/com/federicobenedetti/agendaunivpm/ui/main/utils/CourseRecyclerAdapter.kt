@@ -14,7 +14,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
-
+/**
+ * RecyclerAdapter specifico per la lista di corsi (utilizza un layout per la card associata differente rispetto al LessonRecyclerAdapter)
+ */
 class CourseRecyclerAdapter(
     private val courses: ArrayList<Course>
 ) :

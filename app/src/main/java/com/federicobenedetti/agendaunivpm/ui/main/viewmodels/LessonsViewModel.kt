@@ -5,6 +5,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 import java.util.*
 
+/**
+ * Viewmodel relativo al fragment della lista delle lezioni
+ */
 class LessonsViewModel : ViewModel() {
 
     private var _availableLessons = mutableListOf<Lesson>()

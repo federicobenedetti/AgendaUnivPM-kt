@@ -5,6 +5,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.CalendarLesson
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 import java.util.*
 
+/**
+ * Viewmodel relativo all'activity che presenta la lista delle lezioni, relative al corso, in un calendario
+ */
 class CourseCalendarViewModel : ViewModel() {
     private var _calendarLessons = mutableListOf<CalendarLesson>()
 

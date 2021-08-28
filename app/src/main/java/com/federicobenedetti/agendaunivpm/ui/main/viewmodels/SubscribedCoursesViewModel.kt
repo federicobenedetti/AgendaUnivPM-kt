@@ -5,6 +5,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import java.util.*
 
+/**
+ * Viewmodel relativo ai corsi a cui l'utente si è iscritto
+ */
 class SubscribedCoursesViewModel : ViewModel() {
 
     private var _availableCourses = mutableListOf<Course>()

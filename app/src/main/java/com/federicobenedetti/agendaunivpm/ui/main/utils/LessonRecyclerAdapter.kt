@@ -15,6 +15,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
 
+/**
+ * RecyclerAdapter specifico per la lista di lezioni
+ */
 class LessonRecyclerAdapter(private val courses: ArrayList<Lesson>) :
     RecyclerView.Adapter<LessonRecyclerAdapter.LessonCardViewHolder>() {
 

@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.DataPersistanceUtils
 
+/**
+ * Viewmodel relativo al dettaglio del corso scelto dall'utente
+ */
 class CourseDetailViewModel : ViewModel() {
     private var _selectedCourse: Course? = null
 
