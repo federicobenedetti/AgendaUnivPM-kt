@@ -6,6 +6,10 @@ import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.ActivityFaqBinding
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 
+/**
+ * Semplice activity che permette di visualizzare la lista
+ * di FAQ, organizzate in cardview
+ */
 class FaqActivity : CustomAppCompatActivity("FAQ") {
     private lateinit var faqBinding: ActivityFaqBinding
 

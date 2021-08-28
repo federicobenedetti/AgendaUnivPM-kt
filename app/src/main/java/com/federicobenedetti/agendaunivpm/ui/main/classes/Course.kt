@@ -1,5 +1,8 @@
 package com.federicobenedetti.agendaunivpm.ui.main.classes
 
+/**
+ * Classe che descrive il corso e il suo dettaglio
+ */
 open class Course {
     private var _logTAG = "COURSECLASS"
 

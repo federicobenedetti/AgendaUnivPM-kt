@@ -15,6 +15,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.FeedbackViewModel
 
+/**
+ * Activity che permette di inviare un Feedback tramite Firebase
+ */
 class FeedbackActivity : CustomAppCompatActivity("FEEDBACK") {
 
     private lateinit var feedbackBinding: ActivityFeedbackBinding

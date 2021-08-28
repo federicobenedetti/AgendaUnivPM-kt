@@ -14,6 +14,9 @@ import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 import com.federicobenedetti.agendaunivpm.ui.main.utils.LessonRecyclerAdapter
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.LessonsViewModel
 
+/**
+ * Fragment che mostra a video la lista di tutti i corsi a cui l'utente può partecipare
+ */
 class LessonsFragment : CustomFragment("LESSONS") {
     private var _binding: FragmentLessonsBinding? = null
     private val binding get() = _binding!!

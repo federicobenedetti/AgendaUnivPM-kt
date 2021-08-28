@@ -14,6 +14,10 @@ import com.federicobenedetti.agendaunivpm.ui.main.utils.CourseRecyclerAdapter
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomFragment
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.CoursesListViewModel
 
+/**
+ * Fragment che mostra a schermo la lista di tutti i corsi disponibili nell'app a cui
+ * l'utente può iscriversi
+ */
 class CoursesListFragment : CustomFragment("COURSESLIST") {
     private var _binding: FragmentCoursesListBinding? = null
     private val binding get() = _binding!!

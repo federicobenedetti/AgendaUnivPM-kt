@@ -4,6 +4,10 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseUser
 
+/**
+ * Classe derivata da un Firebase User
+ * Serve per tener traccia di tutti quei dati tecnici utili alla descrizione di un utente
+ */
 open class User {
     private var _logTAG = "USERCLASS"
 
@@ -28,6 +32,9 @@ open class User {
         return matricola
     }
 
+    /**
+     * Numero di telefono dell'utente
+     */
     private var phoneNumber: Int = 0
     fun setPhoneNumber(_phone: Int) {
         phoneNumber = _phone
@@ -37,6 +44,9 @@ open class User {
         return phoneNumber
     }
 
+    /**
+     * Anno universitario dell'utente
+     */
     private var courseYear: Int = 0
     fun setCourseYear(_year: Int) {
         courseYear = _year
@@ -71,6 +81,9 @@ open class User {
         return photoUrl
     }
 
+    /**
+     * Situazione tasse dell'utente loggato
+     */
     private lateinit var situazioneTasse: String
 
     fun setSituazioneTasse(situazione: Boolean) {

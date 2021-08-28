@@ -10,6 +10,10 @@ import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.LessonDetailViewModel
 
+/**
+ * Quest'activity permette di andare al dettaglio del corso relativo
+ * oppure di visualizzare lo streaming della lezione selezionata
+ */
 class LessonDetailActivity : CustomAppCompatActivity("LESSONDETAIL") {
     private lateinit var lessonDetailBinding: ActivityLessonDetailBinding
     private lateinit var lessonDetailViewModel: LessonDetailViewModel

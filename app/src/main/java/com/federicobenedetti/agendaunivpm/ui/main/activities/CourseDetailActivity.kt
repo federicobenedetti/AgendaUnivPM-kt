@@ -15,6 +15,13 @@ import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.CourseDetailViewModel
 
+/**
+ * Activity che mostra il dettaglio del corso scelto
+ *
+ * Permette di iscriverti al corso (e quindi di ricevere le lezioni relative)
+ * Disiscriverti dal corso
+ * E andare a vedere il calendario per le prossime lezioni relative al corso
+ */
 class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
     private lateinit var courseDetailBinding: ActivityCourseDetailBinding
     private lateinit var courseDetailViewModel: CourseDetailViewModel

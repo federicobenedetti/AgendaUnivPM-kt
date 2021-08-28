@@ -1,5 +1,8 @@
 package com.federicobenedetti.agendaunivpm.ui.main.classes
 
+/**
+ * Classe che descrive un professore
+ */
 open class Teacher {
 
     constructor() {}

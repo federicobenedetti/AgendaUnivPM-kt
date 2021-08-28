@@ -16,6 +16,10 @@ import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.CourseCalendarViewM
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.ui.DayBinder
 
+/**
+ * Activity che mostra un calendario con tutte le prossime lezioni
+ * Le lezioni sono cliccabili, portano direttamente al dettaglio della lezione stessa
+ */
 class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
 
     private lateinit var courseCalendarBinding: ActivityCourseCalendarBinding
