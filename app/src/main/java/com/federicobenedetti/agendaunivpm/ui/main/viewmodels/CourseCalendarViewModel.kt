@@ -14,7 +14,7 @@ class CourseCalendarViewModel : ViewModel() {
         get() = _calendarLessons
 
     init {
-        var lessons = DataPersistanceUtils.getCalendarLessonWhichUserCanSee()
+        var lessons = DataPersistanceUtils.getCalendarLessonsWhichUserCanSee()
 
         _calendarLessons = if (lessons.isNotEmpty()) {
             lessons as MutableList<CalendarLesson>

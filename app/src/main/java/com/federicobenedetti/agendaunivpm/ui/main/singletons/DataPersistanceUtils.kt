@@ -4,6 +4,7 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.CalendarLesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Course
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Lesson
 import com.federicobenedetti.agendaunivpm.ui.main.classes.Teacher
+import java.time.LocalDate
 
 /**
  * Non avendo un DB implementato, necessito comunque di un posto in cui tenere i miei dati a runtime
@@ -21,6 +22,7 @@ object DataPersistanceUtils {
     private var lessons: List<Lesson> = listOf()
 
     private var calendarLessons: List<CalendarLesson> = listOf()
+    private var calendarLessonWhichUserCanSee: List<CalendarLesson> = listOf()
 
     fun setTeachers(t: List<Teacher>) {
         if (t != null) {
@@ -48,7 +50,7 @@ object DataPersistanceUtils {
     }
 
     fun getCourseById(id: String): Course? {
-        return courses.find { t -> t.id === id }
+        return courses.find { t -> t.id == id }
     }
 
     fun setLessons(l: List<Lesson>) {
@@ -67,7 +69,7 @@ object DataPersistanceUtils {
     }
 
     fun getLessonById(id: String): Lesson? {
-        return lessons.find { t -> t.id === id }
+        return lessons.find { t -> t.id == id }
     }
 
     fun getCalendarLessons(): List<CalendarLesson> {
@@ -75,7 +77,7 @@ object DataPersistanceUtils {
     }
 
     fun getCalendarLessonById(id: String): CalendarLesson? {
-        return calendarLessons.find { t -> t.lessonId === id }
+        return calendarLessons.find { t -> t.lessonId == id }
     }
 
     /**
@@ -83,7 +85,7 @@ object DataPersistanceUtils {
      * può vedere, e la lista globale di lezioni disponibili
      * In questo modo, l'utente potrà vedere a calendario solo quelle di cui è iscritto al corso relativo
      */
-    fun getCalendarLessonWhichUserCanSee(): List<CalendarLesson> {
+    fun setCalendarLessonWhichUserCanSee() {
         var lessonThatStudentCanSee = ArrayList<CalendarLesson>()
 
         for (lessonId in WhoAmI.getLessonStudentCanSee()) {
@@ -97,12 +99,29 @@ object DataPersistanceUtils {
             }
         }
 
-        return lessonThatStudentCanSee.toList()
+        calendarLessonWhichUserCanSee = lessonThatStudentCanSee
+    }
+
+    fun getCalendarLessonsAtDate(date: LocalDate): List<CalendarLesson> {
+        var lessons = ArrayList<CalendarLesson>()
+        for (lesson in calendarLessonWhichUserCanSee) {
+            if (lesson.dueDate == date.toString()) {
+                lessons.add(lesson)
+            }
+        }
+
+        return lessons.toList()
+    }
+
+    fun getCalendarLessonsWhichUserCanSee(): List<CalendarLesson> {
+        return calendarLessonWhichUserCanSee
     }
 
     fun setCalendarLessons(l: List<CalendarLesson>) {
         if (l != null) {
             calendarLessons = l
+
+            setCalendarLessonWhichUserCanSee()
         }
     }
 }

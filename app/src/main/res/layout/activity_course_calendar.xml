@@ -46,7 +46,29 @@
             app:cv_orientation="horizontal"
             app:cv_outDateStyle="endOfRow"
             app:cv_inDateStyle="allMonths"
-            app:cv_scrollMode="paged"></com.kizitonwose.calendarview.CalendarView>
+            app:cv_scrollMode="paged">
 
+        </com.kizitonwose.calendarview.CalendarView>
+
+        <TextView
+            android:id="@+id/selectedDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#EEEEEE"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="20dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="12dp"
+            android:textAllCaps="true"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="14sp"
+            tools:text="7 Jan, 2019" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewLessons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>
