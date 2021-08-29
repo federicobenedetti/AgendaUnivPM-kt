@@ -1,7 +1,9 @@
 package com.federicobenedetti.agendaunivpm.ui.main.singletons
 
 import android.content.Context
+import android.content.Intent
 import com.federicobenedetti.agendaunivpm.ui.main.activities.LoginActivity
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.ktx.functions
@@ -26,6 +28,7 @@ object FirebaseUtils {
 
     private var mStorageRef: StorageReference? = null
 
+    private var mGoogleSignInClient: GoogleSignInClient? = null
 
     var mStreamingPath: String =
         "https://firebasestorage.googleapis.com/v0/b/agenda-univpm.appspot.com/o/01.mp4?alt=media&token=0836eb52-290b-4f23-86dd-4379d40b0ec0"
@@ -38,18 +41,20 @@ object FirebaseUtils {
         initFirebase()
     }
 
-    private fun initFirebase() {
+    fun initFirebase() {
         mFirebaseAuth = FirebaseAuth.getInstance()
         mFirebaseFunctions = Firebase.functions
         mFirebaseStorage = Firebase.storage
         mStorageRef = mFirebaseStorage!!.getReferenceFromUrl(mStreamingPath)
+        mGoogleSignInClient = null
     }
 
-    fun reset() {
-        mFirebaseAuth = null
-        mFirebaseFunctions = null
-        mFirebaseStorage = null
-        mStorageRef = null
+    fun setGoogleSignInClient(client: GoogleSignInClient) {
+        mGoogleSignInClient = client
+    }
+
+    fun getGoogleSignInClientIntent(): Intent {
+        return mGoogleSignInClient!!.signInIntent
     }
 
     /**
@@ -73,6 +78,11 @@ object FirebaseUtils {
      */
     fun getFirebaseAuthInstance(): FirebaseAuth? {
         return mFirebaseAuth
+    }
+
+    fun signOut() {
+        mFirebaseAuth!!.signOut()
+        mGoogleSignInClient!!.signOut()
     }
 
     /**

@@ -40,7 +40,7 @@ class DataLoadingActivity : CustomAppCompatActivity("DATALOADING") {
          * Uso un Handler piuttosto che un Thread.sleep perché evito di bloccare il
          * thread della UI.
          */
-        Handler().postDelayed(this::loadStudentData, 1500)
+        Handler().postDelayed(this::loadStudentData, 2500)
     }
 
     /**

@@ -3,27 +3,32 @@
     package="com.federicobenedetti.agendaunivpm">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AgendaUnivPM">
-        <activity android:name=".ui.main.activities.LoginActivity">
+        <activity
+            android:name=".ui.main.activities.LoginActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.activities.MainActivity"></activity>
+        <activity
+            android:name=".ui.main.activities.MainActivity"
+            android:noHistory="true"></activity>
         <activity android:name=".ui.main.activities.FaqActivity"></activity>
         <activity android:name=".ui.main.activities.FeedbackActivity"></activity>
         <activity android:name=".ui.main.activities.CourseDetailActivity"></activity>
         <activity android:name=".ui.main.activities.LessonStreamingActivity"></activity>
         <activity android:name=".ui.main.activities.CourseCalendarActivity"></activity>
         <activity android:name=".ui.main.activities.LessonDetailActivity"></activity>
-        <activity android:name=".ui.main.activities.DataLoadingActivity"></activity>
+        <activity
+            android:name=".ui.main.activities.DataLoadingActivity"
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>

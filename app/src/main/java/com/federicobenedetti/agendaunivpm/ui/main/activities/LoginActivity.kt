@@ -2,15 +2,12 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
+import com.federicobenedetti.agendaunivpm.ui.main.singletons.*
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.utils.ExceptionHandler
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
@@ -25,7 +22,7 @@ import com.google.firebase.auth.GoogleAuthProvider
  */
 class LoginActivity : CustomAppCompatActivity("LOGIN") {
     private var mFirebaseAuth: FirebaseAuth? = null
-    private var mGoogleSignInClient: GoogleSignInClient? = null
+
 
     private var mButtonSignIn: SignInButton? = null
 
@@ -38,8 +35,12 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             startLoginProcedure()
         }
 
-        // Ci serve per capire se c'è un utente loggato o meno
-        val currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
+        /**
+         * Puliamo tutto prima di procedere alla login
+         */
+        FirebaseUtils.initFirebase()
+        DataPersistanceUtils.reset()
+        WhoAmI.reset()
 
         /**
          * La login activity è la prima activity chiamata. Impostiamo il contesto per il nostro
@@ -47,12 +48,6 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
          * crashare
          */
         Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler(this))
-
-        Log.w(_logTAG, "Current signedInUser: $currentUser")
-
-        if (currentUser != null) {
-            startDataLoadingActivity()
-        }
     }
 
     /**
@@ -66,11 +61,11 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             .build()
 
         // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
+        FirebaseUtils.setGoogleSignInClient(GoogleSignIn.getClient(this, gso))
+        
         mFirebaseAuth = FirebaseUtils.getFirebaseAuthInstance()
 
-        startActivityForResult(mGoogleSignInClient?.signInIntent, 9001)
+        startActivityForResult(FirebaseUtils.getGoogleSignInClientIntent(), 9001)
     }
 
     /**
@@ -88,11 +83,11 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                Log.w(_logTAG, "firebaseAuthWithGoogle: " + account.id)
+                Logger.d(_logTAG, "firebaseAuthWithGoogle: " + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(_logTAG, "Google sign in failed", e)
+                Logger.d(_logTAG, "Google sign in failed", e)
                 Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
             }
         }
@@ -107,12 +102,12 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.w(_logTAG, "signInWithCredential success")
-                    Log.w(_logTAG, "current signed in user " + mFirebaseAuth!!.currentUser)
+                    Logger.d(_logTAG, "signInWithCredential success")
+                    Logger.d(_logTAG, "current signed in user " + mFirebaseAuth!!.currentUser)
                     startDataLoadingActivity()
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w(_logTAG, "signInWithCredential failure", task.exception)
+                    Logger.d(_logTAG, "signInWithCredential failure", task.exception)
                     Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
                 }
             }

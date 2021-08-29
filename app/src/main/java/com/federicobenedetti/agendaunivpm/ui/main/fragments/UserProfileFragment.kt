@@ -72,7 +72,7 @@ class UserProfileFragment : CustomFragment("USER") {
 
         mButtonSignOut = binding.buttonLaunchSignOut
         mButtonSignOut!!.setOnClickListener {
-            mFirebaseAuth!!.signOut()
+            FirebaseUtils.signOut()
         }
 
         mButtonCalendar = binding.buttonLaunchCalendar

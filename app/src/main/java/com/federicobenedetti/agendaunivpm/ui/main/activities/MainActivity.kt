@@ -27,13 +27,11 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
 
-    private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_main)
-
 
         tabLayout = findViewById(id.tabs)
 
