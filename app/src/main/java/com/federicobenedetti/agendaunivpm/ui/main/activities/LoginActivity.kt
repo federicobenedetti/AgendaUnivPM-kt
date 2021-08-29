@@ -2,7 +2,9 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.*
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
@@ -23,6 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 class LoginActivity : CustomAppCompatActivity("LOGIN") {
     private var mFirebaseAuth: FirebaseAuth? = null
 
+    private lateinit var loginImageView: ImageView
 
     private var mButtonSignIn: SignInButton? = null
 
@@ -34,6 +37,9 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
         mButtonSignIn!!.setOnClickListener {
             startLoginProcedure()
         }
+
+        loginImageView = findViewById(R.id.loginImageView)
+        Glide.with(this).load(R.mipmap.ic_launcher).into(loginImageView)
 
         /**
          * Puliamo tutto prima di procedere alla login
@@ -62,7 +68,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
         // Build a GoogleSignInClient with the options specified by gso.
         FirebaseUtils.setGoogleSignInClient(GoogleSignIn.getClient(this, gso))
-        
+
         mFirebaseAuth = FirebaseUtils.getFirebaseAuthInstance()
 
         startActivityForResult(FirebaseUtils.getGoogleSignInClientIntent(), 9001)
