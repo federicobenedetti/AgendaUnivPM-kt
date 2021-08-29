@@ -12,9 +12,15 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.CalendarLesson
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.Logger
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
 import com.federicobenedetti.agendaunivpm.ui.main.utils.DayViewContainer
+import com.federicobenedetti.agendaunivpm.ui.main.utils.MonthViewContainer
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.CourseCalendarViewModel
 import com.kizitonwose.calendarview.model.CalendarDay
+import com.kizitonwose.calendarview.model.CalendarMonth
+import com.kizitonwose.calendarview.model.InDateStyle
 import com.kizitonwose.calendarview.ui.DayBinder
+import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import java.time.DayOfWeek
+import java.time.YearMonth
 
 /**
  * Activity che mostra un calendario con tutte le prossime lezioni
@@ -43,6 +49,8 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
         calendarLessons = courseCalendarViewModel.getCalendarLessonsAsArrayList()
         Logger.d(_logTAG, "CalendarLesson", calendarLessons)
 
+        mCalendarView = courseCalendarBinding.calendarView
+
         mCalendarView.dayBinder = object : DayBinder<DayViewContainer> {
             // Called only when a new container is needed.
             override fun create(view: View) = DayViewContainer(view)
@@ -53,6 +61,37 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
                 container.textView.text = day.date.dayOfMonth.toString()
             }
         }
+
+        mCalendarView.monthHeaderBinder = object : MonthHeaderFooterBinder<MonthViewContainer> {
+            override fun create(view: View) = MonthViewContainer(view)
+            override fun bind(container: MonthViewContainer, month: CalendarMonth) {
+                container.textView.text =
+                    "${month.yearMonth.month.name.toLowerCase().capitalize()} ${month.year}"
+            }
+        }
+
+        val currentMonth = YearMonth.now()
+        val firstMonth = currentMonth.minusMonths(10)
+        val lastMonth = currentMonth.plusMonths(10)
+
+        // Six row calendar for month mode
+        mCalendarView.updateMonthConfiguration(
+            inDateStyle = InDateStyle.FIRST_MONTH,
+            maxRowCount = 6,
+            hasBoundaries = true
+        )
+
+        val daysOfWeek = arrayOf(
+            DayOfWeek.SUNDAY,
+            DayOfWeek.MONDAY,
+            DayOfWeek.TUESDAY,
+            DayOfWeek.WEDNESDAY,
+            DayOfWeek.THURSDAY,
+            DayOfWeek.FRIDAY,
+            DayOfWeek.SATURDAY
+        )
+        mCalendarView.setup(firstMonth, lastMonth, daysOfWeek.first())
+        mCalendarView.scrollToMonth(currentMonth)
 
     }
 }

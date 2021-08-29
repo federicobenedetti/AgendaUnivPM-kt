@@ -17,7 +17,7 @@ class ExceptionHandler(context: Context) : Thread.UncaughtExceptionHandler {
     private val _logTAG: String = "EXCEPTIONHANDLER"
 
     override fun uncaughtException(thread: Thread, exception: Throwable) {
-        Logger.d(_logTAG, "Uncaught Exception", exception.printStackTrace())
+        Logger.d(_logTAG, "Uncaught Exception", exception)
         ActivityUtils.launchActivity(appContext, LoginActivity::class)
 
         //for restarting the Activity
