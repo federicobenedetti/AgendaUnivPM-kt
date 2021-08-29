@@ -8,6 +8,7 @@ import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
+import com.federicobenedetti.agendaunivpm.ui.main.utils.ExceptionHandler
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -27,7 +28,7 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
     private var mButtonSignIn: SignInButton? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -39,6 +40,13 @@ class LoginActivity : CustomAppCompatActivity("LOGIN") {
 
         // Ci serve per capire se c'è un utente loggato o meno
         val currentUser = FirebaseUtils.getFirebaseAuthInstance()!!.currentUser
+
+        /**
+         * La login activity è la prima activity chiamata. Impostiamo il contesto per il nostro
+         * custom exception handler qui, in modo che poi venga rilanciata se l'app dovesse
+         * crashare
+         */
+        Thread.setDefaultUncaughtExceptionHandler(ExceptionHandler(this))
 
         Log.w(_logTAG, "Current signedInUser: $currentUser")
 
