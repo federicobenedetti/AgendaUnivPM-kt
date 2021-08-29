@@ -11,11 +11,17 @@ import com.federicobenedetti.agendaunivpm.ui.main.classes.Student
 object WhoAmI {
     private const val _logTAG = "WHOAMI"
 
-    private lateinit var studentLoggedIn: Student
+    private var studentLoggedIn: Student? = null
 
     private var studentCourses: List<Course> = listOf()
 
     private var lessonStudentCanSee: ArrayList<String> = arrayListOf()
+
+    fun reset() {
+        studentLoggedIn = null
+        studentCourses = listOf()
+        lessonStudentCanSee = arrayListOf()
+    }
 
     fun getStudentCourses(): List<Course> {
         Logger.d(_logTAG, "Elementi", studentCourses)
@@ -29,7 +35,7 @@ object WhoAmI {
     }
 
     fun getStudentCoursesStringList(): List<String> {
-        return studentLoggedIn.corsi
+        return studentLoggedIn!!.corsi
     }
 
     fun setLoggedInStudentCourses(courses: List<Course>) {
@@ -56,25 +62,25 @@ object WhoAmI {
 
     fun getStudentMatricola(): String {
         Logger.d(_logTAG, "Student", studentLoggedIn)
-        return studentLoggedIn.matricola
+        return studentLoggedIn!!.matricola
     }
 
     fun getStudentPhoneNumber(): Int {
-        return studentLoggedIn.telefono
+        return studentLoggedIn!!.telefono
     }
 
     fun getStudentCourseYear(): Int {
-        return studentLoggedIn.annoCorso
+        return studentLoggedIn!!.annoCorso
     }
 
     fun getStudentSituazioneTasse(): Boolean {
-        return studentLoggedIn.situazioneTasse
+        return studentLoggedIn!!.situazioneTasse
     }
 
     fun checkIfStudentIsSubscribedToCourse(courseId: String): Boolean {
         Logger.d(_logTAG, "is User subscribed to course $courseId")
         Logger.d(_logTAG, "student:", studentLoggedIn)
-        Logger.d(_logTAG, "indexOf", studentLoggedIn.corsi.indexOf(courseId))
-        return studentLoggedIn.corsi.indexOf(courseId) != -1
+        Logger.d(_logTAG, "indexOf", studentLoggedIn!!.corsi.indexOf(courseId))
+        return studentLoggedIn!!.corsi.indexOf(courseId) != -1
     }
 }

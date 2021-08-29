@@ -35,10 +35,21 @@ object FirebaseUtils {
     private var authListenerSet: Boolean = false
 
     init {
+        initFirebase()
+    }
+
+    private fun initFirebase() {
         mFirebaseAuth = FirebaseAuth.getInstance()
         mFirebaseFunctions = Firebase.functions
         mFirebaseStorage = Firebase.storage
         mStorageRef = mFirebaseStorage!!.getReferenceFromUrl(mStreamingPath)
+    }
+
+    fun reset() {
+        mFirebaseAuth = null
+        mFirebaseFunctions = null
+        mFirebaseStorage = null
+        mStorageRef = null
     }
 
     /**

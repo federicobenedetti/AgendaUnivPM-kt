@@ -24,6 +24,14 @@ object DataPersistanceUtils {
     private var calendarLessons: List<CalendarLesson> = listOf()
     private var calendarLessonWhichUserCanSee: List<CalendarLesson> = listOf()
 
+    fun reset() {
+        teachers = listOf()
+        courses = listOf()
+        lessons = listOf()
+        calendarLessons = listOf()
+        calendarLessonWhichUserCanSee = listOf()
+    }
+
     fun setTeachers(t: List<Teacher>) {
         if (t != null) {
             teachers = t

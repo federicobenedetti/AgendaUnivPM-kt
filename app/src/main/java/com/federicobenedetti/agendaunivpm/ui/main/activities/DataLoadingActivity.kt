@@ -24,6 +24,11 @@ class DataLoadingActivity : CustomAppCompatActivity("DATALOADING") {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_loading)
 
+        DataPersistanceUtils.reset()
+        WhoAmI.reset()
+
+        // FirebaseUtils.reset()
+
         loadStudentData()
     }
 
@@ -32,125 +37,125 @@ class DataLoadingActivity : CustomAppCompatActivity("DATALOADING") {
      */
     private fun loadStudentData() {
         FirebaseService.getStudentByUid()
-            .addOnCompleteListener { task -> handleOnCompleteListener(task) }
+            .addOnCompleteListener { task -> handleGetStudentByUid(task) }
     }
 
-    /**
-     * Questo è un metodo quasi ricorsivo
-     * Abbiamo una condizione di 'break' che è quella che si innesca
-     * quando stiamo caricando tutti i corsi, a quel punto lanciamo la
-     * MainActivity e chiudiamo la LoginActivity
-     *
-     * Per i restanti casi facciamo type-checking del risultato
-     * del onCompleteListener, e in base a quello concateniamo altre chiamate
-     */
-    private fun handleOnCompleteListener(task: Task<*>) {
+    // Carichiamo lo studente partendo dal suo UID google
+    private fun handleGetStudentByUid(task: Task<*>) {
         if (task.isSuccessful) {
+            val student = task.result as Student
 
-            when (task.result) {
+            Logger.d(_logTAG, "Risultato chiamata getStudentByUid", student)
 
-                is Student -> {
-                    // 1: Carichiamo lo studente
-                    val student = task.result as Student
+            WhoAmI.setLoggedInStudent(student)
 
-                    Logger.d(_logTAG, "Risultato chiamata getStudentByUid", student)
-
-                    WhoAmI.setLoggedInStudent(student)
-
-                    FirebaseService.getStudentCourses(student.corsi)
-                        .addOnCompleteListener { task -> handleOnCompleteListener(task) }
-                }
-
-                is List<*> -> {
-                    Logger.d(_logTAG, "E' stata ricevuta una lista")
-
-                    if ((task.result as List<*>).all { e -> e is Lesson }) {
-
-                        Logger.d(_logTAG, "La lista è di Lezioni")
-
-                        // 4: Carichiamo tutte le lezioni
-                        val lessons = task.result as List<Lesson>
-
-                        Logger.d(_logTAG, "Risultato chiamata getLessons", lessons)
-
-                        DataPersistanceUtils.setLessons(lessons)
-
-                        FirebaseService.getCourses()
-                            .addOnCompleteListener { task -> handleOnCompleteListener(task) }
-
-                    } else if ((task.result as List<*>).all { e -> e is Course }) {
-                        Logger.d(_logTAG, "La lista è di Corsi")
-
-                        // 2: Carichiamo i corsi dello studente
-                        if (loadingStudentCourses) {
-                            Logger.d(_logTAG, "Stiamo caricando i corsi dello studente")
-
-                            val courses = task.result as List<Course>
-
-                            Logger.d(_logTAG, "Risultato chiamata getStudentCourses", courses)
-
-                            WhoAmI.setLoggedInStudentCourses(courses)
-
-                            loadingStudentCourses = false
-                            FirebaseService.getTeachers()
-                                .addOnCompleteListener { task -> handleOnCompleteListener(task) }
-                        } else {
-
-                            // 5: Carichiamo tutti i corsi
-                            Logger.d(_logTAG, "Stiamo caricanto tutti i corsi")
-
-                            val allCourses = task.result as List<Course>
-
-                            Logger.d(_logTAG, "Risultato chiamata getCourses", allCourses)
-
-                            DataPersistanceUtils.setCourses(allCourses)
-
-                            FirebaseService.getCalendarlessons()
-                                .addOnCompleteListener { task -> handleOnCompleteListener(task) }
-                        }
-
-
-                    } else if ((task.result as List<*>).all { e -> e is Teacher }) {
-                        Logger.d(_logTAG, "La lista è di Professori")
-
-                        // 3: Carichiamo tutti i professori
-                        val teachers = task.result as List<Teacher>
-
-                        Logger.d(_logTAG, "Risultato chiamata getTeachers", teachers)
-
-                        DataPersistanceUtils.setTeachers(teachers)
-
-                        FirebaseService.getLessons()
-                            .addOnCompleteListener { task -> handleOnCompleteListener(task) }
-                    } else if ((task.result as List<*>).all { e -> e is CalendarLesson }) {
-
-                        // 6: Carichiamo tutte le lezioni del calendario
-                        var calendarLessons = task.result as List<CalendarLesson>
-
-                        Logger.d(_logTAG, "Risultato chiamata getCalendarLessons", calendarLessons)
-
-                        DataPersistanceUtils.setCalendarLessons(calendarLessons)
-
-                        Toast.makeText(
-                            this,
-                            R.string.generic_success,
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
-
-                        loadingStudentCourses = true
-
-                        Logger.d(_logTAG, "Finito! Lancio la MainActivity")
-                        ActivityUtils.launchActivity(this, MainActivity::class)
-                        finish()
-                    }
-                }
-            }
-
+            FirebaseService.getStudentCourses(student.corsi)
+                .addOnCompleteListener { task -> handleGetStudentCourses(task) }
         } else {
-            Logger.d(_logTAG, "Errore durante la chiamata", task.exception)
-            Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
+            handleErrorDuringRequest(task.exception)
+        }
+    }
+
+    // Carichiamo i corsi dello studente
+    private fun handleGetStudentCourses(task: Task<*>) {
+        if (task.isSuccessful) {
+            val courses = task.result as List<Course>
+
+            Logger.d(_logTAG, "Risultato chiamata getStudentCourses", courses)
+
+            WhoAmI.setLoggedInStudentCourses(courses)
+
+            FirebaseService.getTeachers()
+                .addOnCompleteListener { task -> handleGetTeachers(task) }
+        } else {
+            handleErrorDuringRequest(task.exception)
+        }
+    }
+
+    // Carichiamo tutti i professori
+    private fun handleGetTeachers(task: Task<*>) {
+        if (task.isSuccessful) {
+            // 3: Carichiamo tutti i professori
+            val teachers = task.result as List<Teacher>
+
+            Logger.d(_logTAG, "Risultato chiamata getTeachers", teachers)
+
+            DataPersistanceUtils.setTeachers(teachers)
+
+            FirebaseService.getLessons()
+                .addOnCompleteListener { task -> handleGetLessons(task) }
+        } else {
+            handleErrorDuringRequest(task.exception)
         }
 
+    }
+
+    // Carichiamo le lezioni
+    private fun handleGetLessons(task: Task<*>) {
+        if (task.isSuccessful) {
+            val lessons = task.result as List<Lesson>
+
+            Logger.d(_logTAG, "Risultato chiamata getLessons", lessons)
+
+            DataPersistanceUtils.setLessons(lessons)
+
+            FirebaseService.getCourses()
+                .addOnCompleteListener { task -> handleGetCourses(task) }
+        } else {
+            handleErrorDuringRequest(task.exception)
+        }
+
+
+    }
+
+    // Carichiamo i corsi
+    private fun handleGetCourses(task: Task<*>) {
+        if (task.isSuccessful) {
+            val allCourses = task.result as List<Course>
+
+            Logger.d(_logTAG, "Risultato chiamata getCourses", allCourses)
+
+            DataPersistanceUtils.setCourses(allCourses)
+
+            FirebaseService.getCalendarlessons()
+                .addOnCompleteListener { task -> handleGetCalendarLessons(task) }
+        } else {
+            handleErrorDuringRequest(task.exception)
+        }
+
+    }
+
+    // Carichiamo il calendario poi procediamo a lanciare la main activity
+    private fun handleGetCalendarLessons(task: Task<*>) {
+        if (task.isSuccessful) {
+            var calendarLessons = task.result as List<CalendarLesson>
+
+            Logger.d(_logTAG, "Risultato chiamata getCalendarLessons", calendarLessons)
+
+            DataPersistanceUtils.setCalendarLessons(calendarLessons)
+
+            Toast.makeText(
+                this,
+                R.string.generic_success,
+                Toast.LENGTH_LONG
+            )
+                .show()
+
+            loadingStudentCourses = true
+
+            Logger.d(_logTAG, "Finito! Lancio la MainActivity")
+            ActivityUtils.launchActivity(this, MainActivity::class)
+            finish()
+        } else {
+            handleErrorDuringRequest(task.exception)
+        }
+
+    }
+
+    private fun handleErrorDuringRequest(exception: Exception?) {
+        Logger.d(_logTAG, "Errore durante la chiamata", exception)
+        Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
+
+        ActivityUtils.launchActivity(this, LoginActivity::class)
     }
 }
