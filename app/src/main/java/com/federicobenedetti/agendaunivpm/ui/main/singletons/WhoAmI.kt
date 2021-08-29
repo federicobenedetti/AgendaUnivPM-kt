@@ -15,7 +15,7 @@ object WhoAmI {
 
     private var studentCourses: List<Course> = listOf()
 
-    private var lessonStudentCanSee = ArrayList<String>()
+    private var lessonStudentCanSee: ArrayList<String> = arrayListOf()
 
     fun getStudentCourses(): List<Course> {
         Logger.d(_logTAG, "Elementi", studentCourses)
@@ -41,6 +41,8 @@ object WhoAmI {
     }
 
     fun setLessonStudentCanSee() {
+        lessonStudentCanSee = arrayListOf()
+
         for (course in studentCourses) {
             for (lessonId in course.lessonIds) {
                 lessonStudentCanSee.add(lessonId)
@@ -48,7 +50,7 @@ object WhoAmI {
         }
     }
 
-    fun getLessonStudentCanSee(): ArrayList<String> {
+    fun getLessonStudentCanSee(): MutableList<String> {
         return lessonStudentCanSee
     }
 

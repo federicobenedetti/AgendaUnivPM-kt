@@ -49,7 +49,7 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
         courseCalendarBinding.courseCalendarViewModel = courseCalendarViewModel
         courseCalendarBinding.lifecycleOwner = this
 
-        calendarLessons = courseCalendarViewModel.getCalendarLessonsAsArrayList()
+        calendarLessons = courseCalendarViewModel.calendarLessons
         Logger.d(_logTAG, "CalendarLesson", calendarLessons)
 
         mCalendarView = courseCalendarBinding.calendarView
@@ -66,7 +66,7 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
                 val dotView = container.dotView
 
                 textView.text = day.date.dayOfMonth.toString()
-                
+
                 if (day.owner == DayOwner.THIS_MONTH) {
                     textView.makeVisible()
                     when (day.date) {
@@ -123,6 +123,8 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
         init {
             view.setOnClickListener {
                 if (day.owner == DayOwner.THIS_MONTH) {
+
+
                 }
             }
         }
