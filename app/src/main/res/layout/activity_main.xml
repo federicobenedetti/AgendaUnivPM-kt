@@ -37,6 +37,4 @@
             tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    >
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

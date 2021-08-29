@@ -3,7 +3,8 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 import android.os.Bundle
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
-import com.federicobenedetti.agendaunivpm.R
+import com.federicobenedetti.agendaunivpm.R.id
+import com.federicobenedetti.agendaunivpm.R.layout
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseUtils
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
@@ -26,15 +27,17 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
 
+    private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(layout.activity_main)
 
-        tabLayout = findViewById(R.id.tabs)
 
-        viewPager = findViewById(R.id.view_pager)
+        tabLayout = findViewById(id.tabs)
+
+        viewPager = findViewById(id.view_pager)
         viewPager.adapter = ViewPagerFragmentAdapter(supportFragmentManager, lifecycle)
 
         // Dico al TabLayout di assegnare ad ogni Fragment un'icona differente
@@ -55,7 +58,7 @@ class MainActivity : CustomAppCompatActivity("MAIN") {
             }
         }.attach()
 
-        swipeRefreshLayout = findViewById(R.id.mainActivitySwipeRefresh)
+        swipeRefreshLayout = findViewById(id.mainActivitySwipeRefresh)
 
         swipeRefreshLayout.setOnRefreshListener {
             ActivityUtils.launchActivity(this, DataLoadingActivity::class)

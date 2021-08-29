@@ -3,23 +3,25 @@ package com.federicobenedetti.agendaunivpm.ui.main.activities
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.ActivityCourseCalendarBinding
 import com.federicobenedetti.agendaunivpm.ui.main.classes.CalendarLesson
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.Logger
-import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
-import com.federicobenedetti.agendaunivpm.ui.main.utils.DayViewContainer
-import com.federicobenedetti.agendaunivpm.ui.main.utils.MonthViewContainer
+import com.federicobenedetti.agendaunivpm.ui.main.utils.*
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.CourseCalendarViewModel
+import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
-import com.kizitonwose.calendarview.model.InDateStyle
+import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
-import java.time.DayOfWeek
+import com.kizitonwose.calendarview.ui.ViewContainer
+import java.time.LocalDate
 import java.time.YearMonth
 
 /**
@@ -33,8 +35,9 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
 
     private lateinit var calendarLessons: List<CalendarLesson>
 
-    private lateinit var mCalendarView: com.kizitonwose.calendarview.CalendarView
+    private lateinit var mCalendarView: CalendarView
 
+    private val today = LocalDate.now()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +61,31 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
             // Called every time we need to reuse a container.
             @RequiresApi(Build.VERSION_CODES.O)
             override fun bind(container: DayViewContainer, day: CalendarDay) {
-                container.textView.text = day.date.dayOfMonth.toString()
+                container.day = day
+                val textView = container.textView
+                val dotView = container.dotView
+
+                textView.text = day.date.dayOfMonth.toString()
+                
+                if (day.owner == DayOwner.THIS_MONTH) {
+                    textView.makeVisible()
+                    when (day.date) {
+                        today -> {
+                            textView.setTextColorRes(R.color.primaryTextColor)
+                            textView.setBackgroundResource(R.drawable.selected_day_bg)
+                            dotView.makeInVisible()
+                        }
+                        else -> {
+                            textView.setTextColorRes(R.color.secondaryTextColor)
+                            textView.background = null
+                            dotView.isVisible =
+                                calendarLessons.any() { e -> e.dueDate == day.date.toString() }
+                        }
+                    }
+                } else {
+                    textView.makeInVisible()
+                    dotView.makeInVisible()
+                }
             }
         }
 
@@ -67,31 +94,48 @@ class CourseCalendarActivity : CustomAppCompatActivity("COURSECALENDAR") {
             override fun bind(container: MonthViewContainer, month: CalendarMonth) {
                 container.textView.text =
                     "${month.yearMonth.month.name.toLowerCase().capitalize()} ${month.year}"
+
             }
         }
 
         val currentMonth = YearMonth.now()
-        val firstMonth = currentMonth.minusMonths(10)
-        val lastMonth = currentMonth.plusMonths(10)
+        val firstMonth = currentMonth.minusMonths(5)
+        val lastMonth = currentMonth.plusMonths(5)
+        val daysOfWeek = daysOfWeekFromLocale()
 
-        // Six row calendar for month mode
-        mCalendarView.updateMonthConfiguration(
-            inDateStyle = InDateStyle.FIRST_MONTH,
-            maxRowCount = 6,
-            hasBoundaries = true
-        )
 
-        val daysOfWeek = arrayOf(
-            DayOfWeek.SUNDAY,
-            DayOfWeek.MONDAY,
-            DayOfWeek.TUESDAY,
-            DayOfWeek.WEDNESDAY,
-            DayOfWeek.THURSDAY,
-            DayOfWeek.FRIDAY,
-            DayOfWeek.SATURDAY
-        )
         mCalendarView.setup(firstMonth, lastMonth, daysOfWeek.first())
         mCalendarView.scrollToMonth(currentMonth)
 
     }
+
+    /**
+     * DayView container
+     * specifico per la libreria che fornisce la CalendarView
+     * Serve per poter customizzare a proprio piacimento la vista per il giorno visualizzato in griglia
+     */
+    class DayViewContainer(view: View) : ViewContainer(view) {
+        lateinit var day: CalendarDay // Will be set when this container is bound.
+
+        val textView = view.findViewById<TextView>(R.id.calendarDayText)
+        val dotView = view.findViewById<View>(R.id.calendarDotView)
+
+        init {
+            view.setOnClickListener {
+                if (day.owner == DayOwner.THIS_MONTH) {
+                }
+            }
+        }
+    }
+
+
+    /**
+     * DayView container
+     * specifico per la libreria che fornisce la CalendarView
+     * Serve per poter customizzare a proprio piacimento la vista per il mese visualizzato in griglia
+     */
+    class MonthViewContainer(view: View) : ViewContainer(view) {
+        val textView = view.findViewById<TextView>(R.id.headerTextView)
+    }
 }
+

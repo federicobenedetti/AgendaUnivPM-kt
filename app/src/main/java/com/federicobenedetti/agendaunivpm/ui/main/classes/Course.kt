@@ -41,6 +41,8 @@ open class Course {
      */
     lateinit var bookedHour: String
 
+    lateinit var lessonIds: ArrayList<String>
+
     constructor()
 
     constructor(
@@ -50,7 +52,8 @@ open class Course {
         _description: String,
         _session: String,
         _teacherId: String,
-        _bookedHour: String
+        _bookedHour: String,
+        _lessonIds: ArrayList<String>,
     ) {
         id = _id
         title = _title
@@ -59,6 +62,7 @@ open class Course {
         session = _session
         teacherId = _teacherId
         bookedHour = _bookedHour
+        lessonIds = _lessonIds
     }
 
 }

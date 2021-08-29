@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/calendarDayText"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:textSize="@dimen/text_small" />
+    android:layout_margin="2dp">
+
+    <TextView
+        android:id="@+id/calendarDayText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/text_medium" />
+
+    <View
+        android:id="@+id/calendarDotView"
+        android:layout_width="4.5dp"
+        android:layout_height="4.5dp"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@drawable/today_bg" />
+</FrameLayout>

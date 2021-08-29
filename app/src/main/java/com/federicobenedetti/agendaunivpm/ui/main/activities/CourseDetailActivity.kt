@@ -1,18 +1,18 @@
 package com.federicobenedetti.agendaunivpm.ui.main.activities
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.ActivityCourseDetailBinding
-import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.FirebaseService
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.Logger
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.WhoAmI
 import com.federicobenedetti.agendaunivpm.ui.main.utils.CustomAppCompatActivity
+import com.federicobenedetti.agendaunivpm.ui.main.utils.makeGone
+import com.federicobenedetti.agendaunivpm.ui.main.utils.makeVisible
 import com.federicobenedetti.agendaunivpm.ui.main.viewmodels.CourseDetailViewModel
 
 /**
@@ -48,15 +48,6 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
 
         courseDetailViewModel.setSelectedCourseById(selectedCourseDetailId)
 
-        mBtnGoToCalendar = courseDetailBinding.mBtnGoToCalendar
-        mBtnGoToCalendar.setOnClickListener {
-            ActivityUtils.launchActivityWithParams(
-                this,
-                CourseCalendarActivity::class,
-                hashMapOf("CourseId" to selectedCourseDetailId)
-            )
-        }
-
         mBtnSubscribeToCourse = courseDetailBinding.mBtnSubscribeToCourse
         mBtnSubscribeToCourse.setOnClickListener {
             FirebaseService.subToCourse(selectedCourseDetailId, WhoAmI.getStudentMatricola())
@@ -86,11 +77,11 @@ class CourseDetailActivity : CustomAppCompatActivity("COURSEDETAIL") {
         }
 
         if (WhoAmI.checkIfStudentIsSubscribedToCourse(selectedCourseDetailId)) {
-            mBtnSubscribeToCourse.visibility = View.GONE
-            mBtnUnsubscribeFromCourse.visibility = View.VISIBLE
+            mBtnSubscribeToCourse.makeGone()
+            mBtnUnsubscribeFromCourse.makeVisible()
         } else {
-            mBtnSubscribeToCourse.visibility = View.VISIBLE
-            mBtnUnsubscribeFromCourse.visibility = View.GONE
+            mBtnSubscribeToCourse.makeVisible()
+            mBtnUnsubscribeFromCourse.makeGone()
         }
 
     }

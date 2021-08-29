@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.databinding.FragmentUserProfileBinding
+import com.federicobenedetti.agendaunivpm.ui.main.activities.CourseCalendarActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FaqActivity
 import com.federicobenedetti.agendaunivpm.ui.main.activities.FeedbackActivity
 import com.federicobenedetti.agendaunivpm.ui.main.singletons.ActivityUtils
@@ -35,12 +36,14 @@ class UserProfileFragment : CustomFragment("USER") {
     private var mButtonFaqActivity: Button? = null
     private var mButtonFeedbackActivity: Button? = null
     private var mButtonSignOut: Button? = null
+    private var mButtonCalendar: Button? = null
+
     private var mImageViewUserProfileImage: ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         _binding =
@@ -70,6 +73,11 @@ class UserProfileFragment : CustomFragment("USER") {
         mButtonSignOut = binding.buttonLaunchSignOut
         mButtonSignOut!!.setOnClickListener {
             mFirebaseAuth!!.signOut()
+        }
+
+        mButtonCalendar = binding.buttonLaunchCalendar
+        mButtonCalendar!!.setOnClickListener {
+            context?.let { it -> ActivityUtils.launchActivity(it, CourseCalendarActivity::class) }
         }
 
         mFirebaseAuth = FirebaseUtils!!.getFirebaseAuthInstance()

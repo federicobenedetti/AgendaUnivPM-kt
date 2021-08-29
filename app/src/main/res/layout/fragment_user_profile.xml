@@ -170,6 +170,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/buttonLaunchCalendar"
+                android:text="@string/button_go_to_calendar"></Button>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/buttonLaunchFaqActivity"
                 android:text="@string/btn_go_to_faq"></Button>
 

@@ -78,6 +78,28 @@ object DataPersistanceUtils {
         return calendarLessons.find { t -> t.lessonId === id }
     }
 
+    /**
+     * Questa funzione non fa altro che fare un match tra le lezioni che l'utente
+     * può vedere, e la lista globale di lezioni disponibili
+     * In questo modo, l'utente potrà vedere a calendario solo quelle di cui è iscritto al corso relativo
+     */
+    fun getCalendarLessonWhichUserCanSee(): List<CalendarLesson> {
+        var lessonThatStudentCanSee = ArrayList<CalendarLesson>()
+
+        for (lessonId in WhoAmI.getLessonStudentCanSee()) {
+
+            for (lesson in calendarLessons) {
+
+                if (lesson.lessonId == lessonId) {
+                    lessonThatStudentCanSee.add(lesson)
+                }
+
+            }
+        }
+
+        return lessonThatStudentCanSee.toList()
+    }
+
     fun setCalendarLessons(l: List<CalendarLesson>) {
         if (l != null) {
             calendarLessons = l

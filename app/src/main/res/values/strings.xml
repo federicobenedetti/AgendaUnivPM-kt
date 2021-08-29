@@ -71,5 +71,7 @@
     <string name="calendar_activity_title">Calendario lezioni</string>
 
     <string name="lesson_streaming_description">Verrà ora riprodotta automaticamente la lezione selezionata. I controlli a schermo non sono (ancora) disponibili</string>
-    <string name="calendar_activity_description">Utilizzando il calendario è possibile visualizzare le prossime lezioni programmate per il corso scelto</string>
+    <string name="calendar_activity_description">Utilizzando il calendario è possibile visualizzare le prossime lezioni programmate</string>
+
+    <string name="button_go_to_calendar">Calendario lezioni</string>
 </resources>

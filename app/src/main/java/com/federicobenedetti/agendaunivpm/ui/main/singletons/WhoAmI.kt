@@ -15,6 +15,8 @@ object WhoAmI {
 
     private var studentCourses: List<Course> = listOf()
 
+    private var lessonStudentCanSee = ArrayList<String>()
+
     fun getStudentCourses(): List<Course> {
         Logger.d(_logTAG, "Elementi", studentCourses)
         return studentCourses
@@ -34,7 +36,20 @@ object WhoAmI {
         Logger.d(_logTAG, "Corsi: ", courses)
         if (courses != null) {
             studentCourses = courses
+            setLessonStudentCanSee()
         }
+    }
+
+    fun setLessonStudentCanSee() {
+        for (course in studentCourses) {
+            for (lessonId in course.lessonIds) {
+                lessonStudentCanSee.add(lessonId)
+            }
+        }
+    }
+
+    fun getLessonStudentCanSee(): ArrayList<String> {
+        return lessonStudentCanSee
     }
 
     fun getStudentMatricola(): String {

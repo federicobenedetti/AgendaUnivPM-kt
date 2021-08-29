@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/drawable-v24/gmd_event.xml" value="0.215625" />
+        <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/drawable/go_to_calendar.xml" value="0.215625" />
+        <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/drawable/go_to_calendar_icon.xml" value="0.215625" />
+        <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/drawable/selected_day_bg.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/drawable/today_bg.xml" value="0.215625" />
         <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/layout/activity_course_calendar.xml" value="0.34148550724637683" />
         <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/layout/activity_course_detail.xml" value="0.34148550724637683" />
         <entry key="..\:/Users/Federico Benedetti/AndroidStudioProjects/AgendaUnivPM/app/src/main/res/layout/activity_course_streaming.xml" value="0.34148550724637683" />
