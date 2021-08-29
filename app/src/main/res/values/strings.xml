@@ -3,11 +3,11 @@
     <string name="generic_error">Errore</string>
     <string name="generic_success">Successo!</string>
 
-    <string name="available_courses">Corsi disponibili</string>
+    <string name="available_courses">Corsi a cui sei iscritto</string>
     <string name="course_year">Anno </string>
     <string name="course_subscribe">Iscriviti</string>
     <string name="course_prof">Prof</string>
-    <string name="courses_list">Lista corsi</string>
+    <string name="courses_list">Corsi a cui puoi iscriverti</string>
     <string name="lessons_label">Lezioni disponibili</string>
     <string name="search_hint">Ricerca i corsi...</string>
     <string name="feedback_title">Feedback</string>

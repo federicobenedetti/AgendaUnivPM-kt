@@ -1,6 +1,7 @@
 package com.federicobenedetti.agendaunivpm.ui.main.activities
 
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import com.federicobenedetti.agendaunivpm.R
 import com.federicobenedetti.agendaunivpm.ui.main.classes.*
@@ -24,12 +25,22 @@ class DataLoadingActivity : CustomAppCompatActivity("DATALOADING") {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_loading)
 
+        /**
+         * Resettiamo tutti i dati locali prima di procedere
+         * alla nuova richiesta
+         */
         DataPersistanceUtils.reset()
-        WhoAmI.reset()
 
-        // FirebaseUtils.reset()
-
-        loadStudentData()
+        /**
+         * E' necessario aspettare un paio di secondi in quanto
+         * Firebase non è istantaneo a creare l'utente dopo la richiesta di signup
+         * Non credo ci sia una callback specifica quando un utente viene registrato
+         * Per ora è un dirty fix
+         *
+         * Uso un Handler piuttosto che un Thread.sleep perché evito di bloccare il
+         * thread della UI.
+         */
+        Handler().postDelayed(this::loadStudentData, 1500)
     }
 
     /**
@@ -157,5 +168,6 @@ class DataLoadingActivity : CustomAppCompatActivity("DATALOADING") {
         Toast.makeText(this, R.string.generic_error, Toast.LENGTH_LONG).show()
 
         ActivityUtils.launchActivity(this, LoginActivity::class)
+        finish()
     }
 }
