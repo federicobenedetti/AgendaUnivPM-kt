@@ -3,6 +3,13 @@
 Dopo mesi di sviluppo, sono felice di presentare l'app scritta per il corso di Programmazione Mobile. 
 Lo scopo è quello di rendere più veloce e accessibile la consultazione tramite smartphone di piattaforme universitarie come Learn, Moodle o simili.
 
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![](https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white)
+![](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
+![](https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)
+
+
 # Funzionalità
 
 - Login tramite Auth Google (possibilità di integrazione con altri sistemi di Auth in futuro)
@@ -16,8 +23,7 @@ Lo scopo è quello di rendere più veloce e accessibile la consultazione tramite
 
 
 ## Download
-
-![GitHub all releases](https://img.shields.io/github/downloads/federicobenedetti/AgendaUnivPM-kt/total)
+[![](https://img.shields.io/badge/Agenda%20UnivPM-1.3-green)](https://github.com/federicobenedetti/AgendaUnivPM-kt/releases/tag/1.3)
 
 
 # Interfaccia
