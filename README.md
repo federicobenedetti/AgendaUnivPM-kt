@@ -1,6 +1,6 @@
 ﻿# Agenda UnivPM
 
-Dopo mesi di sviluppo, sono felice di presentare l'app scritta per il corso di Programmazione Mobile. 
+Dopo quasi 2 mesi di sviluppo, sono felice di presentare l'app scritta per il corso di Programmazione Mobile. 
 Lo scopo è quello di rendere più veloce e accessibile la consultazione tramite smartphone di piattaforme universitarie come Learn, Moodle o simili.
 
 ![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
