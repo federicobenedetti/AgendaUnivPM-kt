@@ -23,7 +23,7 @@ Lo scopo è quello di rendere più veloce e accessibile la consultazione tramite
 
 
 ## Download
-[![](https://img.shields.io/badge/Agenda%20UnivPM-1.3-green)](https://github.com/federicobenedetti/AgendaUnivPM-kt/releases/tag/1.3)
+[![](https://img.shields.io/badge/Agenda%20UnivPM-1.4-green)](https://github.com/federicobenedetti/AgendaUnivPM-kt/releases/tag/1.4)
 
 
 # Interfaccia
