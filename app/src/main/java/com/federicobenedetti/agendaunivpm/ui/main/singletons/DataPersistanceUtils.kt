@@ -32,8 +32,8 @@ object DataPersistanceUtils {
         calendarLessonWhichUserCanSee = listOf()
     }
 
-    fun setTeachers(t: List<Teacher>) {
-        if (t != null) {
+    fun setTeachers(t: List<Teacher>?) {
+        if (!t.isNullOrEmpty()) {
             teachers = t
         }
     }
@@ -42,13 +42,13 @@ object DataPersistanceUtils {
         return teachers
     }
 
-    fun getTeacherById(id: String): Teacher {
+    fun getTeacherById(id: String): Teacher? {
         Logger.d(_logTAG, "Teacher to find", id)
-        return teachers.find { t -> t.id == id }!!
+        return teachers?.find { t -> t.id == id }
     }
 
-    fun setCourses(c: List<Course>) {
-        if (c != null) {
+    fun setCourses(c: List<Course>?) {
+        if (!c.isNullOrEmpty()) {
             courses = c
         }
     }
@@ -57,12 +57,8 @@ object DataPersistanceUtils {
         return courses
     }
 
-    fun getCourseById(id: String): Course? {
-        return courses.find { t -> t.id == id }
-    }
-
-    fun setLessons(l: List<Lesson>) {
-        if (l != null) {
+    fun setLessons(l: List<Lesson>?) {
+        if (!l.isNullOrEmpty()) {
             lessons = l
         }
     }
@@ -73,20 +69,12 @@ object DataPersistanceUtils {
 
     fun getStudentLessons(): List<Lesson> {
         return lessons.filter { l -> WhoAmI.getStudentCoursesStringList().contains(l.courseId) }
-
     }
 
     fun getLessonById(id: String): Lesson? {
-        return lessons.find { t -> t.id == id }
+        return lessons?.find { t -> t.id == id }
     }
 
-    fun getCalendarLessons(): List<CalendarLesson> {
-        return calendarLessons
-    }
-
-    fun getCalendarLessonById(id: String): CalendarLesson? {
-        return calendarLessons.find { t -> t.lessonId == id }
-    }
 
     /**
      * Questa funzione non fa altro che fare un match tra le lezioni che l'utente
@@ -125,11 +113,14 @@ object DataPersistanceUtils {
         return calendarLessonWhichUserCanSee
     }
 
-    fun setCalendarLessons(l: List<CalendarLesson>) {
-        if (l != null) {
+    fun setCalendarLessons(l: List<CalendarLesson>?) {
+        if (!l.isNullOrEmpty()) {
             calendarLessons = l
-
             setCalendarLessonWhichUserCanSee()
         }
+    }
+
+    fun getCalendarLessons(): List<CalendarLesson> {
+        return calendarLessons
     }
 }

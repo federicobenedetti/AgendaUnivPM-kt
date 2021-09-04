@@ -38,9 +38,9 @@ object WhoAmI {
         return studentLoggedIn!!.corsi
     }
 
-    fun setLoggedInStudentCourses(courses: List<Course>) {
+    fun setLoggedInStudentCourses(courses: List<Course>?) {
         Logger.d(_logTAG, "Corsi: ", courses)
-        if (courses != null) {
+        if (!courses.isNullOrEmpty()) {
             studentCourses = courses
             setLessonStudentCanSee()
         }
