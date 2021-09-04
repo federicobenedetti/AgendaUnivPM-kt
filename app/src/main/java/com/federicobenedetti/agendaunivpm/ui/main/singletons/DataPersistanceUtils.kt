@@ -42,7 +42,7 @@ object DataPersistanceUtils {
         return teachers
     }
 
-    fun getTeacherById(id: String): Teacher? {
+    fun getTeacherById(id: String?): Teacher? {
         Logger.d(_logTAG, "Teacher to find", id)
         return teachers?.find { t -> t.id == id }
     }
@@ -71,7 +71,7 @@ object DataPersistanceUtils {
         return lessons.filter { l -> WhoAmI.getStudentCoursesStringList().contains(l.courseId) }
     }
 
-    fun getLessonById(id: String): Lesson? {
+    fun getLessonById(id: String?): Lesson? {
         return lessons?.find { t -> t.id == id }
     }
 

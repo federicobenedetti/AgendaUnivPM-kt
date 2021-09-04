@@ -91,6 +91,8 @@ class WhoAmITest {
             false,
             whoamI.checkIfStudentIsSubscribedToCourse("Course_2")
         )
+
+        whoamI.reset()
     }
 
     @Test
@@ -101,6 +103,8 @@ class WhoAmITest {
             studentCoursesStringList,
             whoamI.getStudentCoursesStringList()
         )
+
+        whoamI.reset()
     }
 
     @Test
@@ -144,5 +148,7 @@ class WhoAmITest {
             ),
             result
         )
+
+        whoamI.reset()
     }
 }
