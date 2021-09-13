@@ -20,6 +20,11 @@ class LessonsViewModel : ViewModel() {
     }
 
     init {
-        _availableLessons = DataPersistanceUtils.getStudentLessons() as MutableList<Lesson>
+        var lessons = DataPersistanceUtils.getStudentLessons()
+        if (lessons.isEmpty()) {
+            _availableLessons.clear()
+        } else {
+            _availableLessons = lessons as MutableList<Lesson>
+        }
     }
 }

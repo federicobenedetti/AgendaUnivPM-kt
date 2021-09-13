@@ -30,6 +30,7 @@ class DataLoadingActivity : CustomAppCompatActivity("DATALOADING") {
          * alla nuova richiesta
          */
         DataPersistanceUtils.reset()
+        WhoAmI.reset()
 
         /**
          * E' necessario aspettare un paio di secondi in quanto

@@ -18,7 +18,6 @@ object WhoAmI {
     private var lessonStudentCanSee: ArrayList<String> = arrayListOf()
 
     fun reset() {
-        studentLoggedIn = null
         studentCourses = listOf()
         lessonStudentCanSee = arrayListOf()
     }

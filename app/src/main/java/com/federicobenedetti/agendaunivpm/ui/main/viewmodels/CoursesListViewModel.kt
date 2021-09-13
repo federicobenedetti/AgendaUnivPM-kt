@@ -19,6 +19,11 @@ class CoursesListViewModel : ViewModel() {
     }
 
     init {
-        _availableCourses = DataPersistanceUtils.getCourses() as MutableList<Course>
+        var courses = DataPersistanceUtils.getCourses()
+        if (courses.isEmpty()) {
+            _availableCourses.clear()
+        } else {
+            _availableCourses = courses as MutableList<Course>
+        }
     }
 }

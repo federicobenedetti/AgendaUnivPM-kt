@@ -20,7 +20,12 @@ class SubscribedCoursesViewModel : ViewModel() {
     }
 
     init {
-        _availableCourses = WhoAmI.getStudentCourses() as MutableList<Course>
+        var courses = WhoAmI.getStudentCourses()
+        if (courses.isEmpty()) {
+            _availableCourses.clear()
+        } else {
+            _availableCourses = courses as MutableList<Course>
+        }
     }
 
 }
